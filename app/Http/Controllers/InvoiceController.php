@@ -14,11 +14,7 @@ use App\Http\Traits\NepaliDateConverter;
 class InvoiceController extends Controller
 {
     use NepaliDateConverter;
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     private $totalTurnOver;
     private $paidTurnOver;
     private $unPaidTurnOver;
