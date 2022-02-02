@@ -37,7 +37,9 @@
       <!-- Heading -->
       <div class="sidebar-heading">Interface</div>
       <li class="nav-item">
-        <a
+        
+        <router-link :to="{ name: 'users'}" class="nav-link"><i class="fas fa-user-cog"></i> Users</router-link>
+        <!-- <a
           class="nav-link collapsed"
           href="#"
           data-toggle="collapse"
@@ -47,8 +49,8 @@
         >
           <i class="fas fa-fw fa-cog"></i>
           <span>Users</span>
-        </a>
-        <div
+        </a> -->
+        <!-- <div
           id="collapse-users"
           class="collapse"
           aria-labelledby="headingTwo"
@@ -57,10 +59,12 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <router-link :to="{ name: 'users'}" class="collapse-item">Users List</router-link>
           </div>
-        </div>
+        </div> -->
       </li>
       <li class="nav-item">
-        <a
+        <router-link :to="{ name: 'customers'}" class="nav-link"><i class="fas fa-user-friends"></i> Party</router-link>
+
+        <!-- <a
           class="nav-link collapsed"
           href="#"
           data-toggle="collapse"
@@ -80,10 +84,11 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <router-link :to="{ name: 'customers'}" class="collapse-item">Party List</router-link>
           </div>
-        </div>
+        </div> -->
       </li>
       <li class="nav-item">
-        <a
+        <router-link :to="{ name: 'vendors'}" class="nav-link"><i class="fas fa-user-friends"></i> Vendors</router-link>
+        <!-- <a
           class="nav-link collapsed"
           href="#"
           data-toggle="collapse"
@@ -103,10 +108,11 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <router-link :to="{ name: 'vendors'}" class="collapse-item">Vendor List</router-link>
           </div>
-        </div>
+        </div> -->
       </li>
       <li class="nav-item">
-        <a
+        <router-link :to="{ path: '/products'}" class="nav-link"><i class="fas fa-box"></i> Particular List</router-link>
+        <!-- <a
           class="nav-link collapsed"
           href="#"
           data-toggle="collapse"
@@ -126,11 +132,12 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <router-link :to="{ path: '/products'}" class="collapse-item">Particular List</router-link>
           </div>
-        </div>
+        </div> -->
       </li>
       
       <li class="nav-item">
-        <a
+        <router-link :to="{ name: 'items'}" class="nav-link"><i class="fas fa-box"></i> Item </router-link>
+        <!-- <a
           class="nav-link collapsed"
           href="#"
           data-toggle="collapse"
@@ -150,12 +157,13 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <router-link :to="{ name: 'items'}" class="collapse-item">Item List</router-link>
           </div>
-        </div>
+        </div> -->
       </li>
       
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a
+        <router-link :to="{ name: 'invoices'}" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> Billing List</router-link>
+        <!-- <a
           class="nav-link collapsed"
           href="#"
           data-toggle="collapse"
@@ -175,12 +183,13 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <router-link :to="{ name: 'invoices'}" class="collapse-item">Billing List</router-link>
           </div>
-        </div>
+        </div> -->
       </li>
       
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a
+        <router-link :to="{ name: 'expenses'}" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> Purchase</router-link>
+        <!-- <a
           class="nav-link collapsed"
           href="#"
           data-toggle="collapse"
@@ -200,10 +209,11 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <router-link :to="{ name: 'expenses'}" class="collapse-item">Purchase List</router-link>
           </div>
-        </div>
+        </div> -->
       </li>
       <li class="nav-item">
-        <a
+        <router-link :to="{ name: 'settings'}" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> Settings</router-link>
+        <!-- <a
           class="nav-link collapsed"
           href="#"
           data-toggle="collapse"
@@ -223,7 +233,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <router-link :to="{ name: 'settings'}" class="collapse-item">Setting List</router-link>
           </div>
-        </div>
+        </div> -->
       </li>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block" />

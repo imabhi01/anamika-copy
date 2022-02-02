@@ -1497,6 +1497,13 @@ span.form-remove {
   vertical-align: -webkit-baseline-middle;
 }
 
+span.badge.text-center {
+  display: block;
+  width: 30%;
+  color: #fff;
+  padding: 10px;
+}
+
 @media print{
   h1.h3.mb-0.text-gray-800 {
     display: none;

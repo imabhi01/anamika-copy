@@ -2887,6 +2887,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Sidebar",
@@ -89314,463 +89324,137 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "sidebar-heading" }, [_vm._v("Interface")]),
         _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse",
-              attrs: {
-                id: "collapse-users",
-                "aria-labelledby": "headingTwo",
-                "data-parent": "#accordionSidebar"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "bg-white py-2 collapse-inner rounded" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { to: { name: "users" } }
-                    },
-                    [_vm._v("Users List")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
-        ]),
+        _c(
+          "li",
+          { staticClass: "nav-item" },
+          [
+            _c(
+              "router-link",
+              { staticClass: "nav-link", attrs: { to: { name: "users" } } },
+              [_c("i", { staticClass: "fas fa-user-cog" }), _vm._v(" Users")]
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse",
-              attrs: {
-                id: "collapse-customers",
-                "aria-labelledby": "headingTwo",
-                "data-parent": "#accordionSidebar"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "bg-white py-2 collapse-inner rounded" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { to: { name: "customers" } }
-                    },
-                    [_vm._v("Party List")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
-        ]),
+        _c(
+          "li",
+          { staticClass: "nav-item" },
+          [
+            _c(
+              "router-link",
+              { staticClass: "nav-link", attrs: { to: { name: "customers" } } },
+              [
+                _c("i", { staticClass: "fas fa-user-friends" }),
+                _vm._v(" Party")
+              ]
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse",
-              attrs: {
-                id: "collapse-vendors",
-                "aria-labelledby": "headingTwo",
-                "data-parent": "#accordionSidebar"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "bg-white py-2 collapse-inner rounded" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { to: { name: "vendors" } }
-                    },
-                    [_vm._v("Vendor List")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
-        ]),
+        _c(
+          "li",
+          { staticClass: "nav-item" },
+          [
+            _c(
+              "router-link",
+              { staticClass: "nav-link", attrs: { to: { name: "vendors" } } },
+              [
+                _c("i", { staticClass: "fas fa-user-friends" }),
+                _vm._v(" Vendors")
+              ]
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _vm._m(3),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse",
-              attrs: {
-                id: "collapse-products",
-                "aria-labelledby": "headingTwo",
-                "data-parent": "#accordionSidebar"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "bg-white py-2 collapse-inner rounded" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { to: { path: "/products" } }
-                    },
-                    [_vm._v("Particular List")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
-        ]),
+        _c(
+          "li",
+          { staticClass: "nav-item" },
+          [
+            _c(
+              "router-link",
+              { staticClass: "nav-link", attrs: { to: { path: "/products" } } },
+              [
+                _c("i", { staticClass: "fas fa-box" }),
+                _vm._v(" Particular List")
+              ]
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _vm._m(4),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse",
-              attrs: {
-                id: "collapse-Items",
-                "aria-labelledby": "headingTwo",
-                "data-parent": "#accordionSidebar"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "bg-white py-2 collapse-inner rounded" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { to: { name: "items" } }
-                    },
-                    [_vm._v("Item List")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
-        ]),
+        _c(
+          "li",
+          { staticClass: "nav-item" },
+          [
+            _c(
+              "router-link",
+              { staticClass: "nav-link", attrs: { to: { name: "items" } } },
+              [_c("i", { staticClass: "fas fa-box" }), _vm._v(" Item ")]
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _vm._m(5),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse",
-              attrs: {
-                id: "collapseTwo",
-                "aria-labelledby": "headingTwo",
-                "data-parent": "#accordionSidebar"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "bg-white py-2 collapse-inner rounded" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { to: { name: "invoices" } }
-                    },
-                    [_vm._v("Billing List")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
-        ]),
+        _c(
+          "li",
+          { staticClass: "nav-item" },
+          [
+            _c(
+              "router-link",
+              { staticClass: "nav-link", attrs: { to: { name: "invoices" } } },
+              [
+                _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
+                _vm._v(" Billing List")
+              ]
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _vm._m(6),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse",
-              attrs: {
-                id: "collapseExpense",
-                "aria-labelledby": "headingTwo",
-                "data-parent": "#accordionSidebar"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "bg-white py-2 collapse-inner rounded" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { to: { name: "expenses" } }
-                    },
-                    [_vm._v("Purchase List")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
-        ]),
+        _c(
+          "li",
+          { staticClass: "nav-item" },
+          [
+            _c(
+              "router-link",
+              { staticClass: "nav-link", attrs: { to: { name: "expenses" } } },
+              [
+                _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
+                _vm._v(" Purchase")
+              ]
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _vm._m(7),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse",
-              attrs: {
-                id: "collapseSetting",
-                "aria-labelledby": "headingTwo",
-                "data-parent": "#accordionSidebar"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "bg-white py-2 collapse-inner rounded" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "collapse-item",
-                      attrs: { to: { name: "settings" } }
-                    },
-                    [_vm._v("Setting List")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
-        ]),
+        _c(
+          "li",
+          { staticClass: "nav-item" },
+          [
+            _c(
+              "router-link",
+              { staticClass: "nav-link", attrs: { to: { name: "settings" } } },
+              [
+                _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
+                _vm._v(" Settings")
+              ]
+            )
+          ],
+          1
+        ),
         _vm._v(" "),
         _c("hr", { staticClass: "sidebar-divider d-none d-md-block" }),
         _vm._v(" "),
-        _vm._m(8)
+        _vm._m(0)
       ],
       1
     )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link collapsed",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapse-users",
-          "aria-expanded": "true",
-          "aria-controls": "collapse-users"
-        }
-      },
-      [
-        _c("i", { staticClass: "fas fa-fw fa-cog" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("Users")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link collapsed",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapse-customers",
-          "aria-expanded": "true",
-          "aria-controls": "collapse-customers"
-        }
-      },
-      [
-        _c("i", { staticClass: "fas fa-fw fa-cog" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("Party")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link collapsed",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapse-vendors",
-          "aria-expanded": "true",
-          "aria-controls": "collapse-vendors"
-        }
-      },
-      [
-        _c("i", { staticClass: "fas fa-fw fa-cog" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("Vendors")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link collapsed",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapse-products",
-          "aria-expanded": "true",
-          "aria-controls": "collapse-products"
-        }
-      },
-      [
-        _c("i", { staticClass: "fas fa-fw fa-cog" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("Particulars")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link collapsed",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapse-Items",
-          "aria-expanded": "true",
-          "aria-controls": "collapse-Items"
-        }
-      },
-      [
-        _c("i", { staticClass: "fas fa-fw fa-cog" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("Items")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link collapsed",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapseTwo",
-          "aria-expanded": "true",
-          "aria-controls": "collapseTwo"
-        }
-      },
-      [
-        _c("i", { staticClass: "fas fa-fw fa-cog" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("Billing")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link collapsed",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapseExpense",
-          "aria-expanded": "true",
-          "aria-controls": "collapseExpense"
-        }
-      },
-      [
-        _c("i", { staticClass: "fas fa-fw fa-cog" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("Purchase")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "nav-link collapsed",
-        attrs: {
-          href: "#",
-          "data-toggle": "collapse",
-          "data-target": "#collapseSetting",
-          "aria-expanded": "true",
-          "aria-controls": "collapseSetting"
-        }
-      },
-      [
-        _c("i", { staticClass: "fas fa-fw fa-cog" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("Settings")])
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
