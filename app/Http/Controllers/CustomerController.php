@@ -88,7 +88,6 @@ class CustomerController extends Controller
 
         return response()
             ->json(['saved' => true, 'id' => $customer->id, 'status' => 200]);
-
     }
 
     public function show($id){
