@@ -7,7 +7,7 @@
                 </span>
                 <div>
                     <router-link :to="{name: 'users-create'}" class="btn btn-primary">
-                        New User
+                        <i class="fas fa-plus-square"></i> New User
                     </router-link>
                 </div>
             </div>

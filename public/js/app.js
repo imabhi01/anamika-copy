@@ -96228,7 +96228,10 @@ var render = function() {
                 staticClass: "btn btn-primary",
                 attrs: { to: { name: "users-create" } }
               },
-              [_vm._v("\n                    New User\n                ")]
+              [
+                _c("i", { staticClass: "fas fa-plus-square" }),
+                _vm._v(" New User\n                ")
+              ]
             )
           ],
           1
