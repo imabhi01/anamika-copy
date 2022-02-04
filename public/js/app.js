@@ -2183,7 +2183,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 
@@ -2215,7 +2214,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)(['isLoggedIn'])),
   data: function data() {
-    return {};
+    return {
+      year: new Date().getFullYear()
+    };
   }
 });
 
@@ -2496,7 +2497,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Footer"
+  name: "Footer",
+  props: ['year']
 });
 
 /***/ }),
@@ -88489,7 +88491,7 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("Footer")
+                _c("Footer", { attrs: { year: _vm.year } })
               ],
               1
             )
@@ -88935,24 +88937,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("footer", { staticClass: "sticky-footer bg-white" }, [
-        _c("div", { staticClass: "container my-auto" }, [
-          _c("div", { staticClass: "copyright text-center my-auto" }, [
-            _c("span", [_vm._v("Copyright © Your Website 2021")])
-          ])
+  return _c("div", [
+    _c("footer", { staticClass: "sticky-footer bg-white" }, [
+      _c("div", { staticClass: "container my-auto" }, [
+        _c("div", { staticClass: "copyright text-center my-auto" }, [
+          _c("span", [_vm._v("Copyright © Your Website " + _vm._s(_vm.year))])
         ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

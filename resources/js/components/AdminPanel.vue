@@ -31,8 +31,7 @@
                 </div>
                 <!-- End of Main Content -->
 
-            <Footer />
-
+            <Footer :year="year"/>
             </div>
             <!-- End of Content Wrapper -->
         </div>
@@ -63,7 +62,9 @@
             ...mapGetters(['isLoggedIn'])
         },
         data(){
-            return {}
+            return {
+                year: new Date().getFullYear()
+            }
         }
     }
 </script>
