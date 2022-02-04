@@ -20,5 +20,4 @@ class Vendor extends Model
     {
         return $this->attributes['vendor_name'];
     }
-
 }

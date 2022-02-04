@@ -22,5 +22,4 @@ class Item extends Model
     {
         return $this->attributes['item_name'];
     }
-
 }

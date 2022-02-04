@@ -47,5 +47,4 @@ class User extends Authenticatable
     {
         return asset(\Storage::url($image ?: 'public/uploads/default.png'));
     }
-
 }
