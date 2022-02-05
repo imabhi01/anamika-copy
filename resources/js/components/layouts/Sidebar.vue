@@ -235,6 +235,9 @@
           </div>
         </div> -->
       </li>
+      <li class="nav-item">
+        <router-link :to="{ name: 'employees'}" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> Employee</router-link>
+      </li>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block" />
       <!-- Sidebar Toggler (Sidebar) -->
