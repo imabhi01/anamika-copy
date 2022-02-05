@@ -11366,6 +11366,10 @@ a.btn.btn-primary {
   font-size: 16px !important;
 }
 
+.document {
+  width: 1500px !important;
+}
+
 @media print {
   h1.h3.mb-0.text-gray-800 {
     display: none;
