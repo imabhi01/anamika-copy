@@ -12,6 +12,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,6 +48,8 @@ Route::get('/users/create', [UserController::class, 'create']);
 Route::post('/users/store', [UserController::class, 'store']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
 Route::put('/users/{id}', [UserController::class, 'update']);
+
+Route::post('/employees/store', [EmployeeController::class, 'store']);
 
 Route::resource('/invoices', InvoiceController::class);
 Route::get('/invoices/live/search', [InvoiceController::class, 'livesearch']);

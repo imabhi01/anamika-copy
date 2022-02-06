@@ -6,8 +6,8 @@
                     <h3>All Employees</h3>
                 </span>
                 <div>
-                    <router-link :to="{name: 'users-create'}" class="btn btn-primary">
-                        <i class="fas fa-plus-square"></i> New User
+                    <router-link :to="{name: 'employees-create'}" class="btn btn-primary">
+                        <i class="fas fa-plus-square"></i> New Employee
                     </router-link>
                 </div>
             </div>
