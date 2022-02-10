@@ -9,13 +9,16 @@ class EmployeeController extends Controller
 {
     public function store(Request $request){
 
+        // dd($request->all());
+
         $request->validate([
            'first_name' => 'required',
            'last_name' => 'required',
-           'phone' => 'required|phone|unique:users',
+           'phone' => 'required|unique:employees',
            'address' => 'required|string',
-           'image' => 'required|mimes:jpg,jpeg,png,csv,txt,xlx,xls,pdf|max:2048',
-           'salary' => 'required|numeric'
+           'image' => 'sometimes|mimes:jpg,jpeg,png|max:2048',
+           'salary' => 'required|numeric',
+           'joining_date' => 'required|date',
         ]);
 
         $employee = Employee::create([
@@ -23,7 +26,8 @@ class EmployeeController extends Controller
             'last_name' => $request['last_name'],
             'phone' => $request['phone'],
             'address' => $request['address'],
-            'salary' => $request['salary']
+            'salary' => $request['salary'],
+            'joining_date' => $request['joining_date'],
         ]);
 
         if($request->file('image')) {
