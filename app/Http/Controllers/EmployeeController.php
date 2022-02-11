@@ -9,12 +9,12 @@ class EmployeeController extends Controller
 {
     public function store(Request $request){
 
-        // dd($request->all());
+        dd($request->all());
 
         $request->validate([
            'first_name' => 'required',
            'last_name' => 'required',
-           'phone' => 'required|unique:employees',
+           'phone' => 'required|unique:employees|numeric',
            'address' => 'required|string',
            'image' => 'sometimes|mimes:jpg,jpeg,png|max:2048',
            'salary' => 'required|numeric',
@@ -45,7 +45,7 @@ class EmployeeController extends Controller
     }
 
     public function update(Request $request, $id){
-        dd($request->all());
+        
         $user = User::findOrFail($id);
         
         $request->validate([

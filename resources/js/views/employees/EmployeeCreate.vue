@@ -123,6 +123,8 @@
                 formData.append("joining_date", this.form.joining_date);
                 formData.append("image", this.form.image);
 
+                console.log(this.form);
+
                 axios.post(this.store, formData)
                 .then((res) => {
                     if(res.data.saved === true){
