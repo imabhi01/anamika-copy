@@ -49,6 +49,11 @@ Route::post('/users/store', [UserController::class, 'store']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
 Route::put('/users/{id}', [UserController::class, 'update']);
 
+Route::get('/employees/search', [EmployeeController::class, 'search']);
+Route::get('/employees/live/search', [EmployeeController::class, 'livesearch']);
+Route::get('/employees/get/total_rows', [EmployeeController::class, 'totalRows']);
+Route::get('/employees', [EmployeeController::class, 'index']);
+Route::get('/employees/{id}', [EmployeeController::class, 'show']);
 Route::post('/employees/store', [EmployeeController::class, 'store']);
 
 Route::resource('/invoices', InvoiceController::class);

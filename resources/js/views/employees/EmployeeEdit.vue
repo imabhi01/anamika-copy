@@ -2,7 +2,7 @@
     <div>
         <div class="panel">
             <div class="panel-heading">
-                <span class="panel-title">Edit User</span>
+                <span class="panel-title">Edit Employee</span>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -28,32 +28,44 @@
                     <div class="col-8">
                         <div class="form-group">
                             <label>
-                                Email
+                                Phone
                             </label>
-                            <input type="email" class="form-control" v-model="form.email" placeholder="Email">
-                            <small class="error-control" v-if="errors.email">
-                                {{errors.email[0]}}
+                            <input type="text" class="form-control" disabled v-model="form.phone" placeholder="Phone">
+                            <small class="error-control" v-if="errors.phone">
+                                {{errors.phone[0]}}
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label>
+                                Address
+                            </label>
+                            <input type="text" class="form-control" disabled v-model="form.address" placeholder="Address">
+                            <small class="error-control" v-if="errors.address">
+                                {{errors.address[0]}}
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label>
+                                Joining Date
+                            </label>
+                            <input type="date" class="form-control" disabled v-model="form.joining_date" placeholder="Joining Date">
+                            <small class="error-control" v-if="errors.joining_date">
+                                {{errors.joining_date[0]}}
                             </small>
                         </div>
                     </div>
 
                     <div class="col-8">
                         <div class="form-group">
-                            <label>
-                                Password
-                            </label>
-                            <input type="password" class="form-control" v-model="form.password" placeholder="Password">
-                            <small class="error-control" v-if="errors.password">
-                                {{errors.password[0]}}
-                            </small>
-                        </div>
-                    </div>
-                    <div class="col-8">
-                        <div class="form-group">
-                            <label>Password Confirmation</label>
-                            <input type="password" class="form-control" v-model="form.password_confirmation" placeholder="Password Confirmation">
-                            <small class="error-control" v-if="errors.password_confirmation">
-                                {{errors.password_confirmation[0]}}
+                            <label>Salary</label>
+                            <input type="text" class="form-control" disabled v-model="form.salary" placeholder="Password Confirmation">
+                            <small class="error-control" v-if="errors.salary">
+                                {{errors.salary[0]}}
                             </small>
                         </div>
                     </div>
@@ -84,28 +96,28 @@
     import {get, byMethod } from '../../lib/api'
 
     export default {
-        name: 'UserEdit',
+        name: 'EmployeeEdit',
         data(){
             return {
                 form: {},
                 isProcessing: false,
-                store: `/api/users/`,
+                store: `/api/employees/`,
                 method: 'PUT',
                 title: 'Edit',
-                resource: '/users',
+                resource: '/employees',
                 previewUrl: null,
                 image: null
             }
         },
         beforeRouteEnter(to, from, next) {
-            get(`/api/users/${to.params.id}`)
+            get(`/api/employees/${to.params.id}`)
                 .then((res) => {
                     next(vm => vm.setData(res))
                 })
         },
         beforeRouteUpdate(to, from, next) {
             this.show = false
-            get(`/api/users/${to.params.id}`)
+            get(`/api/employees/${to.params.id}`)
                 .then((res) => {
                     this.setData(res)
                     next()
@@ -121,7 +133,7 @@
             },
             setData(res) {
                 Vue.set(this.$data, 'form', res.data.model)
-                this.store = `/api/users/${this.$route.params.id}`
+                this.store = `/api/employees/${this.$route.params.id}`
                 this.show = true
                 this.$bar.finish()
             },
@@ -169,5 +181,12 @@
 </script>
 
 <style lang="scss" scoped>
-
+.figure-img {
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  object-fit: cover;
+  height: 250px;
+  width: 250px;
+  border-radius: 10px;
+}
 </style>

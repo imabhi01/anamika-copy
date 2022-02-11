@@ -20,8 +20,10 @@
                             <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>Email</th>
+                            <th>Phone</th>
                             <th>Image</th>
+                            <th>Address</th>
+                            <th>Salary</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -30,12 +32,14 @@
                             <td class="w-1">{{item.id}}</td>
                             <td class="w-3">{{item.first_name}}</td>
                             <td class="w-3">{{item.last_name}}</td>
-                            <td class="w-5">{{item.email}}</td>
+                            <td class="w-5">{{item.phone}}</td>
                             <td class="w-5">
                                 <img :src="item.image" class="figure-img img-fluid img-rounded preview" alt="">
                             </td>
+                            <td class="w-5">{{item.address}}</td>
+                            <td class="w-5">{{item.salary}}</td>
                             <td class="w-3">
-                                <router-link :to="`/users/${item.id}`" class="btn">Show</router-link>
+                                <router-link :to="`/employees/${item.id}`" class="btn">Show</router-link>
                             </td>
                         </tr>
                     </tbody>
@@ -78,14 +82,14 @@
             }
         },
         beforeRouteEnter(to, from, next) {
-            get('/api/users', to.query)
+            get('/api/employees', to.query)
                 .then((res) => {
                     next(vm => vm.setData(res))
                 })
         },
 
         beforeRouteUpdate(to, from, next) {
-            get('/api/users', to.query)
+            get('/api/employees', to.query)
                 .then((res) => {
                     this.setData(res)
                     next()
@@ -94,7 +98,7 @@
         methods: {
             getRows(event) {
                 this.total_rows = event.target.value
-                axios.get('/api/users/get/total_rows', {params: { total_rows : this.total_rows}})
+                axios.get('/api/employees/get/total_rows', {params: { total_rows : this.total_rows}})
                     .then(res => {
                         this.setData(res)
                     })
@@ -104,7 +108,7 @@
             },
             liveSearch(event){
                 this.search = event.target.value
-                axios.get('/api/users/live/search', { params: { q: this.search } })
+                axios.get('/api/employees/live/search', { params: { q: this.search } })
                     .then(res => {
                         this.setData(res)
                     })
@@ -113,7 +117,7 @@
                     });
             },
             detailsPage(item) {
-                this.$router.push(`/users/${item.id}`)
+                this.$router.push(`/employees/${item.id}`)
             },
             setData(res) {
                 Vue.set(this.$data, 'model', res.data.results)
@@ -126,7 +130,7 @@
                     query.page = query.page ? (Number(query.page) + 1) : 2
 
                     this.$router.push({
-                        path: '/users',
+                        path: '/employees',
                         query: query
                     })
                 }
@@ -137,7 +141,7 @@
                     query.page = query.page ? (Number(query.page) - 1) : 1
 
                     this.$router.push({
-                        path: '/users',
+                        path: '/employees',
                         query: query
                     })
                 }

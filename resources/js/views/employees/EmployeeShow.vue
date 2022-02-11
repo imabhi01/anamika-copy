@@ -4,8 +4,8 @@
             <div class="panel-heading">
                 <span class="panel-title">{{form.number}}</span>
                 <div>
-                    <router-link to="/users" class="btn">Back</router-link>
-                    <router-link :to="`/users/${form.id}/edit`" class="btn">Edit</router-link>
+                    <router-link to="/employees" class="btn">Back</router-link>
+                    <router-link :to="`/employees/${form.id}/edit`" class="btn">Edit</router-link>
                     <button class="btn btn-error" @click="deleteItem">Delete</button>
                 </div>
             </div>
@@ -29,36 +29,48 @@
                             </small>
                         </div>
                     </div>
+
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label>
+                                Phone
+                            </label>
+                            <input type="text" class="form-control" disabled v-model="form.phone" placeholder="Phone">
+                            <small class="error-control" v-if="errors.phone">
+                                {{errors.phone[0]}}
+                            </small>
+                        </div>
+                    </div>
                     
                     <div class="col-8">
                         <div class="form-group">
                             <label>
-                                Email
+                                Address
                             </label>
-                            <input type="email" class="form-control" disabled v-model="form.email" placeholder="Email">
-                            <small class="error-control" v-if="errors.email">
-                                {{errors.email[0]}}
+                            <input type="text" class="form-control" disabled v-model="form.address" placeholder="Address">
+                            <small class="error-control" v-if="errors.address">
+                                {{errors.address[0]}}
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label>
+                                Joining Date
+                            </label>
+                            <input type="date" class="form-control" disabled v-model="form.joining_date" placeholder="Joining Date">
+                            <small class="error-control" v-if="errors.joining_date">
+                                {{errors.joining_date[0]}}
                             </small>
                         </div>
                     </div>
 
                     <div class="col-8">
                         <div class="form-group">
-                            <label>
-                                Password
-                            </label>
-                            <input type="password" class="form-control" disabled v-model="form.password" placeholder="Password">
-                            <small class="error-control" v-if="errors.password">
-                                {{errors.password[0]}}
-                            </small>
-                        </div>
-                    </div>
-                    <div class="col-8">
-                        <div class="form-group">
-                            <label>Password Confirmation</label>
-                            <input type="password" class="form-control" disabled v-model="form.password_confirmation" placeholder="Password Confirmation">
-                            <small class="error-control" v-if="errors.password_confirmation">
-                                {{errors.password_confirmation[0]}}
+                            <label>Salary</label>
+                            <input type="text" class="form-control" disabled v-model="form.salary" placeholder="Password Confirmation">
+                            <small class="error-control" v-if="errors.salary">
+                                {{errors.salary[0]}}
                             </small>
                         </div>
                     </div>
@@ -80,7 +92,7 @@
     import {get, byMethod} from '../../lib/api'
     
     export default {
-        name: 'usershow',
+        name: 'EmployeeShow',
         data(){
             return {
                 form: {},
@@ -88,13 +100,13 @@
             }
         },
         beforeRouteEnter(to, from, next) {
-            get(`/api/users/${to.params.id}`)
+            get(`/api/employees/${to.params.id}`)
                 .then((res) => {
                     next(vm => vm.setData(res))
                 })
         },
         beforeRouteUpdate(to, from, next) {
-            get(`/api/users/${to.params.id}`)
+            get(`/api/employees/${to.params.id}`)
                 .then((res) => {
                     this.setData(res)
                     next()
@@ -106,10 +118,10 @@
                 this.$bar.finish()
             },
             deleteItem() {
-                byMethod('delete', `/api/users/${this.form.id}`)
+                byMethod('delete', `/api/employees/${this.form.id}`)
                     .then((res) => {
                         if(res.data.deleted) {
-                            this.$router.push('/users')
+                            this.$router.push('/employees')
                         }
                     })
             }
@@ -118,5 +130,12 @@
 </script>
 
 <style lang="scss" scoped>
-
+.figure-img {
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  object-fit: cover;
+  height: 250px;
+  width: 250px;
+  border-radius: 10px;
+}
 </style>

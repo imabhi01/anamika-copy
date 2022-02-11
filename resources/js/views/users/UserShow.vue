@@ -118,5 +118,12 @@
 </script>
 
 <style lang="scss" scoped>
-
+.figure-img {
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  object-fit: cover;
+  height: 250px;
+  width: 250px;
+  border-radius: 10px;
+}
 </style>

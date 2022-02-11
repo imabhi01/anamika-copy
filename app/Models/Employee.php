@@ -10,4 +10,9 @@ class Employee extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function getImageAttribute($image)
+    {
+        return asset(\Storage::url($image ?: 'public/uploads/default.png'));
+    }
 }
