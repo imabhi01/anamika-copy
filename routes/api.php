@@ -55,6 +55,8 @@ Route::get('/employees/get/total_rows', [EmployeeController::class, 'totalRows']
 Route::get('/employees', [EmployeeController::class, 'index']);
 Route::get('/employees/{id}', [EmployeeController::class, 'show']);
 Route::post('/employees/store', [EmployeeController::class, 'store']);
+Route::delete('/employees/{id}', [EmployeeController::class, 'destroy']);
+Route::put('/employees/{id}', [EmployeeController::class, 'update']);
 
 Route::resource('/invoices', InvoiceController::class);
 Route::get('/invoices/live/search', [InvoiceController::class, 'livesearch']);

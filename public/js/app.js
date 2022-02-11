@@ -4485,7 +4485,6 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("email", this.form.email);
       formData.append("password", this.form.password);
       formData.append("password_confirmation", this.form.password_confirmation);
-      console.log(this.form, formData);
       (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)(this.method, this.store, formData).then(function (res) {
         if (res.data && res.data.saved) {
           _this2.$toaster.success('User Updated Successfully!');

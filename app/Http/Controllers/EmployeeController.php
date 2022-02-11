@@ -81,15 +81,15 @@ class EmployeeController extends Controller
     }
 
     public function update(Request $request, $id){
-        
+        dd($request->all());
         $employee = Employee::findOrFail($id);
         
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'phone' => 'required|unique:employees|numeric',
+            'phone' => 'required|unique:employees|numeric,'.$id,
             'address' => 'required|string',
-            'image' => 'sometimes|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'sometimes|mimes:jpg,jpeg,png|max:2048,'.$id,
             'salary' => 'required|numeric',
             'joining_date' => 'required|date',
         ]);

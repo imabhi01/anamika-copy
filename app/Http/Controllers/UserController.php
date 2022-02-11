@@ -85,7 +85,7 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id){
-        dd($request->all());
+        
         $user = User::findOrFail($id);
         
         $request->validate([
