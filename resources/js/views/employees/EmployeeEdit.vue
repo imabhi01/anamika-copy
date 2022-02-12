@@ -79,7 +79,6 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
             <div class="panel-footer flex-end">
@@ -150,7 +149,7 @@
                 formData.append("email", this.form.email);
                 formData.append("password", this.form.password);
                 formData.append("password_confirmation", this.form.password_confirmation);
-                
+
                 byMethod(this.method, this.store, formData)
                 .then((res) => {
                     if(res.data && res.data.saved) {
