@@ -69,7 +69,6 @@
 
 <script>
     import {get, byMethod } from '../../lib/api'
-
     export default {
         name: 'CustomerEdit',
         data(){
