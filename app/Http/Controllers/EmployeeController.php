@@ -16,7 +16,6 @@ class EmployeeController extends Controller
                     ->orWhere('email', 'like', '%'.request('q').'%');
             })
             ->limit(6)->get();
-
         return response()
             ->json(['results' => $results]);
     }
@@ -34,7 +33,6 @@ class EmployeeController extends Controller
                     ->orWhere('last_name', 'like', '%'.request('q').'%')
                     ->orWhere('email', 'like', '%'.request('q').'%');
             })->paginate(10);
-
         return response()
             ->json(['results' => $results]);
     }
