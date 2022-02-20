@@ -123,5 +123,4 @@ class EmployeeController extends Controller
         return response()
             ->json(['deleted' => true]);
     }
-
 }
