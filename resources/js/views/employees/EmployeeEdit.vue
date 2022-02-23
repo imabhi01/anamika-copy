@@ -138,9 +138,7 @@
                 this.errors = {}
                 this.isProcessing = true
                 this.form.image = this.image
-             
                 let formData = new FormData();
-                
                 formData.append("image", this.form.image);
                 formData.append("first_name", this.form.first_name);
                 formData.append("last_name", this.form.last_name);
