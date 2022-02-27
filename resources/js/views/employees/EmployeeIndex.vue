@@ -61,7 +61,6 @@
         </div>
     </div>
 </template>
-
 <script type="text/javascript">
     import Vue from 'vue'
     import { get } from '../../lib/api'
