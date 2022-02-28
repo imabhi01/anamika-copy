@@ -85,7 +85,6 @@
                     next(vm => vm.setData(res))
                 })
         },
-
         beforeRouteUpdate(to, from, next) {
             get('/api/employees', to.query)
                 .then((res) => {
