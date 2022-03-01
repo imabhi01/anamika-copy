@@ -146,7 +146,6 @@
         }
     }
 </script>
-
 <style lang="scss" scoped>
     .preview{
         height: 100px;
