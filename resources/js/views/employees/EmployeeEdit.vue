@@ -174,7 +174,6 @@
         }
     }
 </script>
-
 <style lang="scss" scoped>
 .figure-img {
   margin-bottom: 0.5rem;
