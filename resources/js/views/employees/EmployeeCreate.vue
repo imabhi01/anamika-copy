@@ -101,7 +101,7 @@
         },
         methods:{
             errors(){
-                console.log('here');
+                // console.log('here');
             },
             selectImage(e){
                 this.image = e.target.files[0]
@@ -121,7 +121,7 @@
                 formData.append("address", this.form.address);
                 formData.append("joining_date", this.form.joining_date);
                 formData.append("image", this.form.image);
-                
+
                 axios.post(this.store, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
