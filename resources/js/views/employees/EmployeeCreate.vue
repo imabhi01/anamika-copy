@@ -121,7 +121,7 @@
                 formData.append("address", this.form.address);
                 formData.append("joining_date", this.form.joining_date);
                 formData.append("image", this.form.image);
-                console.log(formData);
+                
                 axios.post(this.store, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
