@@ -16,6 +16,7 @@ class EmployeeController extends Controller
                     ->orWhere('email', 'like', '%'.request('q').'%');
             })
             ->limit(6)->get();
+            
         return response()
             ->json(['results' => $results]);
     }
