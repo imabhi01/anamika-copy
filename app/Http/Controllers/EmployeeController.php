@@ -16,7 +16,7 @@ class EmployeeController extends Controller
                     ->orWhere('email', 'like', '%'.request('q').'%');
             })
             ->limit(6)->get();
-
+            
         return response()
             ->json(['results' => $results]);
     }
@@ -45,6 +45,7 @@ class EmployeeController extends Controller
     }
 
     public function store(Request $request){
+
         $request->validate([
            'first_name' => 'required',
            'last_name' => 'required',
@@ -54,6 +55,7 @@ class EmployeeController extends Controller
            'salary' => 'required|numeric',
            'joining_date' => 'required|date',
         ]);
+
         $employee = Employee::create([
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
