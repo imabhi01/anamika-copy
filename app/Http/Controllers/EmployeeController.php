@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class EmployeeController extends Controller
 {
     public function search(){
+
         $results = Employee::orderBy('firstname')
             ->when(request('q'), function($query) {
                 $query->where('first_name', 'like', '%'.request('q').'%')
@@ -16,6 +17,7 @@ class EmployeeController extends Controller
                     ->orWhere('email', 'like', '%'.request('q').'%');
             })
             ->limit(6)->get();
+            
         return response()
             ->json(['results' => $results]);
     }
