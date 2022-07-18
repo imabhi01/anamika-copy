@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Storage;
 class EmployeeController extends Controller
 {
     public function search(){
-
         $results = Employee::orderBy('firstname')
             ->when(request('q'), function($query) {
                 $query->where('first_name', 'like', '%'.request('q').'%')
