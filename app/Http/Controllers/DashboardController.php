@@ -63,6 +63,7 @@ class DashboardController extends Controller
     }
 
     public function totalIncome(){
+        
         $invoices = Invoice::select(
             DB::raw('max(status) as `status`'),
             DB::raw('sum(total) as `total`'),
