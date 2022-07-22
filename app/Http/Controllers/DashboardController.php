@@ -24,7 +24,6 @@ class DashboardController extends Controller
     private $monthNames = ['Baisakh', 'Jestha', 'Ashar', 'Shrawan', 'Bhadra', 'Ashoj', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
 
     public function income(){
-
         $invoices = Invoice::select(
             DB::raw('max(status) as `status`'),
             DB::raw('sum(total) as `total`'),
