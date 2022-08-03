@@ -9,7 +9,6 @@ use DB;
 
 class DashboardController extends Controller
 {
-    
     private $invoicePaidLabels, 
             $invoiceUnPaidLabels, 
             $invoicePaidDataCollection, 
