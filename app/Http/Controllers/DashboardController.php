@@ -10,16 +10,16 @@ use DB;
 class DashboardController extends Controller
 {
     private $invoicePaidLabels, 
-            $invoiceUnPaidLabels, 
-            $invoicePaidDataCollection, 
-            $invoiceUnPaidDataCollection,
-            $expensePaidLabels,
-            $expenseUnPaidLabels, 
-            $expensePaidDataCollection, 
-            $expenseUnPaidDataCollection,
-            $months,
-            $totalIncomeData,
-            $totalExpensesData = []; 
+        $invoiceUnPaidLabels, 
+        $invoicePaidDataCollection, 
+        $invoiceUnPaidDataCollection,
+        $expensePaidLabels,
+        $expenseUnPaidLabels, 
+        $expensePaidDataCollection, 
+        $expenseUnPaidDataCollection,
+        $months,
+        $totalIncomeData,
+        $totalExpensesData = []; 
 
     private $monthNames = ['Baisakh', 'Jestha', 'Ashar', 'Shrawan', 'Bhadra', 'Ashoj', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'];
 
