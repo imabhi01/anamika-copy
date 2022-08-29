@@ -7,7 +7,6 @@ use App\Models\Customer;
 
 class CustomerController extends Controller
 {
-    
     public function search(){
         $results = Customer::orderBy('firstname')
             ->when(request('q'), function($query) {
