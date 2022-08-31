@@ -83,7 +83,6 @@ class DashboardController extends Controller
     }
     
     public function totalExpense(){
-
         $expenses = Expense::select(
             DB::raw('max(status) as `status`'),
             DB::raw('sum(total) as `total`'),
