@@ -89887,7 +89887,7 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center py-5" }, [
-        _c("div", { staticClass: "col-sm-6" }, [
+        _c("div", { staticClass: "col-sm-8" }, [
           _c("div", { staticClass: "card" }, [
             _vm._m(0),
             _vm._v(" "),
@@ -89990,7 +89990,7 @@ var render = function() {
                   _c(
                     "button",
                     { staticClass: "btn btn-lg btn-primary btn-block" },
-                    [_vm._v("Sign in")]
+                    [_vm._v("Login")]
                   )
                 ]
               )
@@ -90015,7 +90015,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header text-center" }, [
-      _c("h4", [_vm._v("Please sign in")])
+      _c("h2", [_c("strong", [_vm._v("Please Sign In")])])
     ])
   }
 ]

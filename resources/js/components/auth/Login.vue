@@ -2,10 +2,10 @@
   <div>
     <div class="container">
       <div class="row justify-content-center py-5">
-        <div class="col-sm-6">
+        <div class="col-sm-8">
           <div class="card">
             <div class="card-header text-center">
-              <h4>Please sign in</h4>
+              <h2><strong>Please Sign In</strong></h2>
             </div>
             <div class="card-body">
               <form v-on:submit.prevent="login">
@@ -23,7 +23,7 @@
                     {{errors.password[0]}}
                   </small>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block">Sign in</button>
+                <button class="btn btn-lg btn-primary btn-block">Login</button>
               </form>
             </div>
             <div class="card-footer" v-if="message">
