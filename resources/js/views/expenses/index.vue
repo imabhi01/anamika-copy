@@ -7,7 +7,7 @@
                 </span>
                 <div>
                     <router-link to="/expenses/create" class="btn btn-primary">
-                        New Purchase
+                        <i class="fa fa-plus-square" aria-hidden="true"></i> New Purchase
                     </router-link>
                 </div>
             </div>

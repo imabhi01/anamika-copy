@@ -2,7 +2,7 @@
     <div>
         <router-view></router-view>
         <div class="row">
-            <div class="col-12">
+            <!-- <div class="col-12">
                 <line-chart :chart-data="totalIncomesData" :options="options"></line-chart> 
             </div>
             <div class="col-12">
@@ -11,7 +11,7 @@
             
             <div class="col-12">
                 <line-chart :chart-data="totalExpensesData" :options="options"></line-chart> 
-            </div>
+            </div> -->
             <div class="col-12">
                 <line-chart :chart-data="totalExpenseCollection" :options="options"></line-chart> 
             </div>

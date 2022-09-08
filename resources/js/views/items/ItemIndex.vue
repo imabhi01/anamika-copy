@@ -5,7 +5,7 @@
                 <span class="panel-title">Items</span>
                 <div>
                     <router-link :to="{name: 'items-create'}" class="btn btn-primary">
-                        New Item
+                        <i class="fas fa-plus-square"></i> New Item
                     </router-link>
                 </div>
             </div>

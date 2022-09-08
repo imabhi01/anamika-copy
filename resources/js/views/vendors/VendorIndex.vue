@@ -7,7 +7,7 @@
                 </span>
                 <div>
                     <router-link :to="{name: 'vendors-create'}" class="btn btn-primary">
-                        New Vendor
+                        <i class="fas fa-plus-square"></i> New Vendor
                     </router-link>
                 </div>
             </div>

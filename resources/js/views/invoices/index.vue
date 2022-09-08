@@ -7,7 +7,7 @@
                 </span>
                 <div>
                     <router-link to="/invoices/create" class="btn btn-primary">
-                        New Billing
+                        <i class="fas fa-plus-square"></i> New Billing
                     </router-link>
                 </div>
             </div>

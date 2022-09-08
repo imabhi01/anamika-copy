@@ -5,7 +5,7 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-6">
+                <div class="col-8">
                     <div class="form-group">
                         <label>Customer</label>
                         <typeahead :url="customerURL" :initialize="form.customer"
@@ -15,13 +15,13 @@
                         </small>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-8">
                     <div class="form-group">
                         <label for="">(Add if not on list)</label>
-                        <router-link :to="{path: '/customers/create'}" class="btn btn-primary">Add New Party</router-link>
+                        <router-link :to="{path: '/customers/create'}" class="btn btn-primary"><i class="fa fa-plus-square"></i> Add New Party</router-link>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-8">
                     <div class="form-group">
                         <label>
                             Number
@@ -30,21 +30,9 @@
                         <span class="form-control">{{form.number}}</span>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>
-                            Reference
-                            <small>Optional</small>
-                        </label>
-                        <input type="text" class="form-control" v-model="form.reference">
-                        <small class="error-control" v-if="errors.reference">
-                            {{errors.reference[0]}}
-                        </small>
-                    </div>
-                </div>
             </div>
             <div class="row">
-                <div class="col-10">
+                <div class="col-8">
                     <div class="form-group">
                         <label>Date :</label>
                         <v-nepalidatepicker classValue="form-control" v-model="form.date" />
@@ -54,12 +42,24 @@
                     </div>
                 </div>
                 
-                <div class="col-10">
+                <div class="col-8">
                     <div class="form-group">
                         <label>Due Date :</label>
                         <v-nepalidatepicker classValue="form-control" v-model="form.due_date" />
                         <small class="error-control" v-if="errors.due_date">
                             {{errors.due_date[0]}}
+                        </small>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="form-group">
+                        <label>
+                            Reference
+                            <small>Optional</small>
+                        </label>
+                        <input type="text" class="form-control" v-model="form.reference">
+                        <small class="error-control" v-if="errors.reference">
+                            {{errors.reference[0]}}
                         </small>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                     <tr>
                         <td colspan="2">
                             <button class="btn btn-success"
-                             @click="addNewLine">Add New Product</button>
+                             @click="addNewLine"><i class="fa fa-plus-square"></i> Add New Product</button>
                         </td>
                         <td class="form-summary">Sub Total</td>
                         <td>{{subTotal | formatMoney}}</td>

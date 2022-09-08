@@ -7,7 +7,7 @@
                 </span>
                 <div>
                     <router-link to="/products/create" class="btn btn-primary">
-                        New Particular
+                        <i class="fas fa-plus-square"></i> New Particular
                     </router-link>
                 </div>
             </div>

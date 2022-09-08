@@ -34,12 +34,12 @@
 
             <div class="form-group">
                 <label for="search-between">Search Date</label>
-                <button class="btn btn-primary" @click="searchDate">Search Date</button>
+                <button class="btn btn-primary" @click="searchDate"><i class="fa fa-search" aria-hidden="true"></i> Search Date</button>
             </div>
 
             <div class="form-group">
                 <label for="search-between">Reset Filter</label>
-                <button class="btn btn-primary" @click="resetFilter">Reset Filter</button>
+                <button class="btn btn-primary" @click="resetFilter"> <i class="fa fa-refresh" aria-hidden="true"></i> Reset Filter</button>
             </div>
             
             <div class="form-group">

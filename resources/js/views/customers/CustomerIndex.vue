@@ -7,7 +7,7 @@
                 </span>
                 <div>
                     <router-link :to="{name: 'customers-create'}" class="btn btn-primary">
-                        New Party
+                        <i class="fas fa-plus-square"></i> New Party
                     </router-link>
                 </div>
             </div>

@@ -2,32 +2,50 @@
   <div>
     <div class="container">
       <div class="row justify-content-center py-5">
-        <div class="col-sm-8">
+        <div class="col-sm-6">
           <div class="card">
-            <div class="card-header text-center">
-              <h2><strong>Please Sign In</strong></h2>
-            </div>
             <div class="card-body">
+              <h3 class="text-center text-uppercase" v-if="setting">{{setting.title }}</h3>
+              <div class="errors" v-if="message">
+                <p class="text-center">{{message}}</p>
+              </div>
+              <p class="text-muted">Login</p>
               <form v-on:submit.prevent="login">
                 <div class="form-group">
-                  <label for="email"> Email Address</label>
-                  <input type="email" v-model="email" class="form-control" name="email" placeholder="Email Address">
-                  <small class="error-control" v-if="errors.email">
-                    {{errors.email[0]}}
-                  </small>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="fa fa-user"></i>
+                      </span>
+                    </div>
+                    <input name="email" type="email" v-model="email" class="form-control" placeholder="Email Address">
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="fa fa-lock"></i>
+                      </span>
+                    </div>
+                    <input name="password" type="password" v-model="password" class="form-control" placeholder="Password">
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="password"> Password</label>
-                  <input type="password" v-model="password" class="form-control" name="password" placeholder="Password">
-                  <small class="error-control" v-if="errors.password">
-                    {{errors.password[0]}}
-                  </small>
+                <div class="input-group mb-4">
+                  <div class="form-check checkbox">
+                    <input class="form-check-input" name="remember" type="checkbox" id="remember" style="vertical-align: middle;" />
+                    <label class="form-check-label" for="remember" style="vertical-align: middle;">
+                      Remember Me
+                    </label>
+                  </div>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block">Login</button>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <button class="btn btn-primary login-btn">
+                      Login
+                    </button>
+                  </div>
+                </div>
               </form>
-            </div>
-            <div class="card-footer" v-if="message">
-              <p class="text-center">{{message}}</p>
             </div>
           </div>
         </div>
@@ -39,6 +57,7 @@
 
 <script>
 import {get, byMethod} from '../../lib/api'
+import { mapGetters } from 'vuex';
 
 export default{
   data(){
@@ -49,6 +68,9 @@ export default{
       errors: {},
       message: ''
     }
+  },
+  async mounted(){
+    this.$store.dispatch('getSetting')
   },
   methods:{
     // async login() {
@@ -74,18 +96,35 @@ export default{
       .catch(error => {
         if(error.response.status === 422) {
           this.errors = error.response.data.errors
+          this.message = 'Both Email and password fields are required!'
         }
         if(error.response.status == 401){
-          this.message = 'Waning! Username or Password Incorrect.'
+          this.message = 'Warning! Username or Password Incorrect.'
         }
       })
     }
+  },
+  computed:{
+    ...mapGetters(['setting'])
   }
 }
 </script>
 
 <style lang="scss">
-  .card-footer{
-    color: red;
+  .errors{
+    color: #d70404;
+  }
+  .col-sm-6 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .login-btn{
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    width: 150px;
   }
 </style>

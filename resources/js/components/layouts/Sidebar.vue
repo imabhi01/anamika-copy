@@ -7,13 +7,10 @@
         class="sidebar-brand d-flex align-items-center justify-content-center"
         :to="{path:'/dashboard'}"
       >
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class=" mx-3" v-if="!setting">
+          PROJECT TITLE FROM SETTINGS
         </div>
-        <div class="sidebar-brand-text mx-3" v-if="!setting">
-          PROJECT TITLE HERE
-        </div>
-        <div class="sidebar-brand-text mx-3" v-if="setting">
+        <div class=" mx-3" v-if="setting">
           {{setting.title }}
         </div>
       </router-link>
@@ -26,7 +23,7 @@
         <!-- <a class="nav-link" href="index.html"> -->
         <router-link :to="{name:'dashboard'}" class="nav-link">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
+          <span>DASHBOARD</span>
         </router-link>
         <!-- </a> -->
       </li>
@@ -38,7 +35,7 @@
       <div class="sidebar-heading">Interface</div>
       <li class="nav-item">
         
-        <router-link :to="{ name: 'users'}" class="nav-link"><i class="fas fa-user-cog"></i> Users</router-link>
+        <router-link :to="{ name: 'users'}" :class="['users', 'users-create'].includes(this.$route.name) ? 'nav-link active' : 'nav-link'"><i class="fas fa-user-cog"></i> Users</router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
@@ -62,7 +59,7 @@
         </div> -->
       </li>
       <li class="nav-item">
-        <router-link :to="{ name: 'customers'}" class="nav-link"><i class="fas fa-user-friends"></i> Party</router-link>
+        <router-link :to="{ name: 'customers'}" :class="[this.$route.name == 'customers' ? 'nav-link active' : 'nav-link']"><i class="fas fa-user-friends"></i> Party</router-link>
 
         <!-- <a
           class="nav-link collapsed"
@@ -87,7 +84,7 @@
         </div> -->
       </li>
       <li class="nav-item">
-        <router-link :to="{ name: 'vendors'}" class="nav-link"><i class="fas fa-user-friends"></i> Vendors</router-link>
+        <router-link :to="{ name: 'vendors'}" :class="[this.$route.name == 'vendors' ? 'nav-link active' : 'nav-link']"><i class="fas fa-user-friends"></i> Vendors</router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
@@ -111,7 +108,7 @@
         </div> -->
       </li>
       <li class="nav-item">
-        <router-link :to="{ path: '/products'}" class="nav-link"><i class="fas fa-box"></i> Particular List</router-link>
+        <router-link :to="{ path: '/products'}" :class="[this.$route.name == 'products' ? 'nav-link active' : 'nav-link']"><i class="fas fa-box"></i> Particular List</router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
@@ -162,7 +159,8 @@
       
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <router-link :to="{ name: 'invoices'}" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> Billing List</router-link>
+        <router-link :to="{ name: 'invoices'}" class="nav-link"><i class="fa fa-file" aria-hidden="true"></i>
+ Billing List</router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
@@ -188,7 +186,7 @@
       
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <router-link :to="{ name: 'expenses'}" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> Purchase</router-link>
+        <router-link :to="{ name: 'expenses'}" class="nav-link"><i class="fas fa-file"></i> Purchase</router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
@@ -212,7 +210,7 @@
         </div> -->
       </li>
       <li class="nav-item">
-        <router-link :to="{ name: 'settings'}" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> Settings</router-link>
+        <router-link :to="{ name: 'settings'}" class="nav-link"><i class="fas fa-cog"></i> Settings</router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
@@ -236,7 +234,7 @@
         </div> -->
       </li>
       <li class="nav-item">
-        <router-link :to="{ name: 'employees'}" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> Employee</router-link>
+        <router-link :to="{ name: 'employees'}" class="nav-link"><i class="fas fa-user-plus"></i> Employee</router-link>
       </li>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block" />
@@ -254,7 +252,11 @@ import { mapGetters } from 'vuex';
 export default {
   name: "Sidebar",
   data(){
-    return {}
+    return {
+    }
+  },
+  mounted(){
+    console.log(this.$route.name)
   },
   computed:{
     ...mapGetters(['setting'])

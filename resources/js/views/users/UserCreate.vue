@@ -91,6 +91,9 @@
                 previewUrl: null
             }
         },
+        mounted(){
+            console.log(this.$route.name)
+        },
         methods:{
             errors(){
                 console.log('here');

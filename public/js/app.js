@@ -2174,15 +2174,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2212,7 +2203,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)(['isLoggedIn'])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)(['isLoggedIn', 'setting'])),
   data: function data() {
     return {
       year: new Date().getFullYear()
@@ -2233,7 +2224,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/api */ "./resources/js/lib/api.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/api */ "./resources/js/lib/api.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2274,6 +2298,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2283,6 +2308,24 @@ __webpack_require__.r(__webpack_exports__);
       errors: {},
       message: ''
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _this.$store.dispatch('getSetting');
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   methods: {
     // async login() {
@@ -2301,7 +2344,7 @@ __webpack_require__.r(__webpack_exports__);
     //     })
     // },
     login: function login() {
-      var _this = this;
+      var _this2 = this;
 
       var email = this.email;
       var password = this.password;
@@ -2309,18 +2352,20 @@ __webpack_require__.r(__webpack_exports__);
         email: email,
         password: password
       }).then(function () {
-        return _this.$router.push('/dashboard');
+        return _this2.$router.push('/dashboard');
       })["catch"](function (error) {
         if (error.response.status === 422) {
-          _this.errors = error.response.data.errors;
+          _this2.errors = error.response.data.errors;
+          _this2.message = 'Both Email and password fields are required!';
         }
 
         if (error.response.status == 401) {
-          _this.message = 'Waning! Username or Password Incorrect.';
+          _this2.message = 'Warning! Username or Password Incorrect.';
         }
       });
     }
-  }
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)(['setting']))
 });
 
 /***/ }),
@@ -2900,13 +2945,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Sidebar",
   data: function data() {
     return {};
+  },
+  mounted: function mounted() {
+    console.log(this.$route.name);
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['setting']))
 });
@@ -4843,6 +4889,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/api */ "./resources/js/lib/api.js");
 /* harmony import */ var _components_typeahead__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/typeahead */ "./resources/js/components/typeahead/index.js");
 /* harmony import */ var v_nepalidatepicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! v-nepalidatepicker */ "./node_modules/v-nepalidatepicker/dist/v-nepalidatepicker.esm.js");
+//
 //
 //
 //
@@ -7868,6 +7915,9 @@ __webpack_require__.r(__webpack_exports__);
       image: null,
       previewUrl: null
     };
+  },
+  mounted: function mounted() {
+    console.log(this.$route.name);
   },
   methods: {
     errors: function errors() {
@@ -30282,7 +30332,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".card-footer {\n  color: red;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".errors {\n  color: #d70404;\n}\n.col-sm-6 {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n}\n.login-btn {\n  display: block;\n  margin-left: auto;\n  margin-right: 0;\n  width: 150px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -89821,7 +89871,7 @@ var render = function() {
                     _c(
                       "div",
                       { staticClass: "container-fluid" },
-                      [_vm._m(0), _vm._v(" "), _c("router-view")],
+                      [_c("router-view")],
                       1
                     )
                   ],
@@ -89844,24 +89894,7 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "d-sm-flex align-items-center justify-content-between mb-4"
-      },
-      [
-        _c("h1", { staticClass: "h3 mb-0 text-gray-800" }, [
-          _vm._v("Dashboard")
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -89887,11 +89920,25 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center py-5" }, [
-        _c("div", { staticClass: "col-sm-8" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
           _c("div", { staticClass: "card" }, [
-            _vm._m(0),
-            _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
+              _vm.setting
+                ? _c("h3", { staticClass: "text-center text-uppercase" }, [
+                    _vm._v(_vm._s(_vm.setting.title))
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.message
+                ? _c("div", { staticClass: "errors" }, [
+                    _c("p", { staticClass: "text-center" }, [
+                      _vm._v(_vm._s(_vm.message))
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-muted" }, [_vm._v("Login")]),
+              _vm._v(" "),
               _c(
                 "form",
                 {
@@ -89904,105 +89951,73 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "email" } }, [
-                      _vm._v(" Email Address")
+                    _c("div", { staticClass: "input-group mb-3" }, [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.email,
+                            expression: "email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "email",
+                          type: "email",
+                          placeholder: "Email Address"
+                        },
+                        domProps: { value: _vm.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.email = $event.target.value
+                          }
+                        }
+                      })
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.email,
-                          expression: "email"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "email",
-                        name: "email",
-                        placeholder: "Email Address"
-                      },
-                      domProps: { value: _vm.email },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
+                    _c("div", { staticClass: "input-group mb-3" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.password,
+                            expression: "password"
                           }
-                          _vm.email = $event.target.value
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "password",
+                          type: "password",
+                          placeholder: "Password"
+                        },
+                        domProps: { value: _vm.password },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.password = $event.target.value
+                          }
                         }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.email
-                      ? _c("small", { staticClass: "error-control" }, [
-                          _vm._v(
-                            "\n                  " +
-                              _vm._s(_vm.errors.email[0]) +
-                              "\n                "
-                          )
-                        ])
-                      : _vm._e()
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "password" } }, [
-                      _vm._v(" Password")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.password,
-                          expression: "password"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "password",
-                        name: "password",
-                        placeholder: "Password"
-                      },
-                      domProps: { value: _vm.password },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.password = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm.errors.password
-                      ? _c("small", { staticClass: "error-control" }, [
-                          _vm._v(
-                            "\n                  " +
-                              _vm._s(_vm.errors.password[0]) +
-                              "\n                "
-                          )
-                        ])
-                      : _vm._e()
-                  ]),
+                  _vm._m(2),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    { staticClass: "btn btn-lg btn-primary btn-block" },
-                    [_vm._v("Login")]
-                  )
+                  _vm._m(3)
                 ]
               )
-            ]),
-            _vm._v(" "),
-            _vm.message
-              ? _c("div", { staticClass: "card-footer" }, [
-                  _c("p", { staticClass: "text-center" }, [
-                    _vm._v(_vm._s(_vm.message))
-                  ])
-                ])
-              : _vm._e()
+            ])
           ])
         ])
       ])
@@ -90014,8 +90029,56 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header text-center" }, [
-      _c("h2", [_c("strong", [_vm._v("Please Sign In")])])
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c("i", { staticClass: "fa fa-user" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c("i", { staticClass: "fa fa-lock" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group mb-4" }, [
+      _c("div", { staticClass: "form-check checkbox" }, [
+        _c("input", {
+          staticClass: "form-check-input",
+          staticStyle: { "vertical-align": "middle" },
+          attrs: { name: "remember", type: "checkbox", id: "remember" }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          {
+            staticClass: "form-check-label",
+            staticStyle: { "vertical-align": "middle" },
+            attrs: { for: "remember" }
+          },
+          [_vm._v("\n                    Remember Me\n                  ")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-12" }, [
+        _c("button", { staticClass: "btn btn-primary login-btn" }, [
+          _vm._v("\n                    Login\n                  ")
+        ])
+      ])
     ])
   }
 ]
@@ -90444,7 +90507,13 @@ var render = function() {
           _c(
             "button",
             { staticClass: "btn btn-primary", on: { click: _vm.searchDate } },
-            [_vm._v("Search Date")]
+            [
+              _c("i", {
+                staticClass: "fa fa-search",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" Search Date")
+            ]
           )
         ]),
         _vm._v(" "),
@@ -90456,7 +90525,13 @@ var render = function() {
           _c(
             "button",
             { staticClass: "btn btn-primary", on: { click: _vm.resetFilter } },
-            [_vm._v("Reset Filter")]
+            [
+              _c("i", {
+                staticClass: "fa fa-refresh",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" Reset Filter")
+            ]
           )
         ]),
         _vm._v(" "),
@@ -90615,19 +90690,17 @@ var render = function() {
             attrs: { to: { path: "/dashboard" } }
           },
           [
-            _c("div", { staticClass: "sidebar-brand-icon rotate-n-15" }, [
-              _c("i", { staticClass: "fas fa-laugh-wink" })
-            ]),
-            _vm._v(" "),
             !_vm.setting
-              ? _c("div", { staticClass: "sidebar-brand-text mx-3" }, [
-                  _vm._v("\n        PROJECT TITLE HERE\n      ")
+              ? _c("div", { staticClass: " mx-3" }, [
+                  _vm._v("\n         PROJECT TITLE FROM SETTINGS\n       ")
                 ])
               : _vm._e(),
             _vm._v(" "),
             _vm.setting
-              ? _c("div", { staticClass: "sidebar-brand-text mx-3" }, [
-                  _vm._v("\n        " + _vm._s(_vm.setting.title) + "\n      ")
+              ? _c("div", { staticClass: " mx-3" }, [
+                  _vm._v(
+                    "\n         " + _vm._s(_vm.setting.title) + "\n       "
+                  )
                 ])
               : _vm._e()
           ]
@@ -90645,7 +90718,7 @@ var render = function() {
               [
                 _c("i", { staticClass: "fas fa-fw fa-tachometer-alt" }),
                 _vm._v(" "),
-                _c("span", [_vm._v("Dashboard")])
+                _c("span", [_vm._v("DASHBOARD")])
               ]
             )
           ],
@@ -90662,7 +90735,12 @@ var render = function() {
           [
             _c(
               "router-link",
-              { staticClass: "nav-link", attrs: { to: { name: "users" } } },
+              {
+                class: ["users", "users-create"].includes(this.$route.name)
+                  ? "nav-link active"
+                  : "nav-link",
+                attrs: { to: { name: "users" } }
+              },
               [_c("i", { staticClass: "fas fa-user-cog" }), _vm._v(" Users")]
             )
           ],
@@ -90675,7 +90753,14 @@ var render = function() {
           [
             _c(
               "router-link",
-              { staticClass: "nav-link", attrs: { to: { name: "customers" } } },
+              {
+                class: [
+                  this.$route.name == "customers"
+                    ? "nav-link active"
+                    : "nav-link"
+                ],
+                attrs: { to: { name: "customers" } }
+              },
               [
                 _c("i", { staticClass: "fas fa-user-friends" }),
                 _vm._v(" Party")
@@ -90691,7 +90776,12 @@ var render = function() {
           [
             _c(
               "router-link",
-              { staticClass: "nav-link", attrs: { to: { name: "vendors" } } },
+              {
+                class: [
+                  this.$route.name == "vendors" ? "nav-link active" : "nav-link"
+                ],
+                attrs: { to: { name: "vendors" } }
+              },
               [
                 _c("i", { staticClass: "fas fa-user-friends" }),
                 _vm._v(" Vendors")
@@ -90707,7 +90797,14 @@ var render = function() {
           [
             _c(
               "router-link",
-              { staticClass: "nav-link", attrs: { to: { path: "/products" } } },
+              {
+                class: [
+                  this.$route.name == "products"
+                    ? "nav-link active"
+                    : "nav-link"
+                ],
+                attrs: { to: { path: "/products" } }
+              },
               [
                 _c("i", { staticClass: "fas fa-box" }),
                 _vm._v(" Particular List")
@@ -90738,8 +90835,11 @@ var render = function() {
               "router-link",
               { staticClass: "nav-link", attrs: { to: { name: "invoices" } } },
               [
-                _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
-                _vm._v(" Billing List")
+                _c("i", {
+                  staticClass: "fa fa-file",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v("\nBilling List")
               ]
             )
           ],
@@ -90753,10 +90853,7 @@ var render = function() {
             _c(
               "router-link",
               { staticClass: "nav-link", attrs: { to: { name: "expenses" } } },
-              [
-                _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
-                _vm._v(" Purchase")
-              ]
+              [_c("i", { staticClass: "fas fa-file" }), _vm._v(" Purchase")]
             )
           ],
           1
@@ -90769,10 +90866,7 @@ var render = function() {
             _c(
               "router-link",
               { staticClass: "nav-link", attrs: { to: { name: "settings" } } },
-              [
-                _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
-                _vm._v(" Settings")
-              ]
+              [_c("i", { staticClass: "fas fa-cog" }), _vm._v(" Settings")]
             )
           ],
           1
@@ -90786,7 +90880,7 @@ var render = function() {
               "router-link",
               { staticClass: "nav-link", attrs: { to: { name: "employees" } } },
               [
-                _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
+                _c("i", { staticClass: "fas fa-user-plus" }),
                 _vm._v(" Employee")
               ]
             )
@@ -90988,7 +91082,7 @@ var staticRenderFns = [
         _c(
           "span",
           { staticClass: "mr-2 d-none d-lg-inline text-gray-600 small" },
-          [_vm._v("Admin")]
+          [_c("i", { staticClass: "fa fa-user" }), _vm._v(" Admin")]
         )
       ]
     )
@@ -91314,48 +91408,6 @@ var render = function() {
       _c("router-view"),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-12" },
-          [
-            _c("line-chart", {
-              attrs: {
-                "chart-data": _vm.totalIncomesData,
-                options: _vm.options
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-12" },
-          [
-            _c("line-chart", {
-              attrs: {
-                "chart-data": _vm.totalIncomeCollection,
-                options: _vm.options
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-12" },
-          [
-            _c("line-chart", {
-              attrs: {
-                "chart-data": _vm.totalExpensesData,
-                options: _vm.options
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
         _c(
           "div",
           { staticClass: "col-12" },
@@ -91939,7 +91991,10 @@ var render = function() {
                 staticClass: "btn btn-primary",
                 attrs: { to: { name: "customers-create" } }
               },
-              [_vm._v("\n                    New Party\n                ")]
+              [
+                _c("i", { staticClass: "fas fa-plus-square" }),
+                _vm._v(" New Party\n                ")
+              ]
             )
           ],
           1
@@ -93537,7 +93592,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "panel-body" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-6" }, [
+            _c("div", { staticClass: "col-8" }, [
               _c(
                 "div",
                 { staticClass: "form-group" },
@@ -93566,7 +93621,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-4" }, [
+            _c("div", { staticClass: "col-8" }, [
               _c(
                 "div",
                 { staticClass: "form-group" },
@@ -93581,14 +93636,20 @@ var render = function() {
                       staticClass: "btn btn-primary",
                       attrs: { to: { path: "/vendors/create" } }
                     },
-                    [_vm._v("Add New Vendor")]
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-plus-square",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v(" Add New Vendor")
+                    ]
                   )
                 ],
                 1
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-6" }, [
+            _c("div", { staticClass: "col-8" }, [
               _c("div", { staticClass: "form-group" }, [
                 _vm._m(0),
                 _vm._v(" "),
@@ -93596,9 +93657,75 @@ var render = function() {
                   _vm._v(_vm._s(_vm.form.number))
                 ])
               ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-8" }, [
+              _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _c("label", [_vm._v("Date :")]),
+                  _vm._v(" "),
+                  _c("v-nepalidatepicker", {
+                    attrs: { classValue: "form-control" },
+                    model: {
+                      value: _vm.form.date,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "date", $$v)
+                      },
+                      expression: "form.date"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.date
+                    ? _c("small", { staticClass: "error-control" }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.errors.date[0]) +
+                            "\n                    "
+                        )
+                      ])
+                    : _vm._e()
+                ],
+                1
+              )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-6" }, [
+            _c("div", { staticClass: "col-8" }, [
+              _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _c("label", [_vm._v("Due Date :")]),
+                  _vm._v(" "),
+                  _c("v-nepalidatepicker", {
+                    attrs: { classValue: "form-control" },
+                    model: {
+                      value: _vm.form.due_date,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "due_date", $$v)
+                      },
+                      expression: "form.due_date"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.due_date
+                    ? _c("small", { staticClass: "error-control" }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.errors.due_date[0]) +
+                            "\n                    "
+                        )
+                      ])
+                    : _vm._e()
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-8" }, [
               _c("div", { staticClass: "form-group" }, [
                 _vm._m(1),
                 _vm._v(" "),
@@ -93634,72 +93761,6 @@ var render = function() {
                     ])
                   : _vm._e()
               ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-10" }, [
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _c("label", [_vm._v("Date :")]),
-                  _vm._v(" "),
-                  _c("v-nepalidatepicker", {
-                    attrs: { classValue: "form-control" },
-                    model: {
-                      value: _vm.form.date,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "date", $$v)
-                      },
-                      expression: "form.date"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.date
-                    ? _c("small", { staticClass: "error-control" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(_vm.errors.date[0]) +
-                            "\n                    "
-                        )
-                      ])
-                    : _vm._e()
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-10" }, [
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _c("label", [_vm._v("Due Date :")]),
-                  _vm._v(" "),
-                  _c("v-nepalidatepicker", {
-                    attrs: { classValue: "form-control" },
-                    model: {
-                      value: _vm.form.due_date,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "due_date", $$v)
-                      },
-                      expression: "form.due_date"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.due_date
-                    ? _c("small", { staticClass: "error-control" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(_vm.errors.due_date[0]) +
-                            "\n                    "
-                        )
-                      ])
-                    : _vm._e()
-                ],
-                1
-              )
             ])
           ]),
           _vm._v(" "),
@@ -93852,7 +93913,10 @@ var render = function() {
                       staticClass: "btn btn-success",
                       on: { click: _vm.addNewLine }
                     },
-                    [_vm._v("Add New Product")]
+                    [
+                      _c("i", { staticClass: "fa fa-plus-square" }),
+                      _vm._v(" Add New Product")
+                    ]
                   )
                 ]),
                 _vm._v(" "),
@@ -94123,7 +94187,13 @@ var render = function() {
                 staticClass: "btn btn-primary",
                 attrs: { to: "/expenses/create" }
               },
-              [_vm._v("\n                    New Purchase\n                ")]
+              [
+                _c("i", {
+                  staticClass: "fa fa-plus-square",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v(" New Purchase\n                ")
+              ]
             )
           ],
           1
@@ -94588,7 +94658,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "panel-body" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-6" }, [
+            _c("div", { staticClass: "col-8" }, [
               _c(
                 "div",
                 { staticClass: "form-group" },
@@ -94617,7 +94687,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-4" }, [
+            _c("div", { staticClass: "col-8" }, [
               _c(
                 "div",
                 { staticClass: "form-group" },
@@ -94632,14 +94702,17 @@ var render = function() {
                       staticClass: "btn btn-primary",
                       attrs: { to: { path: "/customers/create" } }
                     },
-                    [_vm._v("Add New Party")]
+                    [
+                      _c("i", { staticClass: "fa fa-plus-square" }),
+                      _vm._v(" Add New Party")
+                    ]
                   )
                 ],
                 1
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-6" }, [
+            _c("div", { staticClass: "col-8" }, [
               _c("div", { staticClass: "form-group" }, [
                 _vm._m(0),
                 _vm._v(" "),
@@ -94647,9 +94720,75 @@ var render = function() {
                   _vm._v(_vm._s(_vm.form.number))
                 ])
               ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-8" }, [
+              _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _c("label", [_vm._v("Date :")]),
+                  _vm._v(" "),
+                  _c("v-nepalidatepicker", {
+                    attrs: { classValue: "form-control" },
+                    model: {
+                      value: _vm.form.date,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "date", $$v)
+                      },
+                      expression: "form.date"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.date
+                    ? _c("small", { staticClass: "error-control" }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.errors.date[0]) +
+                            "\n                    "
+                        )
+                      ])
+                    : _vm._e()
+                ],
+                1
+              )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-6" }, [
+            _c("div", { staticClass: "col-8" }, [
+              _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _c("label", [_vm._v("Due Date :")]),
+                  _vm._v(" "),
+                  _c("v-nepalidatepicker", {
+                    attrs: { classValue: "form-control" },
+                    model: {
+                      value: _vm.form.due_date,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "due_date", $$v)
+                      },
+                      expression: "form.due_date"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.due_date
+                    ? _c("small", { staticClass: "error-control" }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.errors.due_date[0]) +
+                            "\n                    "
+                        )
+                      ])
+                    : _vm._e()
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-8" }, [
               _c("div", { staticClass: "form-group" }, [
                 _vm._m(1),
                 _vm._v(" "),
@@ -94685,72 +94824,6 @@ var render = function() {
                     ])
                   : _vm._e()
               ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-10" }, [
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _c("label", [_vm._v("Date :")]),
-                  _vm._v(" "),
-                  _c("v-nepalidatepicker", {
-                    attrs: { classValue: "form-control" },
-                    model: {
-                      value: _vm.form.date,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "date", $$v)
-                      },
-                      expression: "form.date"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.date
-                    ? _c("small", { staticClass: "error-control" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(_vm.errors.date[0]) +
-                            "\n                    "
-                        )
-                      ])
-                    : _vm._e()
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-10" }, [
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _c("label", [_vm._v("Due Date :")]),
-                  _vm._v(" "),
-                  _c("v-nepalidatepicker", {
-                    attrs: { classValue: "form-control" },
-                    model: {
-                      value: _vm.form.due_date,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "due_date", $$v)
-                      },
-                      expression: "form.due_date"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.errors.due_date
-                    ? _c("small", { staticClass: "error-control" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(_vm.errors.due_date[0]) +
-                            "\n                    "
-                        )
-                      ])
-                    : _vm._e()
-                ],
-                1
-              )
             ])
           ]),
           _vm._v(" "),
@@ -94913,7 +94986,10 @@ var render = function() {
                       staticClass: "btn btn-success",
                       on: { click: _vm.addNewLine }
                     },
-                    [_vm._v("Add New Product")]
+                    [
+                      _c("i", { staticClass: "fa fa-plus-square" }),
+                      _vm._v(" Add New Product")
+                    ]
                   )
                 ]),
                 _vm._v(" "),
@@ -95226,7 +95302,10 @@ var render = function() {
                 staticClass: "btn btn-primary",
                 attrs: { to: "/invoices/create" }
               },
-              [_vm._v("\n                    New Billing\n                ")]
+              [
+                _c("i", { staticClass: "fas fa-plus-square" }),
+                _vm._v(" New Billing\n                ")
+              ]
             )
           ],
           1
@@ -96215,7 +96294,10 @@ var render = function() {
                 staticClass: "btn btn-primary",
                 attrs: { to: { name: "items-create" } }
               },
-              [_vm._v("\n                    New Item\n                ")]
+              [
+                _c("i", { staticClass: "fas fa-plus-square" }),
+                _vm._v(" New Item\n                ")
+              ]
             )
           ],
           1
@@ -97213,7 +97295,10 @@ var render = function() {
                 staticClass: "btn btn-primary",
                 attrs: { to: "/products/create" }
               },
-              [_vm._v("\n                    New Particular\n                ")]
+              [
+                _c("i", { staticClass: "fas fa-plus-square" }),
+                _vm._v(" New Particular\n                ")
+              ]
             )
           ],
           1
@@ -99823,7 +99908,10 @@ var render = function() {
                 staticClass: "btn btn-primary",
                 attrs: { to: { name: "vendors-create" } }
               },
-              [_vm._v("\n                    New Vendor\n                ")]
+              [
+                _c("i", { staticClass: "fas fa-plus-square" }),
+                _vm._v(" New Vendor\n                ")
+              ]
             )
           ],
           1
