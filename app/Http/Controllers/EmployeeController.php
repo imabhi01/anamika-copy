@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Payroll;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -80,7 +81,6 @@ class EmployeeController extends Controller
     }
 
     public function update(Request $request, $id){
-        dd($request->all());
         $employee = Employee::findOrFail($id);
         
         $request->validate([
@@ -125,7 +125,28 @@ class EmployeeController extends Controller
             ->json(['deleted' => true]);
     }
 
-    public function getPayroll($id){
-        dd($id);
+    public function getEmployee($id){
+        $model = Employee::findOrFail($id);
+        return response()->json(['model' => $model]);
+    }
+
+    public function getPayroll(Request $request, $id){
+        
+        $request->validate([
+            'employee_id' => 'required',
+            'salary' => 'required|numeric',
+            'bonus' => 'required|numeric',
+            'date' => 'required|date',
+        ]);
+
+        $payroll = Payroll::create([
+            'employee_id' => $request['employee_id'],
+            'salary' => $request['salary'],
+            'bonus' => $request['bonus'],
+            'date' => $request['date'],
+        ]);
+
+        return response()
+            ->json(['saved' => true, 'model' => $payroll, 'status' => 200]);
     }
 }

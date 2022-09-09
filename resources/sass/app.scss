@@ -1527,6 +1527,10 @@ a.nav-link:hover, a.nav-link.active {
   background-color: #4e73df;
 }
 
+.text-gray-600:hover, a#userDropdown:hover {
+  color: #fff !important;
+}
+
 @media print{
   h1.h3.mb-0.text-gray-800 {
     display: none;

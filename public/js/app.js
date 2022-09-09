@@ -4814,17 +4814,21 @@ __webpack_require__.r(__webpack_exports__);
   name: "EmployeePayroll",
   data: function data() {
     return {
-      form: {},
+      form: {
+        bonus: ''
+      },
       isProcessing: false,
       store: "/api/employees/",
-      method: 'PUT',
+      method: 'POST',
       title: 'Payroll',
       resource: '/employees'
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.form.bonus = 0;
+  },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-    (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)("/api/employees/".concat(to.params.id)).then(function (res) {
+    (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)("/api/employees/".concat(to.params.id, "/employee")).then(function (res) {
       next(function (vm) {
         return vm.setData(res);
       });
@@ -4833,17 +4837,19 @@ __webpack_require__.r(__webpack_exports__);
   beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
     var _this = this;
 
-    (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)("/api/employees/".concat(to.params.id)).then(function (res) {
+    (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)("/api/employees/".concat(to.params.id, "/employee")).then(function (res) {
       _this.setData(res);
 
       next();
     });
   },
   methods: {
-    errors: function errors() {},
+    errors: function errors() {
+      console.log('errors');
+    },
     setData: function setData(res) {
       Vue.set(this.$data, 'form', res.data.model);
-      this.store = "/api/employees/".concat(this.$route.params.id);
+      this.store = "/api/employees/".concat(this.$route.params.id, "/payroll");
       this.show = true;
       this.$bar.finish();
     },
@@ -4856,15 +4862,22 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("employee_id", this.form.id);
       formData.append("salary", this.form.salary);
       formData.append("bonus", this.form.bonus);
+      formData.append("date", this.form.date);
       formData.append("status", this.form.status);
-      console.log(formData, this.store);
-      (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)(this.method, this.store, formData).then(function (res) {
-        if (res.data && res.data.saved) {
-          _this2.$toaster.success('User Updated Successfully!');
+      axios.post(this.store, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (res) {
+        console.log(res);
 
-          _this2.success(res);
+        if (res.data.saved === true) {
+          _this2.$toaster.success('Employee Payroll created Successfully!');
+
+          _this2.$router.push("".concat(_this2.resource));
         }
       })["catch"](function (error) {
+        // error.response.status Check status code
         if (error.response.status === 422) {
           _this2.$toaster.warning('Please fill in the required fields!');
 
@@ -4872,11 +4885,12 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         _this2.isProcessing = false;
+      })["finally"](function () {//Perform action in always
       });
     },
     onCancel: function onCancel() {
       if (this.$route.meta.mode === 'edit') {
-        this.$router.push("".concat(this.resource, "/").concat(this.form.id));
+        this.$router.push("".concat(this.resource, "/").concat(this.form.id, "/payroll"));
       } else {
         this.$router.push("".concat(this.resource));
       }
@@ -93603,7 +93617,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "date", placeholder: "Date" },
+                attrs: { type: "date", name: "date", placeholder: "Date" },
                 domProps: { value: _vm.form.date },
                 on: {
                   input: function($event) {
