@@ -1523,6 +1523,10 @@ a.btn.btn-primary {
   width: 1500px !important;
 }
 
+a.nav-link:hover, a.nav-link.active {
+  background-color: #4e73df;
+}
+
 @media print{
   h1.h3.mb-0.text-gray-800 {
     display: none;

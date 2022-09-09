@@ -35,7 +35,7 @@
       <div class="sidebar-heading">Interface</div>
       <li class="nav-item">
         
-        <router-link :to="{ name: 'users'}" :class="['users', 'users-create'].includes(this.$route.name) ? 'nav-link active' : 'nav-link'"><i class="fas fa-user-cog"></i> Users</router-link>
+        <router-link :to="{ name: 'users'}" :class="['users', 'users-create', 'users-show', 'users-edit'].includes(this.$route.name) ? 'nav-link active' : 'nav-link'"><i class="fas fa-user-cog"></i> Users</router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
@@ -59,7 +59,7 @@
         </div> -->
       </li>
       <li class="nav-item">
-        <router-link :to="{ name: 'customers'}" :class="[this.$route.name == 'customers' ? 'nav-link active' : 'nav-link']"><i class="fas fa-user-friends"></i> Party</router-link>
+        <router-link :to="{ name: 'customers'}" :class="['customers', 'customers-create', 'customers-show', 'customers-edit'].includes(this.$route.name) ? 'nav-link active' : 'nav-link'"><i class="fas fa-user-friends"></i> Party</router-link>
 
         <!-- <a
           class="nav-link collapsed"
@@ -84,7 +84,7 @@
         </div> -->
       </li>
       <li class="nav-item">
-        <router-link :to="{ name: 'vendors'}" :class="[this.$route.name == 'vendors' ? 'nav-link active' : 'nav-link']"><i class="fas fa-user-friends"></i> Vendors</router-link>
+        <router-link :to="{ name: 'vendors'}" :class="['vendors', 'vendors-create', 'vendors-show', 'vendors-edit'].includes(this.$route.name) ? 'nav-link active' : 'nav-link'"><i class="fas fa-user-friends"></i> Vendors</router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
@@ -108,7 +108,7 @@
         </div> -->
       </li>
       <li class="nav-item">
-        <router-link :to="{ path: '/products'}" :class="[this.$route.name == 'products' ? 'nav-link active' : 'nav-link']"><i class="fas fa-box"></i> Particular List</router-link>
+        <router-link :to="{ path: '/products'}" :class="['products', 'products-create', 'products-show', 'products-edit'].includes(this.$route.name) ? 'nav-link active' : 'nav-link'"><i class="fas fa-box"></i> Particular List</router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
@@ -133,7 +133,7 @@
       </li>
       
       <li class="nav-item">
-        <router-link :to="{ name: 'items'}" class="nav-link"><i class="fas fa-box"></i> Item </router-link>
+        <router-link :to="{ name: 'items'}" :class="['items', 'items-create', 'items-show', 'items-edit'].includes(this.$route.name) ? 'nav-link active' : 'nav-link'"><i class="fas fa-box"></i> Item </router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
@@ -159,7 +159,7 @@
       
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <router-link :to="{ name: 'invoices'}" class="nav-link"><i class="fa fa-file" aria-hidden="true"></i>
+        <router-link :to="{ name: 'invoices'}" :class="['invoices', 'invoices-create', 'invoices-show', 'invoices-edit'].includes(this.$route.name) ? 'nav-link active' : 'nav-link'"><i class="fa fa-file" aria-hidden="true"></i>
  Billing List</router-link>
         <!-- <a
           class="nav-link collapsed"
@@ -186,7 +186,7 @@
       
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <router-link :to="{ name: 'expenses'}" class="nav-link"><i class="fas fa-file"></i> Purchase</router-link>
+        <router-link :to="{ name: 'expenses'}" :class="['expenses', 'expenses-create', 'expenses-show', 'expenses-edit'].includes(this.$route.name) ? 'nav-link active' : 'nav-link'"><i class="fas fa-file"></i> Purchase</router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
@@ -210,7 +210,7 @@
         </div> -->
       </li>
       <li class="nav-item">
-        <router-link :to="{ name: 'settings'}" class="nav-link"><i class="fas fa-cog"></i> Settings</router-link>
+        <router-link :to="{ name: 'settings'}" :class="['settings', 'settings-show'].includes(this.$route.name) ? 'nav-link active' : 'nav-link'"><i class="fas fa-cog"></i> Settings</router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
@@ -234,7 +234,7 @@
         </div> -->
       </li>
       <li class="nav-item">
-        <router-link :to="{ name: 'employees'}" class="nav-link"><i class="fas fa-user-plus"></i> Employee</router-link>
+        <router-link :to="{ name: 'employees'}" :class="['employees', 'employees-create', 'employees-show', 'employees-edit'].includes(this.$route.name) ? 'nav-link active' : 'nav-link'"><i class="fas fa-user-plus"></i> Employee</router-link>
       </li>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block" />
@@ -256,7 +256,6 @@ export default {
     }
   },
   mounted(){
-    console.log(this.$route.name)
   },
   computed:{
     ...mapGetters(['setting'])

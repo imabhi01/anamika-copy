@@ -924,6 +924,7 @@ a.btn-primary {
 }
 
 .document {
+  width: 820px;
   margin: 50px auto;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   padding: 25px;
@@ -1344,19 +1345,10 @@ a.btn.btn-primary {
 }
 
 .document {
-  width: 1000px !important;
+  width: 1500px !important;
 }
 
-button.btn.btn-sm {
-  color: #000;
-}
-
-img.figure-img.img-fluid.img-rounded.preview {
-  border-radius: 5px;
-  object-fit: cover;
-}
-
-a.nav-link:hover, a.router-link-exact-active.router-link-active.nav-link.active{
+a.nav-link:hover, a.nav-link.active {
   background-color: #4e73df;
 }
 

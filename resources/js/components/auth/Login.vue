@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="row justify-content-center py-5">
-        <div class="col-sm-6">
+        <div class="col-sm-5">
           <div class="card">
             <div class="card-body">
               <h3 class="text-center text-uppercase" v-if="setting">{{setting.title }}</h3>
@@ -114,11 +114,12 @@ export default{
   .errors{
     color: #d70404;
   }
-  .col-sm-6 {
+  .col-sm-5 {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    width: 600px;
   }
 
   .login-btn{

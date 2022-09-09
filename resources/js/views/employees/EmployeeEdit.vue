@@ -30,7 +30,7 @@
                             <label>
                                 Phone
                             </label>
-                            <input type="text" class="form-control" disabled v-model="form.phone" placeholder="Phone">
+                            <input type="text" class="form-control" v-model="form.phone" placeholder="Phone">
                             <small class="error-control" v-if="errors.phone">
                                 {{errors.phone[0]}}
                             </small>
@@ -42,7 +42,7 @@
                             <label>
                                 Address
                             </label>
-                            <input type="text" class="form-control" disabled v-model="form.address" placeholder="Address">
+                            <input type="text" class="form-control" v-model="form.address" placeholder="Address">
                             <small class="error-control" v-if="errors.address">
                                 {{errors.address[0]}}
                             </small>
@@ -53,7 +53,7 @@
                             <label>
                                 Joining Date
                             </label>
-                            <input type="date" class="form-control" disabled v-model="form.joining_date" placeholder="Joining Date">
+                            <input type="date" class="form-control" v-model="form.joining_date" placeholder="Joining Date">
                             <small class="error-control" v-if="errors.joining_date">
                                 {{errors.joining_date[0]}}
                             </small>
@@ -63,7 +63,7 @@
                     <div class="col-8">
                         <div class="form-group">
                             <label>Salary</label>
-                            <input type="text" class="form-control" disabled v-model="form.salary" placeholder="Password Confirmation">
+                            <input type="text" class="form-control" v-model="form.salary" placeholder="Salary">
                             <small class="error-control" v-if="errors.salary">
                                 {{errors.salary[0]}}
                             </small>
