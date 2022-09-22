@@ -2,19 +2,24 @@
     <div>
         <router-view></router-view>
         <div class="row">
-            <!-- <div class="col-12">
-                <line-chart :chart-data="totalIncomesData" :options="options"></line-chart> 
+            <div class="col-12">
+                <BarChart :chart-data="totalIncomesData" :options="options"></BarChart> 
             </div>
             <div class="col-12">
-                <line-chart :chart-data="totalIncomeCollection" :options="options"></line-chart>
+                <BarChart :chart-data="totalIncomeCollection" :options="options"></BarChart>
             </div>
             
             <div class="col-12">
-                <line-chart :chart-data="totalExpensesData" :options="options"></line-chart> 
-            </div> -->
-            <div class="col-12">
-                <line-chart :chart-data="totalExpenseCollection" :options="options"></line-chart> 
+                <BarChart :chart-data="totalExpensesData" :options="options"></BarChart> 
             </div>
+
+            <div class="col-12">
+                <BarChart :chart-data="totalExpenseCollection" :options="options"></BarChart> 
+            </div>
+
+            <!-- <div class="col-12">
+                <BarChart :chart-data="totalExpenseCollection"></BarChart>
+            </div> -->
         </div>
     </div>
 </template>

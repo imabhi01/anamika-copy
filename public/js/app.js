@@ -2481,10 +2481,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
 
+var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.mixins.reactiveProp;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Bar,
-  props: ['chartdata', 'options'],
+  mixins: [reactiveProp],
+  props: ['chartData', 'options'],
   mounted: function mounted() {
+    console.log(this.chartData);
     this.renderChart(this.chartData, this.options);
   }
 });
@@ -2510,6 +2513,7 @@ var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.mixins.reactiveProp;
   mixins: [reactiveProp],
   props: ['options', 'chartData'],
   mounted: function mounted() {
+    console.log(this.chartData);
     this.renderChart(this.chartData, this.options);
   }
 });
@@ -3405,6 +3409,11 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4481,6 +4490,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)("/api/employees/".concat(to.params.id)).then(function (res) {
+      console.log('here');
       next(function (vm) {
         return vm.setData(res);
       });
@@ -4497,6 +4507,10 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    mounted: function mounted() {
+      console.log(this.form);
+      alert('here');
+    },
     errors: function errors() {
       console.log('errors');
     },
@@ -4506,6 +4520,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     setData: function setData(res) {
       Vue.set(this.$data, 'form', res.data.model);
+      console.log(this.$data);
       this.store = "/api/employees/".concat(this.$route.params.id);
       this.show = true;
       this.$bar.finish();
@@ -4520,9 +4535,11 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("image", this.form.image);
       formData.append("first_name", this.form.first_name);
       formData.append("last_name", this.form.last_name);
-      formData.append("email", this.form.email);
-      formData.append("password", this.form.password);
-      formData.append("password_confirmation", this.form.password_confirmation);
+      formData.append("phone", this.form.phone);
+      formData.append("address", this.form.address);
+      formData.append("joining_date", this.form.joining_date);
+      formData.append("salary", this.form.salary);
+      console.log(formData);
       (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)(this.method, this.store, formData).then(function (res) {
         if (res.data && res.data.saved) {
           _this2.$toaster.success('User Updated Successfully!');
@@ -91727,7 +91744,49 @@ var render = function() {
           "div",
           { staticClass: "col-12" },
           [
-            _c("line-chart", {
+            _c("BarChart", {
+              attrs: {
+                "chart-data": _vm.totalIncomesData,
+                options: _vm.options
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-12" },
+          [
+            _c("BarChart", {
+              attrs: {
+                "chart-data": _vm.totalIncomeCollection,
+                options: _vm.options
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-12" },
+          [
+            _c("BarChart", {
+              attrs: {
+                "chart-data": _vm.totalExpensesData,
+                options: _vm.options
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-12" },
+          [
+            _c("BarChart", {
               attrs: {
                 "chart-data": _vm.totalExpenseCollection,
                 options: _vm.options

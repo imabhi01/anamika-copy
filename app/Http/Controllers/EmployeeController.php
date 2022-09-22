@@ -82,7 +82,7 @@ class EmployeeController extends Controller
 
     public function update(Request $request, $id){
         $employee = Employee::findOrFail($id);
-        
+        dd($request->all());
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',

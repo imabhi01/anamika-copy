@@ -108,7 +108,7 @@
         },
         beforeRouteEnter(to, from, next) {
             get(`/api/employees/${to.params.id}`)
-                .then((res) => {
+                .then((res) => { console.log('here');
                     next(vm => vm.setData(res))
                 })
         },
@@ -121,6 +121,10 @@
                 })
         },
         methods: {
+            mounted(){
+                console.log(this.form)
+                alert('here');
+            },
             errors(){
                 console.log('errors')
             },
@@ -130,6 +134,7 @@
             },
             setData(res) {
                 Vue.set(this.$data, 'form', res.data.model)
+                console.log(this.$data);
                 this.store = `/api/employees/${this.$route.params.id}`
                 this.show = true
                 this.$bar.finish()
@@ -142,10 +147,11 @@
                 formData.append("image", this.form.image);
                 formData.append("first_name", this.form.first_name);
                 formData.append("last_name", this.form.last_name);
-                formData.append("email", this.form.email);
-                formData.append("password", this.form.password);
-                formData.append("password_confirmation", this.form.password_confirmation);
-
+                formData.append("phone", this.form.phone);
+                formData.append("address", this.form.address);
+                formData.append("joining_date", this.form.joining_date);
+                formData.append("salary", this.form.salary);
+                console.log(formData);
                 byMethod(this.method, this.store, formData)
                 .then((res) => {
                     if(res.data && res.data.saved) {
