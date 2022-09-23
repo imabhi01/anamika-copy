@@ -22,7 +22,7 @@ class ItemSeeder extends Seeder
 
         Item::truncate();
 
-        foreach(range(10, 60) as $i) {
+        foreach(range(10, 1000) as $i) {
             Item::create([
                 'item_name' => 'Kagaj-Kharid-'.$i . $faker->name,
                 'description' => 'Expense '.$i,

@@ -22,7 +22,7 @@ class VendorSeeder extends Seeder
 
         Vendor::truncate();
 
-        foreach(range(10, 50) as $i) {
+        foreach(range(1, 100) as $i) {
             Vendor::create([
                 'firstname' => $faker->firstname,
                 'lastname' => $faker->lastname,

@@ -9,8 +9,8 @@ use DB;
 
 class DashboardController extends Controller
 {
-    private $invoicePaidLabels, 
-        $invoiceUnPaidLabels, 
+    private $invoicePaidLabels = [], 
+        $invoiceUnPaidLabels = [],
         $invoicePaidDataCollection, 
         $invoiceUnPaidDataCollection,
         $expensePaidLabels,
@@ -25,31 +25,25 @@ class DashboardController extends Controller
 
     public function income(){
         $invoices = Invoice::select(
-            DB::raw('max(status) as `status`'),
-            DB::raw('sum(total) as `total`'),
+            DB::raw('sum(total) as `total`'), 'status',
             DB::raw("DATE_FORMAT(date,'%m') as months"),
         )
         ->where("date", ">", \Carbon\Carbon::now()->subMonths(6))
-        ->groupBy('months')
+        ->groupBy('months', 'status')
         ->get();
 
         foreach($invoices as $invoiceDatum){
             if($invoiceDatum->status == 'Paid'){
-                $this->invoicePaidLabels[] = $this->getMonthName($invoiceDatum->months);
-                $this->invoicePaidDataCollection[] = $invoiceDatum->total;
-                
-                $this->invoiceUnPaidLabels[] = $this->getMonthName($invoiceDatum->months);
-                $this->invoiceUnPaidDataCollection[] = 0;
+                $monthName = $this->getMonthName($invoiceDatum->months);
+                $this->invoicePaidLabels[] = $monthName;
+                $this->invoicePaidDataCollection[] = intval($invoiceDatum->total);
             
             }
 
             if($invoiceDatum->status == 'Un paid'){
-                $this->invoicePaidLabels[] = $this->getMonthName($invoiceDatum->months);
-                $this->invoicePaidDataCollection[] = 0;
-
-                $this->invoiceUnPaidLabels[] = $this->getMonthName($invoiceDatum->months);
-                $this->invoiceUnPaidDataCollection[] = $invoiceDatum->total;
-            
+                $monthName = $this->getMonthName($invoiceDatum->months);
+                $this->invoiceUnPaidLabels[] = $monthName;
+                $this->invoiceUnPaidDataCollection[] = intval($invoiceDatum->total);
             }
         }
 
@@ -105,37 +99,28 @@ class DashboardController extends Controller
 
     public function expense(){
         
-        $expenses = Expense::select(
-            DB::raw('max(status) as `status`'),
+        $expenses = Expense::select('status',
             DB::raw('sum(total) as `total`'),
             DB::raw("DATE_FORMAT(date,'%m') as months"),
         )
         ->where("date", ">", \Carbon\Carbon::now()->subMonths(6))
-        ->groupBy('months')
+        ->groupBy('months', 'status')
         ->get();
         
         foreach($expenses as $expenseDatum){
             if($expenseDatum->status == 'Paid'){
                 $this->expensePaidLabels[] = $this->getMonthName($expenseDatum->months);
-                $this->expensePaidDataCollection[] = $expenseDatum->total;
-                
-                $this->expenseUnPaidLabels[] = $this->getMonthName($expenseDatum->months);
-                $this->expenseUnPaidDataCollection[] = 0;
-            
+                $this->expensePaidDataCollection[] = intval($expenseDatum->total);
             }
 
             if($expenseDatum->status == 'Un paid'){
-                $this->expensePaidLabels[] = $this->getMonthName($expenseDatum->months);
-                $this->expensePaidDataCollection[] = 0;
-
                 $this->expenseUnPaidLabels[] = $this->getMonthName($expenseDatum->months);
-                $this->expenseUnPaidDataCollection[] = $expenseDatum->total;
-            
+                $this->expenseUnPaidDataCollection[] = intval($expenseDatum->total);
             }
         }
 
         return response()->json([
-            'expensePaidLabels' =>  $this->expensePaidLabels,
+            'expensePaidLabels' => $this->expensePaidLabels,
             'expensePaidDataCollection' => $this->expensePaidDataCollection,
             'expenseUnPaidLabels' => $this->expenseUnPaidLabels,
             'expenseUnPaidDataCollection' => $this->expenseUnPaidDataCollection

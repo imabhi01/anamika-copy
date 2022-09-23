@@ -2,24 +2,21 @@
     <div>
         <router-view></router-view>
         <div class="row">
-            <div class="col-12">
+            <!-- <div class="col-md-8 chart">
                 <BarChart :chart-data="totalIncomesData" :options="options"></BarChart> 
-            </div>
-            <div class="col-12">
+            </div> -->
+            <div class="col-md-8 chart">
                 <BarChart :chart-data="totalIncomeCollection" :options="options"></BarChart>
             </div>
             
-            <div class="col-12">
+            <!-- <div class="col-md-8 chart">
                 <BarChart :chart-data="totalExpensesData" :options="options"></BarChart> 
-            </div>
-
-            <div class="col-12">
-                <BarChart :chart-data="totalExpenseCollection" :options="options"></BarChart> 
-            </div>
-
-            <!-- <div class="col-12">
-                <BarChart :chart-data="totalExpenseCollection"></BarChart>
             </div> -->
+
+            <div class="col-md-8 chart">
+                <LineChart :chart-data="totalExpenseCollection" :options="options"></LineChart> 
+            </div>
+            
         </div>
     </div>
 </template>
@@ -74,17 +71,19 @@ export default {
                         backgroundColor: 'rgba(71, 183,132,.5)',
                         data: data.invoicePaidDataCollection,
                         borderColor: "#36495d",
-                        borderWidth: 3
+                        borderWidth: 1
                     },
                     {
                         label: 'Income UnPaid',
                         backgroundColor: '#f87979',
                         data: data.invoiceUnPaidDataCollection,
                         borderColor: "#36495d",
-                        borderWidth: 3
+                        borderWidth: 1
                     },
                 ]
             }
+
+            console.log(this.totalIncomeCollection);
         },
         async fillExpenseData () {
             const {data} = await axios.get('/api/expense/')
@@ -93,17 +92,17 @@ export default {
                 datasets: [
                     {
                         label: 'Expense Paid',
-                        backgroundColor: '#d62856',
+                        backgroundColor: 'rgba(71, 183,132,.5)',
                         data: data.expensePaidDataCollection,
                         borderColor: "#36495d",
-                        borderWidth: 3
+                        borderWidth: 1
                     },
                     {
                         label: 'Expense Un Paid',
                         backgroundColor: '#f87979',
                         data: data.expenseUnPaidDataCollection,
                         borderColor: "#36495d",
-                        borderWidth: 3
+                        borderWidth: 1
                     },
                 ]
             }
@@ -118,7 +117,7 @@ export default {
                         backgroundColor: 'rgba(71, 183,132,.5)',
                         data: data.totalIncomeData,
                         borderColor: "#36495d",
-                        borderWidth: 3
+                        borderWidth: 1
                     }
                 ]
             }
@@ -130,10 +129,10 @@ export default {
                 datasets: [
                     {
                         label: 'Total Expenses Per Month',
-                        backgroundColor: '#d62856',
+                        backgroundColor: '#f87979',
                         data: data.totalExpensesData,
                         borderColor: "#36495d",
-                        borderWidth: 3
+                        borderWidth: 1
                     }
                 ]
             }
@@ -144,5 +143,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.chart{
+    background: #fff;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
 </style>

@@ -61,10 +61,10 @@
                     <small>Showing {{model.from}} - {{model.to}} of {{model.total}}</small>
                 </div>
                 <div>
-                    <button class="btn btn-sm" :disabled="!model.prev_page_url" @click="prevPage">
+                    <button class="btn btn-sm btn-primary" :disabled="!model.prev_page_url" @click="prevPage">
                         Prev
                     </button>
-                    <button class="btn btn-sm" :disabled="!model.next_page_url" @click="nextPage">
+                    <button class="btn btn-sm btn-primary" :disabled="!model.next_page_url" @click="nextPage">
                         Next
                     </button>
                 </div>

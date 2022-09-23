@@ -18,9 +18,9 @@ class ExpenseController extends Controller
     private $unPaidTurnOver;
 
     public function __construct(){
-        $this->totalTurnOver = Expense::sum('total');
-        $this->paidTurnOver = Expense::where('status', 'Paid')->sum('total');
-        $this->unPaidTurnOver = Expense::where('status', 'Un paid')->sum('total');
+        $this->totalTurnOver = round(Expense::sum('total'), 2);
+        $this->paidTurnOver = round(Expense::where('status', 'Paid')->sum('total'), 2);
+        $this->unPaidTurnOver = round(Expense::where('status', 'Un paid')->sum('total'), 2);
     }
 
     public function index()

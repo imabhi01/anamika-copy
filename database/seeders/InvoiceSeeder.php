@@ -24,20 +24,22 @@ class InvoiceSeeder extends Seeder
         Invoice::truncate();
         InvoiceItem::truncate();
 
-        foreach(range(1, 30) as $i) {
-            $invoice = Invoice::create([
-                'number' => 'INV-2000'.$i,
-                'customer_id' => $i,
-                'date' => '2078-'.mt_rand(01, 12).'-'.$i,
-                'due_date' => '2078-'.mt_rand(01, 12).'-'.$i,
-                'reference' => 'LPO #'.$i,
-                'terms_and_conditions' => $faker->text,
-                'discount' => mt_rand(0, 100),
-                'sub_total' => mt_rand(1000, 2000),
-                'extra_cost' => mt_rand(0, 100),
-                'status' => rand(0,1) ? 'Paid' :  'Un paid'
-            ]);
-
+        foreach(range(1, 100) as $i) {
+            foreach(range(1, 28) as $j) {
+                $invoice = Invoice::create([
+                    'number' => 'INV-'.mt_rand(1000000000, 9999999999),
+                    'customer_id' => rand(1, 100),
+                    'date' => '2078-'.mt_rand(01, 12).'-'.$j,
+                    'due_date' => '2078-'.mt_rand(01, 12).'-'.$j,
+                    'reference' => 'LPO #'.$i,
+                    'terms_and_conditions' => $faker->text,
+                    'discount' => mt_rand(5, 20),
+                    'sub_total' => mt_rand(10000, 90000),
+                    'extra_cost' => mt_rand(0, 100),
+                    'status' => rand(0,1) ? 'Paid' :  'Un paid'
+                ]);    
+            }
+            
             foreach(range(1, mt_rand(2, 4)) as $j) {
                 InvoiceItem::create([
                     'invoice_id' => $invoice->id,

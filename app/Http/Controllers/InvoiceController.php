@@ -20,9 +20,9 @@ class InvoiceController extends Controller
     private $unPaidTurnOver;
 
     public function __construct(){
-        $this->totalTurnOver = Invoice::sum('total');
-        $this->paidTurnOver = Invoice::where('status', 'Paid')->sum('total');
-        $this->unPaidTurnOver = Invoice::where('status', 'Un paid')->sum('total');
+        $this->totalTurnOver = round(Invoice::sum('total'), 2);
+        $this->paidTurnOver = round(Invoice::where('status', 'Paid')->sum('total'), 2);
+        $this->unPaidTurnOver = round(Invoice::where('status', 'Un paid')->sum('total'), 2);
     }
 
     public function index()

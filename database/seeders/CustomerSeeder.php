@@ -22,7 +22,7 @@ class CustomerSeeder extends Seeder
 
         Customer::truncate();
 
-        foreach(range(10, 50) as $i) {
+        foreach(range(10, 200) as $i) {
             Customer::create([
                 'firstname' => $faker->firstname,
                 'lastname' => $faker->lastname,
