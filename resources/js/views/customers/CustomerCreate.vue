@@ -80,7 +80,7 @@
         },
         methods:{
             errors(){
-                console.log('here');
+                // console.log('here');
             },
             onSave() {
                 this.errors = {}

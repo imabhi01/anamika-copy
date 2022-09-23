@@ -2,18 +2,21 @@
     <div>
         <router-view></router-view>
         <div class="row">
-            <!-- <div class="col-md-8 chart">
+            <div class="col-md-5 chart">
                 <BarChart :chart-data="totalIncomesData" :options="options"></BarChart> 
-            </div> -->
-            <div class="col-md-8 chart">
+                <!-- <div class="data">
+                    <h3>Total Expenses </h3>
+                </div> -->
+            </div>
+            <div class="col-md-5 chart">
                 <BarChart :chart-data="totalIncomeCollection" :options="options"></BarChart>
             </div>
             
-            <!-- <div class="col-md-8 chart">
+            <div class="col-md-5 chart">
                 <BarChart :chart-data="totalExpensesData" :options="options"></BarChart> 
-            </div> -->
+            </div>
 
-            <div class="col-md-8 chart">
+            <div class="col-md-5 chart">
                 <LineChart :chart-data="totalExpenseCollection" :options="options"></LineChart> 
             </div>
             
@@ -71,14 +74,16 @@ export default {
                         backgroundColor: 'rgba(71, 183,132,.5)',
                         data: data.invoicePaidDataCollection,
                         borderColor: "#36495d",
-                        borderWidth: 1
+                        borderWidth: 1,
+                        fill: false
                     },
                     {
                         label: 'Income UnPaid',
                         backgroundColor: '#f87979',
                         data: data.invoiceUnPaidDataCollection,
                         borderColor: "#36495d",
-                        borderWidth: 1
+                        borderWidth: 1,
+                        fill: false
                     },
                 ]
             }
@@ -95,14 +100,16 @@ export default {
                         backgroundColor: 'rgba(71, 183,132,.5)',
                         data: data.expensePaidDataCollection,
                         borderColor: "#36495d",
-                        borderWidth: 1
+                        borderWidth: 1,
+                        fill: false
                     },
                     {
                         label: 'Expense Un Paid',
                         backgroundColor: '#f87979',
                         data: data.expenseUnPaidDataCollection,
                         borderColor: "#36495d",
-                        borderWidth: 1
+                        borderWidth: 1,
+                        fill: false
                     },
                 ]
             }
@@ -143,11 +150,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.row{
+    justify-content: center;
+    align-items: center;
+}
 .chart{
     background: #fff;
     margin: 20px;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.data{
+    margin: 15px;
+    text-align: right;
 }
 </style>

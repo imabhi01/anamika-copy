@@ -90,7 +90,79 @@
         </div>
     </div>
 </template>
+
 <script>
+    import {get, byMethod } from '../../lib/api'
+    export default {
+        name: 'EmployeeEdit',
+        data(){
+            return {
+                form: {},
+                isProcessing: false,
+                store: `/api/employees/`,
+                method: 'PUT',
+                title: 'Edit',
+                resource: '/employees'
+            }
+        },
+        beforeRouteEnter(to, from, next) {
+            get(`/api/employees/${to.params.id}`)
+                .then((res) => {
+                    next(vm => vm.setData(res))
+                })
+        },
+        beforeRouteUpdate(to, from, next) {
+            this.show = false
+            get(`/api/employees/${to.params.id}`)
+                .then((res) => {
+                    this.setData(res)
+                    next()
+                })
+        },
+        methods: {
+            errors(){
+                console.log('errors')
+            },
+            setData(res) {
+                Vue.set(this.$data, 'form', res.data.model)
+                this.store = `/api/employees/${this.$route.params.id}`
+                this.show = true
+                this.$bar.finish()
+            },
+            onSave() {
+                this.errors = {}
+                this.isProcessing = true
+
+                byMethod(this.method, this.store, this.form)
+                .then((res) => {
+                    if(res.data && res.data.saved) {
+                        this.$toaster.success('Party Updated Successfully!')
+                        this.success(res)
+                    }
+                })
+                .catch((error) => {
+                    if(error.response.status === 422) {
+                        this.$toaster.warning('Please fill in the required fields!')
+                        this.errors = error.response.data.errors
+                    }
+                    this.isProcessing = false
+                })
+            },
+            onCancel() {
+                if(this.$route.meta.mode === 'edit') {
+                    this.$router.push(`${this.resource}/${this.form.id}`)
+                } else {
+                    this.$router.push(`${this.resource}`)
+                }
+            },
+            success(res) {
+                this.$router.push(`${this.resource}/${res.data.id}`)
+            }
+        }
+    }
+</script>
+
+<!-- <script>
     import {get, byMethod } from '../../lib/api'
     export default {
         name: 'EmployeeEdit',
@@ -108,7 +180,7 @@
         },
         beforeRouteEnter(to, from, next) {
             get(`/api/employees/${to.params.id}`)
-                .then((res) => { console.log('here');
+                .then((res) => { 
                     next(vm => vm.setData(res))
                 })
         },
@@ -179,7 +251,7 @@
             }
         }
     }
-</script>
+</script> -->
 <style lang="scss" scoped>
 .figure-img {
   margin-bottom: 0.5rem;

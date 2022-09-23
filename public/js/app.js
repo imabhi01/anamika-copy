@@ -3432,6 +3432,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3512,13 +3515,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     backgroundColor: 'rgba(71, 183,132,.5)',
                     data: data.invoicePaidDataCollection,
                     borderColor: "#36495d",
-                    borderWidth: 1
+                    borderWidth: 1,
+                    fill: false
                   }, {
                     label: 'Income UnPaid',
                     backgroundColor: '#f87979',
                     data: data.invoiceUnPaidDataCollection,
                     borderColor: "#36495d",
-                    borderWidth: 1
+                    borderWidth: 1,
+                    fill: false
                   }]
                 };
                 console.log(_this2.totalIncomeCollection);
@@ -3554,13 +3559,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     backgroundColor: 'rgba(71, 183,132,.5)',
                     data: data.expensePaidDataCollection,
                     borderColor: "#36495d",
-                    borderWidth: 1
+                    borderWidth: 1,
+                    fill: false
                   }, {
                     label: 'Expense Un Paid',
                     backgroundColor: '#f87979',
                     data: data.expenseUnPaidDataCollection,
                     borderColor: "#36495d",
-                    borderWidth: 1
+                    borderWidth: 1,
+                    fill: false
                   }]
                 };
 
@@ -3739,8 +3746,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    errors: function errors() {
-      console.log('here');
+    errors: function errors() {// console.log('here');
     },
     onSave: function onSave() {
       var _this = this;
@@ -4471,6 +4477,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'EmployeeEdit',
@@ -4481,14 +4488,11 @@ __webpack_require__.r(__webpack_exports__);
       store: "/api/employees/",
       method: 'PUT',
       title: 'Edit',
-      resource: '/employees',
-      previewUrl: null,
-      image: null
+      resource: '/employees'
     };
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)("/api/employees/".concat(to.params.id)).then(function (res) {
-      console.log('here');
       next(function (vm) {
         return vm.setData(res);
       });
@@ -4505,20 +4509,11 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    mounted: function mounted() {
-      console.log(this.form);
-      alert('here');
-    },
     errors: function errors() {
       console.log('errors');
     },
-    selectImage: function selectImage(e) {
-      this.image = e.target.files[0];
-      this.previewUrl = URL.createObjectURL(this.image);
-    },
     setData: function setData(res) {
       Vue.set(this.$data, 'form', res.data.model);
-      console.log(this.$data);
       this.store = "/api/employees/".concat(this.$route.params.id);
       this.show = true;
       this.$bar.finish();
@@ -4528,19 +4523,9 @@ __webpack_require__.r(__webpack_exports__);
 
       this.errors = {};
       this.isProcessing = true;
-      this.form.image = this.image;
-      var formData = new FormData();
-      formData.append("image", this.form.image);
-      formData.append("first_name", this.form.first_name);
-      formData.append("last_name", this.form.last_name);
-      formData.append("phone", this.form.phone);
-      formData.append("address", this.form.address);
-      formData.append("joining_date", this.form.joining_date);
-      formData.append("salary", this.form.salary);
-      console.log(formData);
-      (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)(this.method, this.store, formData).then(function (res) {
+      (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)(this.method, this.store, this.form).then(function (res) {
         if (res.data && res.data.saved) {
-          _this2.$toaster.success('User Updated Successfully!');
+          _this2.$toaster.success('Party Updated Successfully!');
 
           _this2.success(res);
         }
@@ -30553,7 +30538,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".chart[data-v-63cd6604] {\n  background: #fff;\n  margin: 20px;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".row[data-v-63cd6604] {\n  justify-content: center;\n  align-items: center;\n}\n.chart[data-v-63cd6604] {\n  background: #fff;\n  margin: 20px;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);\n}\n.data[data-v-63cd6604] {\n  margin: 15px;\n  text-align: right;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -91809,7 +91794,21 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-md-8 chart" },
+          { staticClass: "col-md-5 chart" },
+          [
+            _c("BarChart", {
+              attrs: {
+                "chart-data": _vm.totalIncomesData,
+                options: _vm.options
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-5 chart" },
           [
             _c("BarChart", {
               attrs: {
@@ -91823,7 +91822,21 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col-md-8 chart" },
+          { staticClass: "col-md-5 chart" },
+          [
+            _c("BarChart", {
+              attrs: {
+                "chart-data": _vm.totalExpensesData,
+                options: _vm.options
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-5 chart" },
           [
             _c("LineChart", {
               attrs: {
