@@ -20,7 +20,7 @@
                     <div class="col-8">
                         <div class="form-group">
                             <label>Date</label>
-                            <input type="date" name="date" class="form-control" v-model="form.date" placeholder="Date">
+                            <v-nepalidatepicker classValue="form-control" :value="form.date" @change="$emit('getFirstDate', $event)" v-model="form.date" placeholder="Date"/>
                             <small class="error-control" v-if="errors.date">
                                 {{errors.date[0]}}
                             </small>
@@ -77,7 +77,8 @@
         data(){
             return {
                 form: {
-                    bonus: ''
+                    bonus: 0,
+                    date: ''
                 },
                 isProcessing: false,
                 store: `/api/employees/`,
@@ -89,8 +90,10 @@
         mounted(){
             this.form.bonus = 0
         },
+        created(){
+            this.getCurrentDate()
+        },
         beforeRouteEnter(to, from, next) {
-         
             get(`/api/employees/${to.params.id}/employee`)
                 .then((res) => {
                     next(vm => vm.setData(res))
@@ -106,6 +109,13 @@
         methods: {
             errors(){
                 console.log('errors')
+            },
+            async getCurrentDate(){
+                await get(`/api/employees/payroll/date`)
+                .then((res) => {
+                    console.log(res.data, this.form);
+                    this.form.date = res.data
+                })
             },
             setData(res) {
                 Vue.set(this.$data, 'form', res.data.model)

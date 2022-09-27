@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
-use App\Models\Payroll;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Traits\NepaliDateConverter;
 
 class EmployeeController extends Controller
 {
+    use NepaliDateConverter;
+
     public function search(){
         $results = Employee::orderBy('firstname')
             ->when(request('q'), function($query) {
@@ -82,17 +84,17 @@ class EmployeeController extends Controller
 
     public function update(Request $request, $id){
         $employee = Employee::findOrFail($id);
-        dd($request->all());
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'phone' => 'required|unique:employees|numeric,'.$id,
+            'phone' => 'required|unique:employees,id,'.$id,
             'address' => 'required|string',
-            'image' => 'sometimes|mimes:jpg,jpeg,png|max:2048,'.$id,
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048,id,'.$id,
+            'image' => 'nullable',
             'salary' => 'required|numeric',
             'joining_date' => 'required|date',
         ]);
- 
+
         $employee->update([
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
@@ -101,7 +103,7 @@ class EmployeeController extends Controller
             'salary' => $request['salary'],
             'joining_date' => $request['joining_date']
         ]);
-        
+
         if($request->file('image')) {
             $file = $request->file('image');
             $employee->image = Storage::put('public/uploads/employee',$request->file('image'));
@@ -128,25 +130,5 @@ class EmployeeController extends Controller
     public function getEmployee($id){
         $model = Employee::findOrFail($id);
         return response()->json(['model' => $model]);
-    }
-
-    public function getPayroll(Request $request, $id){
-        
-        $request->validate([
-            'employee_id' => 'required',
-            'salary' => 'required|numeric',
-            'bonus' => 'required|numeric',
-            'date' => 'required|date',
-        ]);
-
-        $payroll = Payroll::create([
-            'employee_id' => $request['employee_id'],
-            'salary' => $request['salary'],
-            'bonus' => $request['bonus'],
-            'date' => $request['date'],
-        ]);
-
-        return response()
-            ->json(['saved' => true, 'model' => $payroll, 'status' => 200]);
     }
 }

@@ -1344,10 +1344,6 @@ a.btn.btn-primary {
   font-size: 16px !important;
 }
 
-.document {
-  width: 1500px !important;
-}
-
 a.nav-link:hover, a.nav-link.active {
   background-color: #4e73df;
 }

@@ -13,6 +13,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PayrollController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -57,9 +58,13 @@ Route::get('/employees/{id}', [EmployeeController::class, 'show']);
 
 Route::post('/employees/store', [EmployeeController::class, 'store']);
 Route::delete('/employees/{id}', [EmployeeController::class, 'destroy']);
-Route::put('/employees/{id}', [EmployeeController::class, 'update']);
+Route::post('/employees/{id}', [EmployeeController::class, 'update']);   // NOTE: Route should be PUT method but laravel cannot handle PUT method with vue FormData so post is used
 Route::get('/employees/{id}/employee', [EmployeeController::class, 'getEmployee']);
-Route::post('/employees/{id}/payroll', [EmployeeController::class, 'getPayroll']);
+
+Route::get('/employees/{id}/payroll/history', [PayrollController::class, 'getPayrollHistory']);
+Route::post('/employees/{id}/payroll', [PayrollController::class, 'saveRecord']);
+Route::get('/employees/payroll/date', [PayrollController::class, 'getPayrollDate']);
+Route::delete('/employees/payroll/{id}', [PayrollController::class, 'destroy']);
 
 Route::resource('/invoices', InvoiceController::class);
 Route::get('/invoices/live/search', [InvoiceController::class, 'livesearch']);

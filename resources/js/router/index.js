@@ -17,6 +17,7 @@ import EmployeeCreate from '../views/employees/EmployeeCreate.vue'
 import EmployeeShow from '../views/employees/EmployeeShow.vue'
 import EmployeeEdit from '../views/employees/EmployeeEdit.vue'
 import EmployeePayroll from '../views/employees/EmployeePayroll.vue'
+import EmployeePayrollHistory from '../views/employees/EmployeePayrollHistory.vue'
 import VendorIndex from '../views/vendors/VendorIndex.vue'
 import VendorShow from '../views/vendors/VendorShow.vue'
 import VendorCreate from '../views/vendors/VendorCreate.vue'
@@ -278,10 +279,15 @@ const router = new VueRouter({
                     }
                 },
                 {
-                    path: '/employees/:id/pay-roll',
+                    path: '/employees/:id/payroll',
                     component: EmployeePayroll,
                     name: 'employees-payroll'
                 },
+                {
+                    path: '/employees/:id/payroll/history',
+                    component: EmployeePayrollHistory,
+                    name: 'employee-payroll-history'
+                }
             ]
         },
         {

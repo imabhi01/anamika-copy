@@ -6,7 +6,8 @@
                 <div>
                     <router-link to="/employees" class="btn">Back</router-link>
                     <router-link :to="`/employees/${form.id}/edit`" class="btn">Edit</router-link>
-                    <router-link :to="`/employees/${form.id}/pay-roll`" class="btn">Pay Salary</router-link>
+                    <router-link :to="`/employees/${form.id}/payroll`" class="btn">Pay Salary</router-link>
+                    <router-link :to="`/employees/${form.id}/payroll/history`" class="btn">Show History</router-link>
                     <button class="btn btn-error" @click="deleteItem">Delete</button>
                 </div>
             </div>
