@@ -18,7 +18,8 @@ class CreatePayrollsTable extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->date('date');
             $table->double('salary')->default(0);
-            $table->double('bonus');
+            $table->double('bonus')->default(0);
+            $table->double('advance')->default(0);
             $table->enum('status', ['Paid', 'Un paid']);
             $table->timestamps();
         });

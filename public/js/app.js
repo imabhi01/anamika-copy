@@ -4835,13 +4835,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "EmployeePayroll",
   data: function data() {
     return {
       form: {
-        bonus: 0
+        bonus: 0,
+        advance: 0
       },
       isProcessing: false,
       store: "/api/employees/",
@@ -4852,6 +4862,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.form.bonus = 0;
+    this.form.advance = 0;
     this.form.status = 'Paid';
   },
   created: function created() {
@@ -4914,6 +4925,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       formData.append("employee_id", this.form.id);
       formData.append("salary", this.form.salary);
       formData.append("bonus", this.form.bonus);
+      formData.append("advance", this.form.advance);
       formData.append("date", this.form.date);
       formData.append("status", this.form.status);
       axios.post(this.store, formData, {
@@ -4921,12 +4933,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (res) {
-        console.log(res);
-
         if (res.data.saved === true) {
           _this3.$toaster.success('Employee Payroll created Successfully!');
 
-          _this3.$router.push("".concat(_this3.resource));
+          _this3.$router.push("".concat(_this3.resource, "/").concat(_this3.form.id, "/payroll/history"));
         }
       })["catch"](function (error) {
         // error.response.status Check status code
@@ -4942,9 +4952,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     onCancel: function onCancel() {
       if (this.$route.meta.mode === 'edit') {
+        console.log('edit');
         this.$router.push("".concat(this.resource, "/").concat(this.form.id, "/payroll"));
       } else {
-        this.$router.push("".concat(this.resource));
+        console.log('cancel');
+        this.$router.push("".concat(this.resource, "/").concat(this.form.id)); // this.$router.push(`${this.resource}`)
       }
     },
     success: function success(res) {
@@ -5298,6 +5310,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/api */ "./resources/js/lib/api.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -94719,6 +94742,44 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-8" }, [
             _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Advance")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.advance,
+                    expression: "form.advance"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number", placeholder: "Advance" },
+                domProps: { value: _vm.form.advance },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "advance", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.advance
+                ? _c("small", { staticClass: "error-control" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.advance[0]) +
+                        "\n                        "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "form-group" }, [
               _c("label", [_vm._v("Select Status")]),
               _vm._v(" "),
               _c(
@@ -95523,6 +95584,48 @@ var render = function() {
             _c("div", { staticClass: "form-group" }, [
               _c("label", [
                 _vm._v(
+                  "\n                            Advance\n                        "
+                )
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.advance,
+                    expression: "form.advance"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", disabled: "", placeholder: "Advance" },
+                domProps: { value: _vm.form.advance },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "advance", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.advance
+                ? _c("small", { staticClass: "error-control" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.advance[0]) +
+                        "\n                        "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [
+                _vm._v(
                   "\n                            Date\n                        "
                 )
               ]),
@@ -95592,7 +95695,7 @@ var render = function() {
     _c("div", { staticClass: "panel" }, [
       _c("div", { staticClass: "panel-heading" }, [
         _c("span", { staticClass: "panel-title" }, [
-          _vm._v(_vm._s(_vm.form.number))
+          _vm._v("Showing Employee")
         ]),
         _vm._v(" "),
         _c(

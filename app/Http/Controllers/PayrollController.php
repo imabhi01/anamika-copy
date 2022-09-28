@@ -23,18 +23,20 @@ class PayrollController extends Controller
     }
 
     public function saveRecord(Request $request, $id){
+
         $request->validate([
             'employee_id' => 'required',
             'salary' => 'required|numeric',
             'bonus' => 'required|numeric',
             'date' => 'required|date',
-            'status' => 'status'
+            'status' => 'required'
         ]);
-
+        
         $payroll = Payroll::create([
             'employee_id' => $request['employee_id'],
             'salary' => $request['salary'],
             'bonus' => $request['bonus'],
+            'advance' => $request['advance'],
             'date' => $request['date'],
             'status' => $request['status']
         ]);

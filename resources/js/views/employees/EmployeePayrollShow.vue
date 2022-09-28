@@ -57,6 +57,17 @@
                     <div class="col-8">
                         <div class="form-group">
                             <label>
+                                Advance
+                            </label>
+                            <input type="text" class="form-control" disabled v-model="form.advance" placeholder="Advance">
+                            <small class="error-control" v-if="errors.advance">
+                                {{errors.advance[0]}}
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label>
                                 Date
                             </label>
                             <input type="date" class="form-control" disabled v-model="form.date" placeholder="Month">

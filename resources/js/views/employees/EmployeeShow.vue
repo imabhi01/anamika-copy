@@ -2,7 +2,7 @@
     <div>
         <div class="panel">
             <div class="panel-heading">
-                <span class="panel-title">{{form.number}}</span>
+                <span class="panel-title">Showing Employee</span>
                 <div>
                     <router-link to="/employees" class="btn">Back</router-link>
                     <router-link :to="`/employees/${form.id}/edit`" class="btn">Edit</router-link>

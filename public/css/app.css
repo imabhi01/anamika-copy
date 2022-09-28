@@ -924,7 +924,7 @@ a.btn-primary {
 }
 
 .document {
-  width: 900px;
+  width: 820px;
   margin: 50px auto;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   padding: 25px;
@@ -1342,6 +1342,10 @@ a.btn.btn-primary {
 
 .form-control, button.btn.btn-primary, button.btn, a.btn {
   font-size: 16px !important;
+}
+
+.document {
+  width: 1500px !important;
 }
 
 a.nav-link:hover, a.nav-link.active {

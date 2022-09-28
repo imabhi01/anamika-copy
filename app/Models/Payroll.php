@@ -11,6 +11,8 @@ class Payroll extends Model
 {
     use HasFactory, NepaliDateConverter;
 
+    protected $guarded = [];
+
     protected $fillable = [
         'employee_id', 'date', 'salary', 'bonus', 'status'
     ];
