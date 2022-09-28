@@ -59,12 +59,14 @@ Route::get('/employees/{id}', [EmployeeController::class, 'show']);
 Route::post('/employees/store', [EmployeeController::class, 'store']);
 Route::delete('/employees/{id}', [EmployeeController::class, 'destroy']);
 Route::post('/employees/{id}', [EmployeeController::class, 'update']);   // NOTE: Route should be PUT method but laravel cannot handle PUT method with vue FormData so post is used
-Route::get('/employees/{id}/employee', [EmployeeController::class, 'getEmployee']);
 
 Route::get('/employees/{id}/payroll/history', [PayrollController::class, 'getPayrollHistory']);
 Route::post('/employees/{id}/payroll', [PayrollController::class, 'saveRecord']);
 Route::get('/employees/payroll/date', [PayrollController::class, 'getPayrollDate']);
-Route::delete('/employees/payroll/{id}', [PayrollController::class, 'destroy']);
+
+Route::get('/payroll/{id}', [PayrollController::class, 'show']);
+Route::post('/payroll/{id}', [PayrollController::class, 'update']);
+Route::delete('/payroll/{id}', [PayrollController::class, 'destroy']);
 
 Route::resource('/invoices', InvoiceController::class);
 Route::get('/invoices/live/search', [InvoiceController::class, 'livesearch']);

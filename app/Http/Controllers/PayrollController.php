@@ -13,7 +13,7 @@ class PayrollController extends Controller
     public function getPayrollDate(){
         $date = $this->get_nepali_date(date('Y'), date('m'), date('d'));
         $todayNepaliDate = $date['y']. '-'.$date['m'] . '-'.$date['d']; 
-        return $todayNepaliDate;
+        return response()->json(['date' => $todayNepaliDate]);
     }
 
     public function getPayrollHistory($id){
@@ -28,6 +28,7 @@ class PayrollController extends Controller
             'salary' => 'required|numeric',
             'bonus' => 'required|numeric',
             'date' => 'required|date',
+            'status' => 'status'
         ]);
 
         $payroll = Payroll::create([
@@ -35,6 +36,31 @@ class PayrollController extends Controller
             'salary' => $request['salary'],
             'bonus' => $request['bonus'],
             'date' => $request['date'],
+            'status' => $request['status']
+        ]);
+
+        return response()
+            ->json(['saved' => true, 'model' => $payroll, 'status' => 200]);
+    }
+
+    public function update(Request $request, $id){
+
+        $payroll = Payroll::findOrFail($id);
+
+        $request->validate([
+            'employee_id' => 'required',
+            'salary' => 'required|numeric',
+            'bonus' => 'required|numeric',
+            'date' => 'required|date',
+            'status' => 'required'
+        ]);
+
+        $payroll->update([
+            'employee_id' => $request['employee_id'],
+            'salary' => $request['salary'],
+            'bonus' => $request['bonus'],
+            'date' => $request['date'],
+            'status' => $request['status']
         ]);
 
         return response()
@@ -71,5 +97,16 @@ class PayrollController extends Controller
             ->json(['results' => $results]);
     }
 
-    // public function destroy($id){}
+    
+    public function show($id){
+        $model = Payroll::with('employee')->findOrFail($id);
+        return response()->json(['model' => $model]);
+    }
+
+    public function destroy($id){
+        $payroll = Payroll::findOrFail($id);
+        $payroll->delete();
+        return response()
+            ->json(['deleted' => true]);
+    }
 }

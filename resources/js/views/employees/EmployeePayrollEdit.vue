@@ -2,25 +2,22 @@
     <div>
         <div class="panel">
             <div class="panel-heading">
-                <span class="panel-title">Employee Payroll</span>
+                <span class="panel-title">Edit Payroll</span>
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-8">
                         <div class="form-group">
                             <label for="show">Employee</label>
-                            <select name="employee_id" id="select-rows" @change="$emit('getRows', $event)" class="form-control" :value="form.employee_id">
-                               <option value="" selected disabled>{{ form.first_name}}</option>
+                            <select class="form-control" v-model="form.employee.first_name">
+                               <option disabled>{{ form.employee.first_name}}</option>
                             </select>
-                            <small class="error-control" v-if="errors.employee_id">
-                                {{errors.employee_id[0]}}
-                            </small>
                         </div>
                     </div>
                     <div class="col-8">
                         <div class="form-group">
                             <label>Date</label>
-                            <v-nepalidatepicker classValue="form-control" @change="$emit('getFirstDate', $event)" v-model="form.date" placeholder="Date"/>
+                            <v-nepalidatepicker classValue="form-control" :value="form.date" @change="$emit('getFirstDate', $event)" v-model="form.date" placeholder="Date"/>
                             <small class="error-control" v-if="errors.date">
                                 {{errors.date[0]}}
                             </small>
@@ -61,7 +58,7 @@
             </div>
             <div class="panel-footer flex-end">
                 <div>
-                    <button class="btn btn-primary" :disabled="isProcessing" @click="onSave">Save</button>
+                    <button class="btn btn-primary"  @click="onSave">Save</button>
                     <button class="btn" :disabled="isProcessing" @click="onCancel">Cancel</button>
                 </div>
             </div>
@@ -71,36 +68,26 @@
 
 <script>
     import {get, byMethod } from '../../lib/api'
-    
-    export default{
-        name: "EmployeePayroll",
+    export default {
+        name: 'EmployeeEdit',
         data(){
             return {
-                form: {
-                    bonus: 0,
-                },
+                form: {},
                 isProcessing: false,
-                store: `/api/employees/`,
-                method: 'POST',
-                title: 'Payroll',
-                resource: '/employees',
+                store: `/api/payroll/`,
+                title: 'Edit',
+                resource: '/payroll'
             }
         },
-        mounted(){
-            this.form.bonus = 0
-            this.form.status = 'Paid'
-        },
-        created(){
-            this.getCurrentDate()
-        },
         beforeRouteEnter(to, from, next) {
-            get(`/api/employees/${to.params.id}`)
+            get(`/api/payroll/${to.params.id}`)
                 .then((res) => {
                     next(vm => vm.setData(res))
                 })
         },
         beforeRouteUpdate(to, from, next) {
-            get(`/api/employees/${to.params.id}`)
+            this.show = false
+            get(`/api/payroll/${to.params.id}`)
                 .then((res) => {
                     this.setData(res)
                     next()
@@ -110,62 +97,56 @@
             errors(){
                 console.log('errors')
             },
-            async getCurrentDate(){
-                await get(`/api/employees/payroll/date`)
-                .then((res) => {
-                    this.form.date = res.data.date
-                    console.log(this.form);
-                })
-            },
             setData(res) {
                 Vue.set(this.$data, 'form', res.data.model)
-                this.store = `/api/employees/${this.$route.params.id}/payroll`
+                this.store = `/api/payroll/${this.$route.params.id}`
                 this.show = true
                 this.$bar.finish()
             },
             onSave() {
                 this.errors = {}
                 this.isProcessing = true
+                
                 let formData = new FormData();
-                formData.append("employee_id", this.form.id)
-                formData.append("salary", this.form.salary)
-                formData.append("bonus", this.form.bonus)
-                formData.append("date", this.form.date)
-                formData.append("status", this.form.status)
+                formData.append("employee_id", this.form.employee_id);
+                formData.append("salary", this.form.salary);
+                formData.append("bonus", this.form.bonus);
+                formData.append("date", this.form.date);
+                formData.append("status", this.form.status);
 
-                axios.post(this.store, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
+                axios.post(this.store, formData)
                 .then((res) => {
-                    console.log(res)
-                    if(res.data.saved === true){
-                        this.$toaster.success('Employee Payroll created Successfully!')
-                        this.$router.push(`${this.resource}`)
+                    console.log(res);
+                    if(res.data && res.data.saved) {
+                        this.$toaster.success('Payroll Updated Successfully!')
+                        this.success(res)
                     }
                 })
                 .catch((error) => {
-                    // error.response.status Check status code
                     if(error.response.status === 422) {
                         this.$toaster.warning('Please fill in the required fields!')
                         this.errors = error.response.data.errors
                     }
                     this.isProcessing = false
-                }).finally(() => {
-                    //Perform action in always
-                });
+                })
             },
             onCancel() {
-                if(this.$route.meta.mode === 'edit') {
-                    this.$router.push(`${this.resource}/${this.form.id}/payroll`)
-                } else {
-                    this.$router.push(`${this.resource}`)
-                }
+                this.$router.push(`${this.resource}/${this.form.id}/show`)
             },
             success(res) {
-                this.$router.push(`${this.resource}/${res.data.id}`)
+                this.$router.push(`${this.resource}/${this.form.id}/show`)
             }
         }
     }
 </script>
+
+<style lang="scss" scoped>
+.figure-img {
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  object-fit: cover;
+  height: 250px;
+  width: 250px;
+  border-radius: 10px;
+}
+</style>

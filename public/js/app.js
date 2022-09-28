@@ -4841,8 +4841,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       form: {
-        bonus: 0,
-        date: ''
+        bonus: 0
       },
       isProcessing: false,
       store: "/api/employees/",
@@ -4853,12 +4852,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.form.bonus = 0;
+    this.form.status = 'Paid';
   },
   created: function created() {
     this.getCurrentDate();
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-    (0,_lib_api__WEBPACK_IMPORTED_MODULE_1__.get)("/api/employees/".concat(to.params.id, "/employee")).then(function (res) {
+    (0,_lib_api__WEBPACK_IMPORTED_MODULE_1__.get)("/api/employees/".concat(to.params.id)).then(function (res) {
       next(function (vm) {
         return vm.setData(res);
       });
@@ -4867,7 +4867,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
     var _this = this;
 
-    (0,_lib_api__WEBPACK_IMPORTED_MODULE_1__.get)("/api/employees/".concat(to.params.id, "/employee")).then(function (res) {
+    (0,_lib_api__WEBPACK_IMPORTED_MODULE_1__.get)("/api/employees/".concat(to.params.id)).then(function (res) {
       _this.setData(res);
 
       next();
@@ -4887,8 +4887,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return (0,_lib_api__WEBPACK_IMPORTED_MODULE_1__.get)("/api/employees/payroll/date").then(function (res) {
-                  console.log(res.data, _this2.form);
-                  _this2.form.date = res.data;
+                  _this2.form.date = res.data.date;
+                  console.log(_this2.form);
                 });
 
               case 2:
@@ -4949,6 +4949,165 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     success: function success(res) {
       this.$router.push("".concat(this.resource, "/").concat(res.data.id));
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/api */ "./resources/js/lib/api.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'EmployeeEdit',
+  data: function data() {
+    return {
+      form: {},
+      isProcessing: false,
+      store: "/api/payroll/",
+      title: 'Edit',
+      resource: '/payroll'
+    };
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)("/api/payroll/".concat(to.params.id)).then(function (res) {
+      next(function (vm) {
+        return vm.setData(res);
+      });
+    });
+  },
+  beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
+    var _this = this;
+
+    this.show = false;
+    (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)("/api/payroll/".concat(to.params.id)).then(function (res) {
+      _this.setData(res);
+
+      next();
+    });
+  },
+  methods: {
+    errors: function errors() {
+      console.log('errors');
+    },
+    setData: function setData(res) {
+      Vue.set(this.$data, 'form', res.data.model);
+      this.store = "/api/payroll/".concat(this.$route.params.id);
+      this.show = true;
+      this.$bar.finish();
+    },
+    onSave: function onSave() {
+      var _this2 = this;
+
+      this.errors = {};
+      this.isProcessing = true;
+      var formData = new FormData();
+      formData.append("employee_id", this.form.employee_id);
+      formData.append("salary", this.form.salary);
+      formData.append("bonus", this.form.bonus);
+      formData.append("date", this.form.date);
+      formData.append("status", this.form.status);
+      axios.post(this.store, formData).then(function (res) {
+        console.log(res);
+
+        if (res.data && res.data.saved) {
+          _this2.$toaster.success('Payroll Updated Successfully!');
+
+          _this2.success(res);
+        }
+      })["catch"](function (error) {
+        if (error.response.status === 422) {
+          _this2.$toaster.warning('Please fill in the required fields!');
+
+          _this2.errors = error.response.data.errors;
+        }
+
+        _this2.isProcessing = false;
+      });
+    },
+    onCancel: function onCancel() {
+      this.$router.push("".concat(this.resource, "/").concat(this.form.id, "/show"));
+    },
+    success: function success(res) {
+      this.$router.push("".concat(this.resource, "/").concat(this.form.id, "/show"));
     }
   }
 });
@@ -5025,6 +5184,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -5043,7 +5205,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-    console.log("/api/employees/".concat(to.params.id, "/payroll/history/"));
     (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)("/api/employees/".concat(to.params.id, "/payroll/history/"), to.query).then(function (res) {
       console.log('Here' + res);
       next(function (vm) {
@@ -5090,7 +5251,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     detailsPage: function detailsPage(item) {
-      this.$router.push("/employees/".concat(item.id));
+      this.$router.push("/payroll/".concat(item.id, "/show"));
     },
     setData: function setData(res) {
       vue__WEBPACK_IMPORTED_MODULE_2__["default"].set(this.$data, 'model', res.data.results);
@@ -5117,17 +5278,140 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
+    goBack: function goBack(item) {
+      this.$router.push("/employees");
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/api */ "./resources/js/lib/api.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'EmployeePayrollShow',
+  data: function data() {
+    return {
+      form: {},
+      errors: {}
+    };
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)("/api/payroll/".concat(to.params.id)).then(function (res) {
+      next(function (vm) {
+        return vm.setData(res);
+      });
+    });
+  },
+  beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
+    var _this = this;
+
+    (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)("/api/payroll/".concat(to.params.id)).then(function (res) {
+      _this.setData(res);
+
+      next();
+    });
+  },
+  methods: {
+    setData: function setData(res) {
+      Vue.set(this.$data, 'form', res.data.model);
+      this.$bar.finish();
+    },
     deleteItem: function deleteItem() {
-      var _this4 = this;
+      var _this2 = this;
 
-      alert('jerhere');
-      axios["delete"]('delete', "/api/employees/payroll/".concat(this.form.id, "/")).then(function (res) {
-        console.log(res);
-
+      (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/payroll/".concat(this.form.id)).then(function (res) {
         if (res.data.deleted) {
-          _this4.$router.push('/employees');
+          _this2.$router.push("/employees/".concat(_this2.form.employee_id, "/payroll/history"));
         }
       });
+    },
+    goBack: function goBack() {
+      this.$router.push("/employees/".concat(this.form.employee_id, "/payroll/history"));
     }
   }
 });
@@ -9644,8 +9928,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _components_AdminPanel_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/AdminPanel.vue */ "./resources/js/components/AdminPanel.vue");
 /* harmony import */ var _views_invoices_index_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/invoices/index.vue */ "./resources/js/views/invoices/index.vue");
 /* harmony import */ var _views_invoices_form_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/invoices/form.vue */ "./resources/js/views/invoices/form.vue");
@@ -9664,29 +9948,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_employees_EmployeeEdit_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../views/employees/EmployeeEdit.vue */ "./resources/js/views/employees/EmployeeEdit.vue");
 /* harmony import */ var _views_employees_EmployeePayroll_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../views/employees/EmployeePayroll.vue */ "./resources/js/views/employees/EmployeePayroll.vue");
 /* harmony import */ var _views_employees_EmployeePayrollHistory_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../views/employees/EmployeePayrollHistory.vue */ "./resources/js/views/employees/EmployeePayrollHistory.vue");
-/* harmony import */ var _views_vendors_VendorIndex_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../views/vendors/VendorIndex.vue */ "./resources/js/views/vendors/VendorIndex.vue");
-/* harmony import */ var _views_vendors_VendorShow_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../views/vendors/VendorShow.vue */ "./resources/js/views/vendors/VendorShow.vue");
-/* harmony import */ var _views_vendors_VendorCreate_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../views/vendors/VendorCreate.vue */ "./resources/js/views/vendors/VendorCreate.vue");
-/* harmony import */ var _views_vendors_VendorEdit_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../views/vendors/VendorEdit.vue */ "./resources/js/views/vendors/VendorEdit.vue");
-/* harmony import */ var _views_products_ProductIndex_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../views/products/ProductIndex.vue */ "./resources/js/views/products/ProductIndex.vue");
-/* harmony import */ var _views_products_ProductCreate_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../views/products/ProductCreate.vue */ "./resources/js/views/products/ProductCreate.vue");
-/* harmony import */ var _views_products_ProductShow_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../views/products/ProductShow.vue */ "./resources/js/views/products/ProductShow.vue");
-/* harmony import */ var _views_products_ProductEdit_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../views/products/ProductEdit.vue */ "./resources/js/views/products/ProductEdit.vue");
-/* harmony import */ var _views_items_ItemIndex_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../views/items/ItemIndex.vue */ "./resources/js/views/items/ItemIndex.vue");
-/* harmony import */ var _views_items_ItemCreate_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../views/items/ItemCreate.vue */ "./resources/js/views/items/ItemCreate.vue");
-/* harmony import */ var _views_items_ItemShow_vue__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../views/items/ItemShow.vue */ "./resources/js/views/items/ItemShow.vue");
-/* harmony import */ var _views_items_ItemEdit_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../views/items/ItemEdit.vue */ "./resources/js/views/items/ItemEdit.vue");
-/* harmony import */ var _views_settings_SettingIndex_vue__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../views/settings/SettingIndex.vue */ "./resources/js/views/settings/SettingIndex.vue");
-/* harmony import */ var _views_settings_SettingCreate_vue__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../views/settings/SettingCreate.vue */ "./resources/js/views/settings/SettingCreate.vue");
-/* harmony import */ var _views_settings_SettingShow_vue__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../views/settings/SettingShow.vue */ "./resources/js/views/settings/SettingShow.vue");
-/* harmony import */ var _views_settings_SettingEdit_vue__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../views/settings/SettingEdit.vue */ "./resources/js/views/settings/SettingEdit.vue");
-/* harmony import */ var _views_expenses_index_vue__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../views/expenses/index.vue */ "./resources/js/views/expenses/index.vue");
-/* harmony import */ var _views_expenses_form_vue__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../views/expenses/form.vue */ "./resources/js/views/expenses/form.vue");
-/* harmony import */ var _views_expenses_show_vue__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../views/expenses/show.vue */ "./resources/js/views/expenses/show.vue");
-/* harmony import */ var _views_Home_vue__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../views/Home.vue */ "./resources/js/views/Home.vue");
-/* harmony import */ var _components_404_NotFound_vue__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../components/404/NotFound.vue */ "./resources/js/components/404/NotFound.vue");
-/* harmony import */ var _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../components/auth/Login.vue */ "./resources/js/components/auth/Login.vue");
-/* harmony import */ var _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../components/auth/Register.vue */ "./resources/js/components/auth/Register.vue");
+/* harmony import */ var _views_employees_EmployeePayrollShow_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../views/employees/EmployeePayrollShow.vue */ "./resources/js/views/employees/EmployeePayrollShow.vue");
+/* harmony import */ var _views_employees_EmployeePayrollEdit_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../views/employees/EmployeePayrollEdit.vue */ "./resources/js/views/employees/EmployeePayrollEdit.vue");
+/* harmony import */ var _views_vendors_VendorIndex_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../views/vendors/VendorIndex.vue */ "./resources/js/views/vendors/VendorIndex.vue");
+/* harmony import */ var _views_vendors_VendorShow_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../views/vendors/VendorShow.vue */ "./resources/js/views/vendors/VendorShow.vue");
+/* harmony import */ var _views_vendors_VendorCreate_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../views/vendors/VendorCreate.vue */ "./resources/js/views/vendors/VendorCreate.vue");
+/* harmony import */ var _views_vendors_VendorEdit_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../views/vendors/VendorEdit.vue */ "./resources/js/views/vendors/VendorEdit.vue");
+/* harmony import */ var _views_products_ProductIndex_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../views/products/ProductIndex.vue */ "./resources/js/views/products/ProductIndex.vue");
+/* harmony import */ var _views_products_ProductCreate_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../views/products/ProductCreate.vue */ "./resources/js/views/products/ProductCreate.vue");
+/* harmony import */ var _views_products_ProductShow_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../views/products/ProductShow.vue */ "./resources/js/views/products/ProductShow.vue");
+/* harmony import */ var _views_products_ProductEdit_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../views/products/ProductEdit.vue */ "./resources/js/views/products/ProductEdit.vue");
+/* harmony import */ var _views_items_ItemIndex_vue__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../views/items/ItemIndex.vue */ "./resources/js/views/items/ItemIndex.vue");
+/* harmony import */ var _views_items_ItemCreate_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../views/items/ItemCreate.vue */ "./resources/js/views/items/ItemCreate.vue");
+/* harmony import */ var _views_items_ItemShow_vue__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../views/items/ItemShow.vue */ "./resources/js/views/items/ItemShow.vue");
+/* harmony import */ var _views_items_ItemEdit_vue__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../views/items/ItemEdit.vue */ "./resources/js/views/items/ItemEdit.vue");
+/* harmony import */ var _views_settings_SettingIndex_vue__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../views/settings/SettingIndex.vue */ "./resources/js/views/settings/SettingIndex.vue");
+/* harmony import */ var _views_settings_SettingCreate_vue__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../views/settings/SettingCreate.vue */ "./resources/js/views/settings/SettingCreate.vue");
+/* harmony import */ var _views_settings_SettingShow_vue__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../views/settings/SettingShow.vue */ "./resources/js/views/settings/SettingShow.vue");
+/* harmony import */ var _views_settings_SettingEdit_vue__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ../views/settings/SettingEdit.vue */ "./resources/js/views/settings/SettingEdit.vue");
+/* harmony import */ var _views_expenses_index_vue__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../views/expenses/index.vue */ "./resources/js/views/expenses/index.vue");
+/* harmony import */ var _views_expenses_form_vue__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../views/expenses/form.vue */ "./resources/js/views/expenses/form.vue");
+/* harmony import */ var _views_expenses_show_vue__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../views/expenses/show.vue */ "./resources/js/views/expenses/show.vue");
+/* harmony import */ var _views_Home_vue__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../views/Home.vue */ "./resources/js/views/Home.vue");
+/* harmony import */ var _components_404_NotFound_vue__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ../components/404/NotFound.vue */ "./resources/js/components/404/NotFound.vue");
+/* harmony import */ var _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../components/auth/Login.vue */ "./resources/js/components/auth/Login.vue");
+/* harmony import */ var _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ../components/auth/Register.vue */ "./resources/js/components/auth/Register.vue");
 
 
 
@@ -9730,8 +10016,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_41__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_42__["default"]);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_42__["default"]({
+
+
+vue__WEBPACK_IMPORTED_MODULE_43__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_44__["default"]);
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_44__["default"]({
   mode: 'history',
   //removes # (hashtag) from url
   routes: [{
@@ -9739,12 +10027,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_42__["default"]({
     redirect: '/login'
   }, {
     path: '/login',
-    name: _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_39__["default"],
-    component: _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_39__["default"]
+    name: _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_41__["default"],
+    component: _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_41__["default"]
   }, {
     path: '/register',
     name: 'register',
-    component: _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_40__["default"]
+    component: _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_42__["default"]
   }, {
     path: '/',
     name: 'admin',
@@ -9752,7 +10040,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_42__["default"]({
     children: [{
       path: '/dashboard',
       name: 'dashboard',
-      component: _views_Home_vue__WEBPACK_IMPORTED_MODULE_37__["default"]
+      component: _views_Home_vue__WEBPACK_IMPORTED_MODULE_39__["default"]
     }, {
       path: '/invoices',
       name: 'invoices',
@@ -9813,18 +10101,18 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_42__["default"]({
     }, {
       path: '/vendors',
       name: 'vendors',
-      component: _views_vendors_VendorIndex_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
+      component: _views_vendors_VendorIndex_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
     }, {
       path: '/vendors/create',
       name: 'vendors-create',
-      component: _views_vendors_VendorCreate_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
+      component: _views_vendors_VendorCreate_vue__WEBPACK_IMPORTED_MODULE_22__["default"]
     }, {
       path: '/vendors/:id',
       name: 'vendors-show',
-      component: _views_vendors_VendorShow_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
+      component: _views_vendors_VendorShow_vue__WEBPACK_IMPORTED_MODULE_21__["default"]
     }, {
       path: '/vendors/:id/edit',
-      component: _views_vendors_VendorEdit_vue__WEBPACK_IMPORTED_MODULE_21__["default"],
+      component: _views_vendors_VendorEdit_vue__WEBPACK_IMPORTED_MODULE_23__["default"],
       name: 'vendors-edit',
       meta: {
         mode: 'edit'
@@ -9832,76 +10120,76 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_42__["default"]({
     }, {
       path: '/products',
       name: 'products',
-      component: _views_products_ProductIndex_vue__WEBPACK_IMPORTED_MODULE_22__["default"]
+      component: _views_products_ProductIndex_vue__WEBPACK_IMPORTED_MODULE_24__["default"]
     }, {
       path: '/products/create',
       name: 'products-create',
-      component: _views_products_ProductCreate_vue__WEBPACK_IMPORTED_MODULE_23__["default"]
+      component: _views_products_ProductCreate_vue__WEBPACK_IMPORTED_MODULE_25__["default"]
     }, {
       path: '/products/:id',
       name: 'products-show',
-      component: _views_products_ProductShow_vue__WEBPACK_IMPORTED_MODULE_24__["default"]
+      component: _views_products_ProductShow_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
     }, {
       path: '/products/:id/edit',
       name: 'products-edit',
-      component: _views_products_ProductEdit_vue__WEBPACK_IMPORTED_MODULE_25__["default"],
+      component: _views_products_ProductEdit_vue__WEBPACK_IMPORTED_MODULE_27__["default"],
       meta: {
         mode: 'edit'
       }
     }, {
       path: '/items',
       name: 'items',
-      component: _views_items_ItemIndex_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
+      component: _views_items_ItemIndex_vue__WEBPACK_IMPORTED_MODULE_28__["default"]
     }, {
       path: '/items/create',
       name: 'items-create',
-      component: _views_items_ItemCreate_vue__WEBPACK_IMPORTED_MODULE_27__["default"]
+      component: _views_items_ItemCreate_vue__WEBPACK_IMPORTED_MODULE_29__["default"]
     }, {
       path: '/items/:id',
       name: 'items-show',
-      component: _views_items_ItemShow_vue__WEBPACK_IMPORTED_MODULE_28__["default"]
+      component: _views_items_ItemShow_vue__WEBPACK_IMPORTED_MODULE_30__["default"]
     }, {
       path: '/items/:id/edit',
       name: 'items-edit',
-      component: _views_items_ItemEdit_vue__WEBPACK_IMPORTED_MODULE_29__["default"],
+      component: _views_items_ItemEdit_vue__WEBPACK_IMPORTED_MODULE_31__["default"],
       meta: {
         mode: 'edit'
       }
     }, {
       path: '/expenses',
       name: 'expenses',
-      component: _views_expenses_index_vue__WEBPACK_IMPORTED_MODULE_34__["default"]
+      component: _views_expenses_index_vue__WEBPACK_IMPORTED_MODULE_36__["default"]
     }, {
       path: '/expenses/create',
       name: 'expenses-create',
-      component: _views_expenses_form_vue__WEBPACK_IMPORTED_MODULE_35__["default"]
+      component: _views_expenses_form_vue__WEBPACK_IMPORTED_MODULE_37__["default"]
     }, {
       path: '/expenses/:id',
       name: 'expenses-show',
-      component: _views_expenses_show_vue__WEBPACK_IMPORTED_MODULE_36__["default"]
+      component: _views_expenses_show_vue__WEBPACK_IMPORTED_MODULE_38__["default"]
     }, {
       path: '/expenses/:id/edit',
       name: 'expenses-edit',
-      component: _views_expenses_form_vue__WEBPACK_IMPORTED_MODULE_35__["default"],
+      component: _views_expenses_form_vue__WEBPACK_IMPORTED_MODULE_37__["default"],
       meta: {
         mode: 'edit'
       }
     }, {
       path: '/settings',
       name: 'settings',
-      component: _views_settings_SettingIndex_vue__WEBPACK_IMPORTED_MODULE_30__["default"]
+      component: _views_settings_SettingIndex_vue__WEBPACK_IMPORTED_MODULE_32__["default"]
     }, {
       path: '/settings/create',
       name: 'settings-create',
-      component: _views_settings_SettingCreate_vue__WEBPACK_IMPORTED_MODULE_31__["default"]
+      component: _views_settings_SettingCreate_vue__WEBPACK_IMPORTED_MODULE_33__["default"]
     }, {
       path: '/settings/:id',
       name: 'settings-show',
-      component: _views_settings_SettingShow_vue__WEBPACK_IMPORTED_MODULE_32__["default"]
+      component: _views_settings_SettingShow_vue__WEBPACK_IMPORTED_MODULE_34__["default"]
     }, {
       path: '/settings/:id/edit',
       name: 'settings-edit',
-      component: _views_settings_SettingEdit_vue__WEBPACK_IMPORTED_MODULE_33__["default"],
+      component: _views_settings_SettingEdit_vue__WEBPACK_IMPORTED_MODULE_35__["default"],
       meta: {
         mode: 'edit'
       }
@@ -9932,11 +10220,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_42__["default"]({
       path: '/employees/:id/payroll/history',
       component: _views_employees_EmployeePayrollHistory_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
       name: 'employee-payroll-history'
+    }, {
+      path: '/payroll/:id/show',
+      component: _views_employees_EmployeePayrollShow_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+      name: 'employee-payroll-show'
+    }, {
+      path: '/payroll/:id/edit',
+      component: _views_employees_EmployeePayrollEdit_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
+      name: 'employee-payroll-edit'
     }]
   }, {
     path: '*',
     name: 'error',
-    component: _components_404_NotFound_vue__WEBPACK_IMPORTED_MODULE_38__["default"]
+    component: _components_404_NotFound_vue__WEBPACK_IMPORTED_MODULE_40__["default"]
   }]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -30825,6 +31121,54 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, ".preview[data-v-1c3062eb] {\n  height: 100px;\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=style&index=0&id=095333a8&lang=scss&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=style&index=0&id=095333a8&lang=scss&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".figure-img[data-v-095333a8] {\n  margin-bottom: 0.5rem;\n  line-height: 1;\n  -o-object-fit: cover;\n     object-fit: cover;\n  height: 250px;\n  width: 250px;\n  border-radius: 10px;\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=style&index=0&id=d4b821ca&lang=scss&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=style&index=0&id=d4b821ca&lang=scss&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".figure-img[data-v-d4b821ca] {\n  margin-bottom: 0.5rem;\n  line-height: 1;\n  -o-object-fit: cover;\n     object-fit: cover;\n  height: 250px;\n  width: 250px;\n  border-radius: 10px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -84856,6 +85200,66 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=style&index=0&id=095333a8&lang=scss&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=style&index=0&id=095333a8&lang=scss&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollEdit_vue_vue_type_style_index_0_id_095333a8_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EmployeePayrollEdit.vue?vue&type=style&index=0&id=095333a8&lang=scss&scoped=true& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=style&index=0&id=095333a8&lang=scss&scoped=true&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollEdit_vue_vue_type_style_index_0_id_095333a8_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollEdit_vue_vue_type_style_index_0_id_095333a8_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=style&index=0&id=d4b821ca&lang=scss&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=style&index=0&id=d4b821ca&lang=scss&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollShow_vue_vue_type_style_index_0_id_d4b821ca_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EmployeePayrollShow.vue?vue&type=style&index=0&id=d4b821ca&lang=scss&scoped=true& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=style&index=0&id=d4b821ca&lang=scss&scoped=true&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollShow_vue_vue_type_style_index_0_id_d4b821ca_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollShow_vue_vue_type_style_index_0_id_d4b821ca_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeeShow.vue?vue&type=style&index=0&id=c8c21b18&lang=scss&scoped=true&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeeShow.vue?vue&type=style&index=0&id=c8c21b18&lang=scss&scoped=true& ***!
@@ -87478,6 +87882,47 @@ component.options.__file = "resources/js/views/employees/EmployeePayroll.vue"
 
 /***/ }),
 
+/***/ "./resources/js/views/employees/EmployeePayrollEdit.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/views/employees/EmployeePayrollEdit.vue ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _EmployeePayrollEdit_vue_vue_type_template_id_095333a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EmployeePayrollEdit.vue?vue&type=template&id=095333a8&scoped=true& */ "./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=template&id=095333a8&scoped=true&");
+/* harmony import */ var _EmployeePayrollEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EmployeePayrollEdit.vue?vue&type=script&lang=js& */ "./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=script&lang=js&");
+/* harmony import */ var _EmployeePayrollEdit_vue_vue_type_style_index_0_id_095333a8_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EmployeePayrollEdit.vue?vue&type=style&index=0&id=095333a8&lang=scss&scoped=true& */ "./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=style&index=0&id=095333a8&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _EmployeePayrollEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EmployeePayrollEdit_vue_vue_type_template_id_095333a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _EmployeePayrollEdit_vue_vue_type_template_id_095333a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "095333a8",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/employees/EmployeePayrollEdit.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/views/employees/EmployeePayrollHistory.vue":
 /*!*****************************************************************!*\
   !*** ./resources/js/views/employees/EmployeePayrollHistory.vue ***!
@@ -87513,6 +87958,47 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/views/employees/EmployeePayrollHistory.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/employees/EmployeePayrollShow.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/views/employees/EmployeePayrollShow.vue ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _EmployeePayrollShow_vue_vue_type_template_id_d4b821ca_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EmployeePayrollShow.vue?vue&type=template&id=d4b821ca&scoped=true& */ "./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=template&id=d4b821ca&scoped=true&");
+/* harmony import */ var _EmployeePayrollShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EmployeePayrollShow.vue?vue&type=script&lang=js& */ "./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=script&lang=js&");
+/* harmony import */ var _EmployeePayrollShow_vue_vue_type_style_index_0_id_d4b821ca_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EmployeePayrollShow.vue?vue&type=style&index=0&id=d4b821ca&lang=scss&scoped=true& */ "./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=style&index=0&id=d4b821ca&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _EmployeePayrollShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EmployeePayrollShow_vue_vue_type_template_id_d4b821ca_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _EmployeePayrollShow_vue_vue_type_template_id_d4b821ca_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "d4b821ca",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/employees/EmployeePayrollShow.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -88966,6 +89452,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EmployeePayrollEdit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/views/employees/EmployeePayrollHistory.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************!*\
   !*** ./resources/js/views/employees/EmployeePayrollHistory.vue?vue&type=script&lang=js& ***!
@@ -88979,6 +89481,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollHistory_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EmployeePayrollHistory.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollHistory.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollHistory_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EmployeePayrollShow.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -89479,6 +89997,32 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=style&index=0&id=095333a8&lang=scss&scoped=true&":
+/*!************************************************************************************************************************!*\
+  !*** ./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=style&index=0&id=095333a8&lang=scss&scoped=true& ***!
+  \************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollEdit_vue_vue_type_style_index_0_id_095333a8_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EmployeePayrollEdit.vue?vue&type=style&index=0&id=095333a8&lang=scss&scoped=true& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=style&index=0&id=095333a8&lang=scss&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=style&index=0&id=d4b821ca&lang=scss&scoped=true&":
+/*!************************************************************************************************************************!*\
+  !*** ./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=style&index=0&id=d4b821ca&lang=scss&scoped=true& ***!
+  \************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_0_rules_0_use_3_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollShow_vue_vue_type_style_index_0_id_d4b821ca_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!../../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EmployeePayrollShow.vue?vue&type=style&index=0&id=d4b821ca&lang=scss&scoped=true& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12[0].rules[0].use[3]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=style&index=0&id=d4b821ca&lang=scss&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/views/employees/EmployeeShow.vue?vue&type=style&index=0&id=c8c21b18&lang=scss&scoped=true&":
 /*!*****************************************************************************************************************!*\
   !*** ./resources/js/views/employees/EmployeeShow.vue?vue&type=style&index=0&id=c8c21b18&lang=scss&scoped=true& ***!
@@ -89931,6 +90475,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=template&id=095333a8&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=template&id=095333a8&scoped=true& ***!
+  \*********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollEdit_vue_vue_type_template_id_095333a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollEdit_vue_vue_type_template_id_095333a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollEdit_vue_vue_type_template_id_095333a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EmployeePayrollEdit.vue?vue&type=template&id=095333a8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=template&id=095333a8&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/views/employees/EmployeePayrollHistory.vue?vue&type=template&id=40568134&":
 /*!************************************************************************************************!*\
   !*** ./resources/js/views/employees/EmployeePayrollHistory.vue?vue&type=template&id=40568134& ***!
@@ -89944,6 +90505,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollHistory_vue_vue_type_template_id_40568134___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollHistory_vue_vue_type_template_id_40568134___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EmployeePayrollHistory.vue?vue&type=template&id=40568134& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollHistory.vue?vue&type=template&id=40568134&");
+
+
+/***/ }),
+
+/***/ "./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=template&id=d4b821ca&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=template&id=d4b821ca&scoped=true& ***!
+  \*********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollShow_vue_vue_type_template_id_d4b821ca_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollShow_vue_vue_type_template_id_d4b821ca_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EmployeePayrollShow_vue_vue_type_template_id_d4b821ca_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EmployeePayrollShow.vue?vue&type=template&id=d4b821ca&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=template&id=d4b821ca&scoped=true&");
 
 
 /***/ }),
@@ -94034,11 +94612,7 @@ var render = function() {
                 _c("label", [_vm._v("Date")]),
                 _vm._v(" "),
                 _c("v-nepalidatepicker", {
-                  attrs: {
-                    classValue: "form-control",
-                    value: _vm.form.date,
-                    placeholder: "Date"
-                  },
+                  attrs: { classValue: "form-control", placeholder: "Date" },
                   on: {
                     change: function($event) {
                       return _vm.$emit("getFirstDate", $event)
@@ -94249,6 +94823,292 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=template&id=095333a8&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollEdit.vue?vue&type=template&id=095333a8&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "panel" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-body" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "show" } }, [_vm._v("Employee")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.employee.first_name,
+                      expression: "form.employee.first_name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form.employee,
+                        "first_name",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { disabled: "" } }, [
+                    _vm._v(_vm._s(_vm.form.employee.first_name))
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8" }, [
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", [_vm._v("Date")]),
+                _vm._v(" "),
+                _c("v-nepalidatepicker", {
+                  attrs: {
+                    classValue: "form-control",
+                    value: _vm.form.date,
+                    placeholder: "Date"
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$emit("getFirstDate", $event)
+                    }
+                  },
+                  model: {
+                    value: _vm.form.date,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form, "date", $$v)
+                    },
+                    expression: "form.date"
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.date
+                  ? _c("small", { staticClass: "error-control" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.errors.date[0]) +
+                          "\n                        "
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Salary (per month)")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.salary,
+                    expression: "form.salary"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number", placeholder: "Salary" },
+                domProps: { value: _vm.form.salary },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "salary", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.salary
+                ? _c("small", { staticClass: "error-control" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.salary[0]) +
+                        "\n                        "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Bonus")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.bonus,
+                    expression: "form.bonus"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number", placeholder: "Bonus" },
+                domProps: { value: _vm.form.bonus },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "bonus", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.bonus
+                ? _c("small", { staticClass: "error-control" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.bonus[0]) +
+                        "\n                        "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Select Status")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.status,
+                      expression: "form.status"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { name: "status", id: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "status",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "", selected: "" } }, [
+                    _vm._v("Select Status")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Paid" } }, [_vm._v("Paid")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Un paid" } }, [
+                    _vm._v("Un Paid")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _vm.errors.status
+                ? _c("small", { staticClass: "error-control" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.status[0]) +
+                        "\n                        "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-footer flex-end" }, [
+        _c("div", [
+          _c(
+            "button",
+            { staticClass: "btn btn-primary", on: { click: _vm.onSave } },
+            [_vm._v("Save")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn",
+              attrs: { disabled: _vm.isProcessing },
+              on: { click: _vm.onCancel }
+            },
+            [_vm._v("Cancel")]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel-heading" }, [
+      _c("span", { staticClass: "panel-title" }, [_vm._v("Edit Payroll")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollHistory.vue?vue&type=template&id=40568134&":
 /*!***************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollHistory.vue?vue&type=template&id=40568134& ***!
@@ -94267,7 +95127,15 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "panel" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "panel-heading" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", [
+          _c("button", { staticClass: "btn", on: { click: _vm.goBack } }, [
+            _vm._v("Back")
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -94328,16 +95196,21 @@ var render = function() {
                       _vm._v(_vm._s(item.status))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-error",
-                          on: { click: _vm.deleteItem }
-                        },
-                        [_vm._v("Delete")]
-                      )
-                    ])
+                    _c(
+                      "td",
+                      { staticClass: "w-3" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn",
+                            attrs: { to: "/payroll/" + item.id + "/show" }
+                          },
+                          [_vm._v("Show")]
+                        )
+                      ],
+                      1
+                    )
                   ]
                 )
               }),
@@ -94392,10 +95265,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading" }, [
-      _c("span", { staticClass: "panel-title" }, [
-        _c("h3", [_vm._v("Payroll History")])
-      ])
+    return _c("span", { staticClass: "panel-title" }, [
+      _c("h3", [_vm._v("Payroll History")])
     ])
   },
   function() {
@@ -94421,6 +95292,280 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=template&id=d4b821ca&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/employees/EmployeePayrollShow.vue?vue&type=template&id=d4b821ca&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "panel" }, [
+      _c("div", { staticClass: "panel-heading" }, [
+        _c("span", { staticClass: "panel-title" }, [_vm._v("Show Payroll")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          [
+            _c("button", { staticClass: "btn", on: { click: _vm.goBack } }, [
+              _vm._v("Back")
+            ]),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "btn",
+                attrs: { to: "/payroll/" + _vm.form.id + "/edit" }
+              },
+              [_vm._v("Edit")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-error", on: { click: _vm.deleteItem } },
+              [_vm._v("Delete")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-body" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("First Name")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.employee.first_name,
+                    expression: "form.employee.first_name"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  disabled: "",
+                  placeholder: "First Name"
+                },
+                domProps: { value: _vm.form.employee.first_name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.form.employee,
+                      "first_name",
+                      $event.target.value
+                    )
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.first_name
+                ? _c("small", { staticClass: "error-control" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.first_name[0]) +
+                        "\n                        "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Last Name")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.employee.last_name,
+                    expression: "form.employee.last_name"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", disabled: "", placeholder: "Last Name" },
+                domProps: { value: _vm.form.employee.last_name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.form.employee,
+                      "last_name",
+                      $event.target.value
+                    )
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.last_name
+                ? _c("small", { staticClass: "error-control" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.last_name[0]) +
+                        "\n                        "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [
+                _vm._v(
+                  "\n                            Salary\n                        "
+                )
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.salary,
+                    expression: "form.salary"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", disabled: "", placeholder: "Salary" },
+                domProps: { value: _vm.form.salary },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "salary", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.salary
+                ? _c("small", { staticClass: "error-control" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.salary[0]) +
+                        "\n                        "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [
+                _vm._v(
+                  "\n                            Bonus\n                        "
+                )
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.bonus,
+                    expression: "form.bonus"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", disabled: "", placeholder: "Bonus" },
+                domProps: { value: _vm.form.bonus },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "bonus", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.bonus
+                ? _c("small", { staticClass: "error-control" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.bonus[0]) +
+                        "\n                        "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [
+                _vm._v(
+                  "\n                            Date\n                        "
+                )
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.date,
+                    expression: "form.date"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "date", disabled: "", placeholder: "Month" },
+                domProps: { value: _vm.form.date },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "date", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.date
+                ? _c("small", { staticClass: "error-control" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.date[0]) +
+                        "\n                        "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

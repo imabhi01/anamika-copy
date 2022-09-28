@@ -15,7 +15,7 @@ class Payroll extends Model
         'employee_id', 'date', 'salary', 'bonus', 'status'
     ];
 
-    protected $hidden = ['employee_id', 'created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at'];
 
     protected $appends = ['nepaliMonth'];
 

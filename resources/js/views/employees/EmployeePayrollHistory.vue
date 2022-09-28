@@ -5,6 +5,9 @@
                 <span class="panel-title">
                     <h3>Payroll History</h3>
                 </span>
+                <div>
+                    <button class="btn" @click="goBack">Back</button>
+                </div>
             </div>
             <div class="panel-body">
                 <search :total_rows="total_rows" :search="search" @getRows="getRows($event)" @liveSearch="liveSearch" />
@@ -30,7 +33,7 @@
                             <td class="w-5 text-center">{{item.bonus}}</td>
                             <td class="w-5 text-center">{{item.status}}</td>
                             <td class="w-3">
-                                <button class="btn btn-error" @click="deleteItem">Delete</button>
+                                <router-link :to="`/payroll/${item.id}/show`" class="btn">Show</router-link>
                             </td>
                         </tr>
                     </tbody>
@@ -56,7 +59,7 @@
 
 <script>
 import Vue from 'vue'
-import { get } from '../../lib/api'
+import { get, byMethod } from '../../lib/api'
 import search from '../../components/layouts/search'
 
 export default {
@@ -74,7 +77,6 @@ export default {
         }
     },
     beforeRouteEnter(to, from, next) {
-        console.log(`/api/employees/${to.params.id}/payroll/history/`);
         get(`/api/employees/${to.params.id}/payroll/history/`, to.query)
             .then((res) => {
                 console.log('Here' + res);
@@ -110,7 +112,7 @@ export default {
                 });
         },
         detailsPage(item) {
-            this.$router.push(`/employees/${item.id}`)
+            this.$router.push(`/payroll/${item.id}/show`)
         },
         setData(res) {
             Vue.set(this.$data, 'model', res.data.results)
@@ -139,16 +141,9 @@ export default {
                 })
             }
         },
-        deleteItem() {
-            alert('jerhere');
-            axios.delete('delete', `/api/employees/payroll/${this.form.id}/`)
-                .then((res) => {
-                    console.log(res);
-                    if(res.data.deleted) {
-                        this.$router.push('/employees')
-                    }
-                })
-        }
+        goBack(item) {
+            this.$router.push(`/employees`)
+        },
     }
 }
 </script>
