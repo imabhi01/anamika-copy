@@ -33,7 +33,9 @@ class CreateExpensesTable extends Migration
         Schema::create('expense_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('expense_id');
+            $table->foreign('expense_id')->references('id')->on('expenses')->onDelete('cascade');
             $table->unsignedBigInteger('item_id');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->double('unit_price');
             $table->integer('qty');
             $table->timestamps();
