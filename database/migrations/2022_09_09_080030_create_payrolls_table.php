@@ -16,6 +16,7 @@ class CreatePayrollsTable extends Migration
         Schema::create('payrolls', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employee_id');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->date('date');
             $table->double('salary')->default(0);
             $table->double('bonus')->default(0);
