@@ -87,8 +87,6 @@ export default {
                     },
                 ]
             }
-
-            console.log(this.totalIncomeCollection);
         },
         async fillExpenseData () {
             const {data} = await axios.get('/api/expense/')

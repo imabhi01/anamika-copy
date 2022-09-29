@@ -902,7 +902,7 @@ a.btn-primary {
 
 .table thead tr th {
   text-align: left;
-  padding: 5px;
+  padding: 20px;
   font-weight: bold;
 }
 
@@ -912,7 +912,7 @@ a.btn-primary {
 
 .table tbody tr td {
   vertical-align: top;
-  padding: 5px;
+  padding: 15px;
 }
 
 .table tbody tr:nth-of-type(odd) {
@@ -1328,6 +1328,7 @@ span.badge.text-center {
   width: 30%;
   color: #fff;
   padding: 10px;
+  margin: 0 auto;
 }
 
 .sidebar .sidebar-brand {

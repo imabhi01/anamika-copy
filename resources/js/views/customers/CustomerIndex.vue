@@ -17,22 +17,22 @@
                 <table class="table table-link">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>Phone Number</th>
-                            <th>Action</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">First Name</th>
+                            <th class="text-center">Last Name</th>
+                            <th class="text-center">Address</th>
+                            <th class="text-center">Phone Number</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="item in model.data" :key="item.data" @click="detailsPage(item)">
-                            <td class="w-1">{{item.id}}</td>
-                            <td class="w-3">{{item.firstname}}</td>
-                            <td class="w-3">{{item.lastname}}</td>
-                            <td class="w-5">{{item.address}}</td>
-                            <td class="w-3">{{item.phone}}</td>
-                            <td class="w-3">
+                            <td class="w-1 text-center">{{item.id}}</td>
+                            <td class="w-3 text-center">{{item.firstname}}</td>
+                            <td class="w-3 text-center">{{item.lastname}}</td>
+                            <td class="w-5 text-center">{{item.address}}</td>
+                            <td class="w-3 text-center">{{item.phone}}</td>
+                            <td class="w-3 text-center">
                                 <router-link :to="`/customers/${item.id}`" class="btn">Show</router-link>
                             </td>
                         </tr>

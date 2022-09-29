@@ -79,9 +79,10 @@
                 this.$bar.finish()
             },
             deleteItem() {
-                byMethod('delete', `/api/items/${this.model.id}`)
+                byMethod('delete', `/api/items/${this.form.id}`)
                     .then((res) => {
                         if(res.data.deleted) {
+                            this.$toaster.success('Item deleted Successfully!')
                             this.$router.push('/items')
                         }
                     })

@@ -89,7 +89,6 @@
         },
         methods:{
             errors(){
-                console.log('here');
             },
             onSave() {
                 this.errors = {}

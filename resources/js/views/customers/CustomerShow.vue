@@ -81,9 +81,10 @@
                 this.$bar.finish()
             },
             deleteItem() {
-                byMethod('delete', `/api/customers/${this.model.id}`)
+                byMethod('delete', `/api/customers/${this.form.id}`)
                     .then((res) => {
                         if(res.data.deleted) {
+                            this.$toaster.success('Party deleted Successfully!')
                             this.$router.push('/customers')
                         }
                     })

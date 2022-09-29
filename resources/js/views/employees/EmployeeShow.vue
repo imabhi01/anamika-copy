@@ -123,6 +123,7 @@
                 byMethod('delete', `/api/employees/${this.form.id}`)
                     .then((res) => {
                         if(res.data.deleted) {
+                            this.$toaster.success('Employee deleted Successfully!')
                             this.$router.push('/employees')
                         }
                     })

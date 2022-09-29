@@ -138,7 +138,6 @@
                 formData.append("email", this.form.email);
                 formData.append("password", this.form.password);
                 formData.append("password_confirmation", this.form.password_confirmation);
-                console.log(this.form, formData)
                 byMethod(this.method, this.store, formData)
                 .then((res) => {
                     if(res.data && res.data.saved) {

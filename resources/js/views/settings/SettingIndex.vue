@@ -13,18 +13,18 @@
                 <table class="table table-link">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Action</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="item in model.data" :key="item.data" @click="detailsPage(item)">
-                            <td class="w-1">{{item.id}}</td>
-                            <td class="w-3">{{item.title}}</td>
-                            <td class="w-3">{{item.description}}</td>
-                            <td class="w-3">
+                            <td class="w-1 text-center">{{item.id}}</td>
+                            <td class="w-3 text-center">{{item.title}}</td>
+                            <td class="w-3 text-center">{{item.description}}</td>
+                            <td class="w-3 text-center">
                                 <router-link :to="`/settings/${item.id}`" class="btn">Show</router-link>
                             </td>
                         </tr>

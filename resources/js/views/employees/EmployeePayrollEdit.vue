@@ -43,6 +43,15 @@
                     </div>
                     <div class="col-8">
                         <div class="form-group">
+                            <label>Advance</label>
+                            <input type="number" class="form-control" v-model="form.advance" placeholder="Advance">
+                            <small class="error-control" v-if="errors.advance">
+                                {{errors.advance[0]}}
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
                             <label>Select Status</label>
                             <select name="status" id="" class="form-control" v-model="form.status">
                                 <option value="" selected>Select Status</option>
@@ -111,6 +120,7 @@
                 formData.append("employee_id", this.form.employee_id);
                 formData.append("salary", this.form.salary);
                 formData.append("bonus", this.form.bonus);
+                formData.append("advance", this.form.advance);
                 formData.append("date", this.form.date);
                 formData.append("status", this.form.status);
 

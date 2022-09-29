@@ -26,29 +26,29 @@
                 <table class="table table-link">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Date</th>
-                            <th>Number</th>
-                            <th>Customer</th>
-                            <th>Due Date</th>
-                            <th>Status</th>
-                            <th>Total</th>
-                            <th>Action</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Number</th>
+                            <th class="text-center">Customer</th>
+                            <th class="text-center">Due Date</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Total</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="item in model.data" :key="item.data" @click="detailsPage(item)">
-                            <td class="w-1">{{item.id}}</td>
-                            <td class="w-3">{{item.date}}</td>
-                            <td class="w-3">{{item.number}}</td>
-                            <td class="w-5">{{item.customer.text}}</td>
-                            <td class="w-3">{{item.due_date}}</td>
-                            <td class="w-3">
+                            <td class="w-1 text-center">{{item.id}}</td>
+                            <td class="w-3 text-center">{{item.date}}</td>
+                            <td class="w-3 text-center">{{item.number}}</td>
+                            <td class="w-5 text-center">{{item.customer.text}}</td>
+                            <td class="w-3 text-center">{{item.due_date}}</td>
+                            <td class="w-3 text-center">
                                 <span class="badge bg-success text-center" v-if="item.status == 'Paid'">{{item.status}}</span>
                                 <span class="badge bg-danger text-center" v-else-if="item.status == 'Un paid'">{{item.status}}</span>
                             </td>
-                            <td class="w-3">{{item.total | formatMoney}}</td>
-                            <td class="w-3">
+                            <td class="w-3 text-center">{{item.total | formatMoney}}</td>
+                            <td class="w-3 text-center">
                                 <router-link :to="`/invoices/${item.id}`" class="btn">Show</router-link>
                             </td>
                         </tr>

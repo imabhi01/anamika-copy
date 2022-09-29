@@ -54,7 +54,8 @@ class EmployeeController extends Controller
            'last_name' => 'required',
            'phone' => 'required|unique:employees|numeric',
            'address' => 'required|string',
-           'image' => 'sometimes|mimes:jpg,jpeg,png|max:2048',
+        //    'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+           'image' => 'nullable',
            'salary' => 'required|numeric',
            'joining_date' => 'required|date',
         ]);

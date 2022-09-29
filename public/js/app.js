@@ -3526,9 +3526,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     fill: false
                   }]
                 };
-                console.log(_this2.totalIncomeCollection);
 
-              case 6:
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -3746,8 +3745,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    errors: function errors() {// console.log('here');
-    },
+    errors: function errors() {},
     onSave: function onSave() {
       var _this = this;
 
@@ -4199,8 +4197,10 @@ __webpack_require__.r(__webpack_exports__);
     deleteItem: function deleteItem() {
       var _this2 = this;
 
-      (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/customers/".concat(this.model.id)).then(function (res) {
+      (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/customers/".concat(this.form.id)).then(function (res) {
         if (res.data.deleted) {
+          _this2.$toaster.success('Party deleted Successfully!');
+
           _this2.$router.push('/customers');
         }
       });
@@ -4323,8 +4323,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    errors: function errors() {// console.log('here');
-    },
+    errors: function errors() {},
     selectImage: function selectImage(e) {
       this.image = e.target.files[0];
       this.previewUrl = URL.createObjectURL(this.image);
@@ -4899,7 +4898,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 2;
                 return (0,_lib_api__WEBPACK_IMPORTED_MODULE_1__.get)("/api/employees/payroll/date").then(function (res) {
                   _this2.form.date = res.data.date;
-                  console.log(_this2.form);
                 });
 
               case 2:
@@ -5047,6 +5045,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'EmployeeEdit',
@@ -5095,6 +5102,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("employee_id", this.form.employee_id);
       formData.append("salary", this.form.salary);
       formData.append("bonus", this.form.bonus);
+      formData.append("advance", this.form.advance);
       formData.append("date", this.form.date);
       formData.append("status", this.form.status);
       axios.post(this.store, formData).then(function (res) {
@@ -5213,12 +5221,12 @@ __webpack_require__.r(__webpack_exports__);
         data: []
       },
       search: '',
-      total_rows: 10
+      total_rows: 10,
+      gobackid: ''
     };
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)("/api/employees/".concat(to.params.id, "/payroll/history/"), to.query).then(function (res) {
-      console.log('Here' + res);
       next(function (vm) {
         return vm.setData(res);
       });
@@ -5291,7 +5299,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     goBack: function goBack(item) {
-      this.$router.push("/employees");
+      this.$router.push("/employees/".concat(this.$route.params.id));
     }
   }
 });
@@ -5429,6 +5437,8 @@ __webpack_require__.r(__webpack_exports__);
 
       (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/payroll/".concat(this.form.id)).then(function (res) {
         if (res.data.deleted) {
+          _this2.$toaster.success('Employee deleted Successfully!');
+
           _this2.$router.push("/employees/".concat(_this2.form.employee_id, "/payroll/history"));
         }
       });
@@ -5580,6 +5590,8 @@ __webpack_require__.r(__webpack_exports__);
 
       (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/employees/".concat(this.form.id)).then(function (res) {
         if (res.data.deleted) {
+          _this2.$toaster.success('Employee deleted Successfully!');
+
           _this2.$router.push('/employees');
         }
       });
@@ -6282,6 +6294,8 @@ __webpack_require__.r(__webpack_exports__);
 
       (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/expenses/".concat(this.model.id)).then(function (res) {
         if (res.data.deleted) {
+          _this2.$toaster.success('Purchase deleted Successfully!');
+
           _this2.$router.push('/expenses');
         }
       });
@@ -6997,6 +7011,8 @@ __webpack_require__.r(__webpack_exports__);
 
       (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/invoices/".concat(this.model.id)).then(function (res) {
         if (res.data.deleted) {
+          _this2.$toaster.success('Invoice deleted Successfully!');
+
           _this2.$router.push('/invoices');
         }
       });
@@ -7534,8 +7550,10 @@ __webpack_require__.r(__webpack_exports__);
     deleteItem: function deleteItem() {
       var _this2 = this;
 
-      (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/items/".concat(this.model.id)).then(function (res) {
+      (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/items/".concat(this.form.id)).then(function (res) {
         if (res.data.deleted) {
+          _this2.$toaster.success('Item deleted Successfully!');
+
           _this2.$router.push('/items');
         }
       });
@@ -8128,8 +8146,10 @@ __webpack_require__.r(__webpack_exports__);
     deleteItem: function deleteItem() {
       var _this = this;
 
-      (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/products/".concat(this.model.id)).then(function (res) {
+      (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/products/".concat(this.form.id)).then(function (res) {
         if (res.data.deleted) {
+          _this.$toaster.success('Particular deleted Successfully!');
+
           _this.$router.push('/products');
         }
       });
@@ -8635,9 +8655,7 @@ __webpack_require__.r(__webpack_exports__);
     console.log(this.$route.name);
   },
   methods: {
-    errors: function errors() {
-      console.log('here');
-    },
+    errors: function errors() {},
     selectImage: function selectImage(e) {
       this.image = e.target.files[0];
       this.previewUrl = URL.createObjectURL(this.image);
@@ -8834,7 +8852,6 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("email", this.form.email);
       formData.append("password", this.form.password);
       formData.append("password_confirmation", this.form.password_confirmation);
-      console.log(this.form, formData);
       (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)(this.method, this.store, formData).then(function (res) {
         if (res.data && res.data.saved) {
           _this2.$toaster.success('User Updated Successfully!');
@@ -9160,6 +9177,8 @@ __webpack_require__.r(__webpack_exports__);
 
       (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/users/".concat(this.form.id)).then(function (res) {
         if (res.data.deleted) {
+          _this2.$toaster.success('User deleted Successfully!');
+
           _this2.$router.push('/users');
         }
       });
@@ -9270,9 +9289,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    errors: function errors() {
-      console.log('here');
-    },
+    errors: function errors() {},
     onSave: function onSave() {
       var _this = this;
 
@@ -9742,8 +9759,10 @@ __webpack_require__.r(__webpack_exports__);
     deleteItem: function deleteItem() {
       var _this2 = this;
 
-      (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/vendors/".concat(this.model.id)).then(function (res) {
+      (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)('delete', "/api/vendors/".concat(this.form.id)).then(function (res) {
         if (res.data.deleted) {
+          _this2.$toaster.success('Vendor deleted Successfully!');
+
           _this2.$router.push('/vendors');
         }
       });
@@ -10262,8 +10281,15 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_44__["default"]({
 router.beforeEach(function (to, from, next) {
   var publicPages = ['/login', '/register'];
   var authRequired = !publicPages.includes(to.path);
-  var loggedIn = localStorage.getItem('token'); // trying to access a restricted page + not logged in
+  var loggedIn = localStorage.getItem('token'); // Redirect to dashboard if already authendticated
+
+  if (publicPages.includes(to.fullPath)) {
+    if (loggedIn) {
+      next('/dashboard');
+    }
+  } // trying to access a restricted page + not logged in
   // redirect to login page
+
 
   if (authRequired && !loggedIn) {
     console.log('reached');
@@ -93369,27 +93395,29 @@ var render = function() {
                     }
                   },
                   [
-                    _c("td", { staticClass: "w-1" }, [_vm._v(_vm._s(item.id))]),
+                    _c("td", { staticClass: "w-1 text-center" }, [
+                      _vm._v(_vm._s(item.id))
+                    ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.firstname))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.lastname))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-5" }, [
+                    _c("td", { staticClass: "w-5 text-center" }, [
                       _vm._v(_vm._s(item.address))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.phone))
                     ]),
                     _vm._v(" "),
                     _c(
                       "td",
-                      { staticClass: "w-3" },
+                      { staticClass: "w-3 text-center" },
                       [
                         _c(
                           "router-link",
@@ -93466,17 +93494,17 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("ID")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("First Name")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("First Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Last Name")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Last Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Address")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Address")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Phone Number")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Phone Number")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Action")])
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
     ])
   }
@@ -94435,38 +94463,40 @@ var render = function() {
                     }
                   },
                   [
-                    _c("td", { staticClass: "w-1" }, [_vm._v(_vm._s(item.id))]),
+                    _c("td", { staticClass: "w-1 text-center" }, [
+                      _vm._v(_vm._s(item.id))
+                    ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.first_name))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.last_name))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-5" }, [
+                    _c("td", { staticClass: "w-5 text-center" }, [
                       _vm._v(_vm._s(item.phone))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-5" }, [
+                    _c("td", { staticClass: "w-5 text-center" }, [
                       _c("img", {
                         staticClass: "figure-img img-fluid img-rounded preview",
                         attrs: { src: item.image, alt: "" }
                       })
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-5" }, [
+                    _c("td", { staticClass: "w-5 text-center" }, [
                       _vm._v(_vm._s(item.address))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-5" }, [
+                    _c("td", { staticClass: "w-5 text-center" }, [
                       _vm._v(_vm._s(item.salary))
                     ]),
                     _vm._v(" "),
                     _c(
                       "td",
-                      { staticClass: "w-3" },
+                      { staticClass: "w-3 text-center" },
                       [
                         _c(
                           "router-link",
@@ -94543,21 +94573,21 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("ID")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("First Name")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("First Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Last Name")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Last Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Phone")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Phone")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Image")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Image")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Address")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Address")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Salary")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Salary")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Action")])
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
     ])
   }
@@ -95061,6 +95091,44 @@ var render = function() {
                     _vm._v(
                       "\n                            " +
                         _vm._s(_vm.errors.bonus[0]) +
+                        "\n                        "
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Advance")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.advance,
+                    expression: "form.advance"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number", placeholder: "Advance" },
+                domProps: { value: _vm.form.advance },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "advance", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.errors.advance
+                ? _c("small", { staticClass: "error-control" }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.advance[0]) +
                         "\n                        "
                     )
                   ])
@@ -96701,25 +96769,27 @@ var render = function() {
                     }
                   },
                   [
-                    _c("td", { staticClass: "w-1" }, [_vm._v(_vm._s(item.id))]),
+                    _c("td", { staticClass: "w-1 text-center" }, [
+                      _vm._v(_vm._s(item.id))
+                    ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.date))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.number))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-5" }, [
+                    _c("td", { staticClass: "w-5 text-center" }, [
                       _vm._v(_vm._s(item.vendor.text))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.due_date))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       item.status == "Paid"
                         ? _c(
                             "span",
@@ -96735,13 +96805,13 @@ var render = function() {
                         : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v("Rs. " + _vm._s(_vm._f("formatMoney")(item.total)))
                     ]),
                     _vm._v(" "),
                     _c(
                       "td",
-                      { staticClass: "w-3" },
+                      { staticClass: "w-3 text-center" },
                       [
                         _c(
                           "router-link",
@@ -96842,21 +96912,21 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("ID")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Date")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Date")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Number")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Number")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Vendor")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Vendor")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Due Date")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Due Date")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Status")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Total")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Total")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Action")])
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
     ])
   }
@@ -97813,25 +97883,27 @@ var render = function() {
                     }
                   },
                   [
-                    _c("td", { staticClass: "w-1" }, [_vm._v(_vm._s(item.id))]),
+                    _c("td", { staticClass: "w-1 text-center" }, [
+                      _vm._v(_vm._s(item.id))
+                    ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.date))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.number))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-5" }, [
+                    _c("td", { staticClass: "w-5 text-center" }, [
                       _vm._v(_vm._s(item.customer.text))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.due_date))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       item.status == "Paid"
                         ? _c(
                             "span",
@@ -97847,13 +97919,13 @@ var render = function() {
                         : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(_vm._f("formatMoney")(item.total)))
                     ]),
                     _vm._v(" "),
                     _c(
                       "td",
-                      { staticClass: "w-3" },
+                      { staticClass: "w-3 text-center" },
                       [
                         _c(
                           "router-link",
@@ -97954,21 +98026,21 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("ID")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Date")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Date")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Number")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Number")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Customer")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Customer")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Due Date")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Due Date")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Status")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Status")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Total")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Total")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Action")])
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
     ])
   }
@@ -99792,31 +99864,33 @@ var render = function() {
                     }
                   },
                   [
-                    _c("td", { staticClass: "w-1" }, [_vm._v(_vm._s(item.id))]),
+                    _c("td", { staticClass: "w-1 text-center" }, [
+                      _vm._v(_vm._s(item.id))
+                    ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.item_code))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-4" }, [
+                    _c("td", { staticClass: "w-4 text-center" }, [
                       _vm._v(_vm._s(item.description))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v("Rs. " + _vm._s(item.unit_price))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.quantity))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.unit))
                     ]),
                     _vm._v(" "),
                     _c(
                       "td",
-                      { staticClass: "w-3" },
+                      { staticClass: "w-3 text-center" },
                       [
                         _c(
                           "router-link",
@@ -99893,19 +99967,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("ID")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Item Code")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Item Code")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Description")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Description")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Unit Price")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Unit Price")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Quantity")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Quantity")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Unit")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Unit")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Action")])
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
     ])
   }
@@ -100571,19 +100645,21 @@ var render = function() {
                   }
                 },
                 [
-                  _c("td", { staticClass: "w-1" }, [_vm._v(_vm._s(item.id))]),
+                  _c("td", { staticClass: "w-1 text-center" }, [
+                    _vm._v(_vm._s(item.id))
+                  ]),
                   _vm._v(" "),
-                  _c("td", { staticClass: "w-3" }, [
+                  _c("td", { staticClass: "w-3 text-center" }, [
                     _vm._v(_vm._s(item.title))
                   ]),
                   _vm._v(" "),
-                  _c("td", { staticClass: "w-3" }, [
+                  _c("td", { staticClass: "w-3 text-center" }, [
                     _vm._v(_vm._s(item.description))
                   ]),
                   _vm._v(" "),
                   _c(
                     "td",
-                    { staticClass: "w-3" },
+                    { staticClass: "w-3 text-center" },
                     [
                       _c(
                         "router-link",
@@ -100613,13 +100689,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("ID")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Name")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Description")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Description")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Action")])
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
     ])
   }
@@ -102405,31 +102481,33 @@ var render = function() {
                     }
                   },
                   [
-                    _c("td", { staticClass: "w-1" }, [_vm._v(_vm._s(item.id))]),
+                    _c("td", { staticClass: "w-1 text-center" }, [
+                      _vm._v(_vm._s(item.id))
+                    ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.firstname))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.lastname))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.vendor_name))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-5" }, [
+                    _c("td", { staticClass: "w-5 text-center" }, [
                       _vm._v(_vm._s(item.address))
                     ]),
                     _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
+                    _c("td", { staticClass: "w-3 text-center" }, [
                       _vm._v(_vm._s(item.phone))
                     ]),
                     _vm._v(" "),
                     _c(
                       "td",
-                      { staticClass: "w-3" },
+                      { staticClass: "w-3 text-center" },
                       [
                         _c(
                           "router-link",
@@ -102506,19 +102584,19 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("ID")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", [_vm._v("First Name")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("First Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Last Name")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Last Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Vendor Name")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Vendor Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Address")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Address")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Phone Number")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Phone Number")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Action")])
+        _c("th", { staticClass: "text-center" }, [_vm._v("Action")])
       ])
     ])
   }

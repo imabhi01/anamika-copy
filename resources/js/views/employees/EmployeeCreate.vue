@@ -101,7 +101,6 @@
         },
         methods:{
             errors(){
-                // console.log('here');
             },
             selectImage(e){
                 this.image = e.target.files[0]

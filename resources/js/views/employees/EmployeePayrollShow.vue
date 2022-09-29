@@ -115,6 +115,7 @@
                 byMethod('delete', `/api/payroll/${this.form.id}`)
                     .then((res) => {
                         if(res.data.deleted) {
+                            this.$toaster.success('Employee deleted Successfully!')
                             this.$router.push(`/employees/${this.form.employee_id}/payroll/history`)
                         }
                     })

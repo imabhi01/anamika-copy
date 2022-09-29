@@ -131,6 +131,7 @@
                 byMethod('delete', `/api/expenses/${this.model.id}`)
                     .then((res) => {
                         if(res.data.deleted) {
+                            this.$toaster.success('Purchase deleted Successfully!')
                             this.$router.push('/expenses')
                         }
                     })

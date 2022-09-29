@@ -109,6 +109,7 @@
                 byMethod('delete', `/api/users/${this.form.id}`)
                     .then((res) => {
                         if(res.data.deleted) {
+                            this.$toaster.success('User deleted Successfully!')
                             this.$router.push('/users')
                         }
                     })

@@ -17,8 +17,7 @@ class PayrollController extends Controller
     }
 
     public function getPayrollHistory($id){
-        $payrolls = Payroll::where('employee_id', $id)->with('employee')->paginate(10);
-
+        $payrolls = Payroll::where('employee_id', $id)->with('employee')->latest()->paginate(10);
         return response()->json(['results' => $payrolls]);
     }
 

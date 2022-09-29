@@ -73,14 +73,14 @@ export default {
                 data: []
             },
             search: '',
-            total_rows: 10
+            total_rows: 10,
+            gobackid: ''
         }
     },
     beforeRouteEnter(to, from, next) {
         get(`/api/employees/${to.params.id}/payroll/history/`, to.query)
             .then((res) => {
-                console.log('Here' + res);
-                next(vm => vm.setData(res))
+                next(vm => vm.setData(res) )
             })
     },
     beforeRouteUpdate(to, from, next) {
@@ -142,7 +142,7 @@ export default {
             }
         },
         goBack(item) {
-            this.$router.push(`/employees`)
+            this.$router.push(`/employees/${this.$route.params.id}`)
         },
     }
 }

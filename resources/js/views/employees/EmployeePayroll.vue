@@ -125,7 +125,6 @@
                 await get(`/api/employees/payroll/date`)
                 .then((res) => {
                     this.form.date = res.data.date
-                    console.log(this.form);
                 })
             },
             setData(res) {

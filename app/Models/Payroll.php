@@ -11,7 +11,7 @@ class Payroll extends Model
 {
     use HasFactory, NepaliDateConverter;
 
-    protected $guarded = [];
+    private $month_name = array('ब‌ैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मङ्सिर', 'पुस', 'माघ', 'फाल्गुण', 'चैत');
 
     protected $fillable = [
         'employee_id', 'date', 'salary', 'bonus', 'status'
@@ -27,7 +27,6 @@ class Payroll extends Model
     }
 
     public function getNepaliMonthAttribute($value) {
-        $date = $this->get_nepali_date(date("Y", strtotime($value)), date("m", strtotime($value)), date("d", strtotime($value)));
-        return $date['M']; 
+       return $this->month_name[intVal(date('m', strtotime($this->date)))-1];
     }
 }

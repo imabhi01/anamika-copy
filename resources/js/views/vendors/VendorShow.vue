@@ -96,9 +96,10 @@
                 this.$bar.finish()
             },
             deleteItem() {
-                byMethod('delete', `/api/vendors/${this.model.id}`)
+                byMethod('delete', `/api/vendors/${this.form.id}`)
                     .then((res) => {
                         if(res.data.deleted) {
+                            this.$toaster.success('Vendor deleted Successfully!')
                             this.$router.push('/vendors')
                         }
                     })

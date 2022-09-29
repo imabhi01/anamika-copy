@@ -16,24 +16,24 @@
                 <table class="table table-link">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Item Code</th>
-                            <th>Description</th>
-                            <th>Unit Price</th>
-                            <th>Quantity</th>
-                            <th>Unit</th>
-                            <th>Action</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Item Code</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Unit Price</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Unit</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="item in model.data" :key="item.data" @click="detailsPage(item)">
-                            <td class="w-1">{{item.id}}</td>
-                            <td class="w-3">{{item.item_code}}</td>
-                            <td class="w-4">{{item.description}}</td>
-                            <td class="w-3">Rs. {{item.unit_price}}</td>
-                            <td class="w-3">{{item.quantity}}</td>
-                            <td class="w-3">{{item.unit}}</td>
-                            <td class="w-3">
+                            <td class="w-1 text-center">{{item.id}}</td>
+                            <td class="w-3 text-center">{{item.item_code}}</td>
+                            <td class="w-4 text-center">{{item.description}}</td>
+                            <td class="w-3 text-center">Rs. {{item.unit_price}}</td>
+                            <td class="w-3 text-center">{{item.quantity}}</td>
+                            <td class="w-3 text-center">{{item.unit}}</td>
+                            <td class="w-3 text-center">
                                 <router-link :to="`/products/${item.id}`" class="btn">Show</router-link>
                             </td>
                         </tr>

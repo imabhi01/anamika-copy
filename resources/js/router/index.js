@@ -317,6 +317,14 @@ router.beforeEach((to, from, next) => {
     const publicPages = ['/login', '/register'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem('token');
+
+    // Redirect to dashboard if already authendticated
+    if(publicPages.includes(to.fullPath)){
+        if(loggedIn){
+            next('/dashboard')
+        }
+    }
+
     // trying to access a restricted page + not logged in
     // redirect to login page
     if (authRequired && !loggedIn) {

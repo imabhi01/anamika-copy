@@ -16,7 +16,7 @@ class Employee extends Model
 
     public function getImageAttribute($image)
     {
-        return asset(\Storage::url($image ?: 'public/uploads/default.png'));
+        return asset(\Storage::url($image ?: 'public/uploads/default.jpg'));
     }
 
     public function payrolls(){
