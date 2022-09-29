@@ -113,20 +113,23 @@
                             <button class="btn btn-success" @click="addNewLine"> <i class="fa fa-plus-square"></i> Add New Product</button>
                         </td>
                         <td class="form-summary">Sub Total</td>
-                        <td>{{subTotal | formatMoney}}</td>
+                        <td>Rs. {{subTotal | formatMoney}}</td>
                     </tr>
                     <tr>
                         <td colspan="3" class="form-summary">Discount (%)</td>
                         <td>
-                            <input type="number" class="form-control" v-model="form.discount">
+                            <input type="number" class="form-control" v-model="form.discount" @keyup="discountedValue()">
                             <small class="form-control" v-if="errors.discount">
                                 {{errors.discount[0]}}
+                            </small>
+                            <small v-if="discountValue">
+                                Discount Value : Rs. {{ discountValue }}
                             </small>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" class="form-summary">Grand Total</td>
-                        <td>{{total | formatMoney}}</td>
+                        <td>Rs. {{total | formatMoney}}</td>
                     </tr>
                 </tfoot>
             </table>
@@ -182,7 +185,10 @@
         components: { Typeahead},
         data () {
             return {
-                form: {},
+                form: {
+                    status: ''
+                },
+                discountValue:'',
                 errors: {},
                 isProcessing: false,
                 show: false,
@@ -207,6 +213,9 @@
                     this.setData(res)
                     next()
                 })
+        },
+        mounted(){
+            this.form.status = "Paid"
         },
         computed: {
             subTotal() {
@@ -252,6 +261,9 @@
             },
             removeItem(index) {
                 this.form.items.splice(index, 1)
+            },
+            discountedValue(){
+                this.discountValue = (this.subTotal * Number(this.form.discount)) / 100
             },
             onCancel() {
                 if(this.$route.meta.mode === 'edit') {

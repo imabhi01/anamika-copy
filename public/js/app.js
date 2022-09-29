@@ -4004,6 +4004,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -5782,6 +5784,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -5801,7 +5806,10 @@ function initialize(to) {
   },
   data: function data() {
     return {
-      form: {},
+      form: {
+        status: ''
+      },
+      discountValue: '',
       errors: {},
       isProcessing: false,
       show: false,
@@ -5829,6 +5837,9 @@ function initialize(to) {
 
       next();
     });
+  },
+  mounted: function mounted() {
+    this.form.status = "Paid";
   },
   computed: {
     subTotal: function subTotal() {
@@ -5874,6 +5885,9 @@ function initialize(to) {
     },
     removeItem: function removeItem(index) {
       this.form.items.splice(index, 1);
+    },
+    discountedValue: function discountedValue() {
+      this.discountValue = this.subTotal * Number(this.form.discount) / 100;
     },
     onCancel: function onCancel() {
       if (this.$route.meta.mode === 'edit') {
@@ -6497,6 +6511,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -6517,8 +6534,9 @@ function initialize(to) {
   data: function data() {
     return {
       form: {
-        status: 'Select Status'
+        status: ''
       },
+      discountValue: '',
       errors: {},
       isProcessing: false,
       show: false,
@@ -6546,6 +6564,9 @@ function initialize(to) {
 
       next();
     });
+  },
+  mounted: function mounted() {
+    this.form.status = 'Paid';
   },
   computed: {
     subTotal: function subTotal() {
@@ -6603,6 +6624,9 @@ function initialize(to) {
       }
 
       this.form.items.splice(index, 1);
+    },
+    discountedValue: function discountedValue() {
+      this.discountValue = this.subTotal * Number(this.form.discount) / 100;
     },
     onCancel: function onCancel() {
       if (this.$route.meta.mode === 'edit') {
@@ -93407,12 +93431,16 @@ var render = function() {
                       _vm._v(_vm._s(item.lastname))
                     ]),
                     _vm._v(" "),
+                    _c("td", { staticClass: "w-3 text-center" }, [
+                      _vm._v(_vm._s(item.email ? item.email : "N/A"))
+                    ]),
+                    _vm._v(" "),
                     _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.address))
+                      _vm._v(_vm._s(item.address ? item.address : "N/A"))
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.phone))
+                      _vm._v(_vm._s(item.phone ? item.phone : "N/A"))
                     ]),
                     _vm._v(" "),
                     _c(
@@ -93499,6 +93527,8 @@ var staticRenderFns = [
         _c("th", { staticClass: "text-center" }, [_vm._v("First Name")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Last Name")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Email")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Address")]),
         _vm._v(" "),
@@ -93914,41 +93944,35 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-8" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Joining Date")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", [_vm._v("Joining Date")]),
+                _vm._v(" "),
+                _c("v-nepalidatepicker", {
+                  attrs: { classValue: "form-control" },
+                  model: {
                     value: _vm.form.joining_date,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form, "joining_date", $$v)
+                    },
                     expression: "form.joining_date"
                   }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "date", placeholder: "Joining Date" },
-                domProps: { value: _vm.form.joining_date },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.form, "joining_date", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.errors.joining_date
-                ? _c("small", { staticClass: "error-control" }, [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(_vm.errors.joining_date[0]) +
-                        "\n                        "
-                    )
-                  ])
-                : _vm._e()
-            ])
+                }),
+                _vm._v(" "),
+                _vm.errors.joining_date
+                  ? _c("small", { staticClass: "error-control" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.errors.joining_date[0]) +
+                          "\n                        "
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              1
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-8" }, [
@@ -94241,45 +94265,39 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-8" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [
-                  _vm._v(
-                    "\n                                Joining Date\n                            "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
+              _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _c("label", [
+                    _vm._v(
+                      "\n                                Joining Date\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("v-nepalidatepicker", {
+                    attrs: { classValue: "form-control" },
+                    model: {
                       value: _vm.form.joining_date,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "joining_date", $$v)
+                      },
                       expression: "form.joining_date"
                     }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "date", placeholder: "Joining Date" },
-                  domProps: { value: _vm.form.joining_date },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "joining_date", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm.errors.joining_date
-                  ? _c("small", { staticClass: "error-control" }, [
-                      _vm._v(
-                        "\n                                " +
-                          _vm._s(_vm.errors.joining_date[0]) +
-                          "\n                            "
-                      )
-                    ])
-                  : _vm._e()
-              ])
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.joining_date
+                    ? _c("small", { staticClass: "error-control" }, [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.errors.joining_date[0]) +
+                            "\n                            "
+                        )
+                      ])
+                    : _vm._e()
+                ],
+                1
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-8" }, [
@@ -94468,15 +94486,15 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.first_name))
+                      _vm._v(_vm._s(item.first_name ? item.first_name : "N/A"))
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.last_name))
+                      _vm._v(_vm._s(item.last_name ? item.last_name : "N/A"))
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.phone))
+                      _vm._v(_vm._s(item.phone ? item.phone : "N/A"))
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "w-5 text-center" }, [
@@ -94487,11 +94505,11 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.address))
+                      _vm._v(_vm._s(item.address ? item.address : "N/A"))
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.salary))
+                      _vm._v(_vm._s(item.salary ? item.salary : "N/A"))
                     ]),
                     _vm._v(" "),
                     _c(
@@ -96448,7 +96466,9 @@ var render = function() {
                   _vm._v("Sub Total")
                 ]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(_vm._f("formatMoney")(_vm.subTotal)))])
+                _c("td", [
+                  _vm._v("Rs. " + _vm._s(_vm._f("formatMoney")(_vm.subTotal)))
+                ])
               ]),
               _vm._v(" "),
               _c("tr", [
@@ -96472,6 +96492,9 @@ var render = function() {
                     attrs: { type: "number" },
                     domProps: { value: _vm.form.discount },
                     on: {
+                      keyup: function($event) {
+                        return _vm.discountedValue()
+                      },
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -96489,6 +96512,16 @@ var render = function() {
                             "\n                        "
                         )
                       ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.discountValue
+                    ? _c("small", [
+                        _vm._v(
+                          "\n                            Discount Value : Rs. " +
+                            _vm._s(_vm.discountValue) +
+                            "\n                        "
+                        )
+                      ])
                     : _vm._e()
                 ])
               ]),
@@ -96500,7 +96533,9 @@ var render = function() {
                   [_vm._v("Grand Total")]
                 ),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(_vm._f("formatMoney")(_vm.total)))])
+                _c("td", [
+                  _vm._v("Rs. " + _vm._s(_vm._f("formatMoney")(_vm.total)))
+                ])
               ])
             ])
           ]),
@@ -97085,15 +97120,29 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v(_vm._s(_vm._f("formatMoney")(_vm.model.sub_total)))
+                      _vm._v(
+                        "Rs. " +
+                          _vm._s(_vm._f("formatMoney")(_vm.model.sub_total))
+                      )
                     ])
                   ]),
                   _vm._v(" "),
                   _c("tr", [
-                    _c("td", { attrs: { colspan: "4" } }, [_vm._v("Discount")]),
+                    _c("td", { attrs: { colspan: "4" } }, [
+                      _vm._v(
+                        "Discount ( " + _vm._s(_vm.model.discount) + "% ) "
+                      )
+                    ]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v(_vm._s(_vm._f("formatMoney")(_vm.model.discount)))
+                      _vm._v(
+                        "Rs. " +
+                          _vm._s(
+                            _vm._f("formatMoney")(
+                              (_vm.model.sub_total * _vm.model.discount) / 100
+                            )
+                          )
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -97103,7 +97152,9 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v(_vm._s(_vm._f("formatMoney")(_vm.model.total)))
+                      _vm._v(
+                        "Rs. " + _vm._s(_vm._f("formatMoney")(_vm.model.total))
+                      )
                     ])
                   ])
                 ])
@@ -97523,7 +97574,9 @@ var render = function() {
                   _vm._v("Sub Total")
                 ]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(_vm._f("formatMoney")(_vm.subTotal)))])
+                _c("td", [
+                  _vm._v("Rs. " + _vm._s(_vm._f("formatMoney")(_vm.subTotal)))
+                ])
               ]),
               _vm._v(" "),
               _c("tr", [
@@ -97547,6 +97600,9 @@ var render = function() {
                     attrs: { type: "number" },
                     domProps: { value: _vm.form.discount },
                     on: {
+                      keyup: function($event) {
+                        return _vm.discountedValue()
+                      },
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -97561,6 +97617,16 @@ var render = function() {
                         _vm._v(
                           "\n                            " +
                             _vm._s(_vm.errors.discount[0]) +
+                            "\n                        "
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.discountValue
+                    ? _c("small", [
+                        _vm._v(
+                          "\n                            Discount Value : Rs. " +
+                            _vm._s(_vm.discountValue) +
                             "\n                        "
                         )
                       ])
@@ -97617,7 +97683,9 @@ var render = function() {
                   [_vm._v("Grand Total")]
                 ),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(_vm._f("formatMoney")(_vm.total)))])
+                _c("td", [
+                  _vm._v("Rs. " + _vm._s(_vm._f("formatMoney")(_vm.total)))
+                ])
               ])
             ])
           ]),
@@ -98215,11 +98283,18 @@ var render = function() {
                   _vm._v(" "),
                   _c("tr", [
                     _c("td", { attrs: { colspan: "4" } }, [
-                      _vm._v("Discount (%)")
+                      _vm._v("Discount ( " + _vm._s(_vm.model.discount) + "% )")
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v(_vm._s(_vm._f("formatMoney")(_vm.model.discount)))
+                      _vm._v(
+                        "Rs. " +
+                          _vm._s(
+                            _vm._f("formatMoney")(
+                              (_vm.model.sub_total * _vm.model.discount) / 100
+                            )
+                          )
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -102494,15 +102569,17 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.vendor_name))
+                      _vm._v(
+                        _vm._s(item.vendor_name ? item.vendor_name : "N/A")
+                      )
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.address))
+                      _vm._v(_vm._s(item.address ? item.address : "N/A"))
                     ]),
                     _vm._v(" "),
                     _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.phone))
+                      _vm._v(_vm._s(item.phone ? item.phone : "N/A"))
                     ]),
                     _vm._v(" "),
                     _c(

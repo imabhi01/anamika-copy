@@ -30,14 +30,14 @@
                     <tbody>
                         <tr v-for="item in model.data" :key="item.data" @click="detailsPage(item)">
                             <td class="w-1 text-center">{{item.id}}</td>
-                            <td class="w-3 text-center">{{item.first_name}}</td>
-                            <td class="w-3 text-center">{{item.last_name}}</td>
-                            <td class="w-5 text-center">{{item.phone}}</td>
+                            <td class="w-3 text-center">{{item.first_name ? item.first_name : 'N/A'}}</td>
+                            <td class="w-3 text-center">{{item.last_name ? item.last_name : 'N/A'}}</td>
+                            <td class="w-5 text-center">{{item.phone ? item.phone : 'N/A'}}</td>
                             <td class="w-5 text-center">
                                 <img :src="item.image" class="figure-img img-fluid img-rounded preview" alt="">
                             </td>
-                            <td class="w-5 text-center">{{item.address}}</td>
-                            <td class="w-5 text-center">{{item.salary}}</td>
+                            <td class="w-5 text-center">{{item.address ? item.address : 'N/A'}}</td>
+                            <td class="w-5 text-center">{{item.salary ? item.salary : 'N/A'}}</td>
                             <td class="w-3 text-center">
                                 <router-link :to="`/employees/${item.id}`" class="btn">Show</router-link>
                             </td>

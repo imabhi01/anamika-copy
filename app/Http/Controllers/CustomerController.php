@@ -50,9 +50,9 @@ class CustomerController extends Controller
         $request->validate([
            'firstname' => 'required',
            'lastname' => 'required',
-           'email' => 'required|email|unique:customers',
-           'phone' => 'required|numeric|digits:10',
-           'address' => 'required',
+           'email' => 'nullable|email|unique:customers',
+           'phone' => 'nullable|numeric|digits:10',
+           'address' => 'nullable',
         ]);
 
         $customer = Customer::create($request->all());

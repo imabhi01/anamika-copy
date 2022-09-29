@@ -80,7 +80,7 @@ export default {
     beforeRouteEnter(to, from, next) {
         get(`/api/employees/${to.params.id}/payroll/history/`, to.query)
             .then((res) => {
-                next(vm => vm.setData(res) )
+                next(vm => vm.setData(res))
             })
     },
     beforeRouteUpdate(to, from, next) {

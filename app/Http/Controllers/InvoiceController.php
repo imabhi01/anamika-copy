@@ -138,7 +138,6 @@ class InvoiceController extends Controller
                 ]
             ],
             'status' => 'Select Status'
-
         ];
 
         return response()

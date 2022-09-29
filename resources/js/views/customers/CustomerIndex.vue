@@ -20,6 +20,7 @@
                             <th class="text-center">ID</th>
                             <th class="text-center">First Name</th>
                             <th class="text-center">Last Name</th>
+                            <th class="text-center">Email</th>
                             <th class="text-center">Address</th>
                             <th class="text-center">Phone Number</th>
                             <th class="text-center">Action</th>
@@ -30,8 +31,9 @@
                             <td class="w-1 text-center">{{item.id}}</td>
                             <td class="w-3 text-center">{{item.firstname}}</td>
                             <td class="w-3 text-center">{{item.lastname}}</td>
-                            <td class="w-5 text-center">{{item.address}}</td>
-                            <td class="w-3 text-center">{{item.phone}}</td>
+                            <td class="w-3 text-center">{{item.email ? item.email : 'N/A'}}</td>
+                            <td class="w-5 text-center">{{item.address ? item.address : 'N/A'}}</td>
+                            <td class="w-3 text-center">{{item.phone ? item.phone : 'N/A'}}</td>
                             <td class="w-3 text-center">
                                 <router-link :to="`/customers/${item.id}`" class="btn">Show</router-link>
                             </td>

@@ -31,9 +31,9 @@
                             <td class="w-1 text-center">{{item.id}}</td>
                             <td class="w-3 text-center">{{item.firstname}}</td>
                             <td class="w-3 text-center">{{item.lastname}}</td>
-                            <td class="w-3 text-center">{{item.vendor_name}}</td>
-                            <td class="w-5 text-center">{{item.address}}</td>
-                            <td class="w-3 text-center">{{item.phone}}</td>
+                            <td class="w-3 text-center">{{item.vendor_name ? item.vendor_name : 'N/A'}}</td>
+                            <td class="w-5 text-center">{{item.address ? item.address : 'N/A'}}</td>
+                            <td class="w-3 text-center">{{item.phone ? item.phone : 'N/A'}}</td>
                             <td class="w-3 text-center">
                                 <router-link :to="`/vendors/${item.id}`" class="btn">Show</router-link>
                             </td>

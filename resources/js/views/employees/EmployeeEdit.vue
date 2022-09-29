@@ -54,7 +54,7 @@
                                 <label>
                                     Joining Date
                                 </label>
-                                <input type="date" class="form-control" v-model="form.joining_date" placeholder="Joining Date">
+                                <v-nepalidatepicker classValue="form-control" v-model="form.joining_date" />
                                 <small class="error-control" v-if="errors.joining_date">
                                     {{errors.joining_date[0]}}
                                 </small>

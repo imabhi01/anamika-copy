@@ -75,8 +75,8 @@
                                 <td>Rs. {{model.sub_total | formatMoney}}</td>
                             </tr>
                             <tr>
-                                <td colspan="4">Discount (%)</td>
-                                <td>{{model.discount | formatMoney}}</td>
+                                <td colspan="4">Discount ( {{model.discount}}% )</td>
+                                <td>Rs. {{(model.sub_total*model.discount)/100 | formatMoney}}</td>
                             </tr>
                             <tr>
                                 <td colspan="4">Grand Total</td>
