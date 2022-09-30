@@ -5216,6 +5216,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -95390,65 +95393,80 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.model.data, function(item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.data,
-                    on: {
-                      click: function($event) {
-                        return _vm.detailsPage(item)
+              [
+                _vm._l(_vm.model.data, function(item, index) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.data,
+                      on: {
+                        click: function($event) {
+                          return _vm.detailsPage(item)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("td", { staticClass: "w-1 text-center" }, [
-                      _vm._v(_vm._s(item.id))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(
-                        _vm._s(item.employee.first_name) +
-                          " " +
-                          _vm._s(item.employee.last_name)
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.nepaliMonth))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.salary))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.bonus))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.status))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "w-3" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn",
-                            attrs: { to: "/payroll/" + item.id + "/show" }
-                          },
-                          [_vm._v("Show")]
+                    },
+                    [
+                      _c("td", { staticClass: "w-1 text-center" }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(
+                          _vm._s(item.employee.first_name) +
+                            " " +
+                            _vm._s(item.employee.last_name)
                         )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              }),
-              0
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.nepaliMonth))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5 text-center" }, [
+                        _vm._v(_vm._s(item.salary))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5 text-center" }, [
+                        _vm._v(_vm._s(item.bonus))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5 text-center" }, [
+                        _vm._v(_vm._s(item.status))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "w-3" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn",
+                              attrs: { to: "/payroll/" + item.id + "/show" }
+                            },
+                            [_vm._v("Show")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                !_vm.model.data.length
+                  ? _c("tr", { staticClass: "text-center" }, [
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          attrs: { colspan: "100%" }
+                        },
+                        [_vm._v("No Records Found")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
             )
           ])
         ],

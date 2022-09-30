@@ -25,8 +25,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in model.data" :key="item.data" @click="detailsPage(item)">
-                            <td class="w-1 text-center">{{item.id}}</td>
+                        <tr v-for="(item, index) in model.data" :key="item.data" @click="detailsPage(item)">
+                            <td class="w-1 text-center">{{index+1}}</td>
                             <td class="w-3 text-center">{{item.employee.first_name}} {{item.employee.last_name}}</td>
                             <td class="w-3 text-center">{{item.nepaliMonth}}</td>
                             <td class="w-5 text-center">{{item.salary}}</td>
@@ -35,6 +35,9 @@
                             <td class="w-3">
                                 <router-link :to="`/payroll/${item.id}/show`" class="btn">Show</router-link>
                             </td>
+                        </tr>
+                        <tr v-if="!model.data.length" class="text-center">
+                            <td colspan = "100%" class="text-center">No Records Found</td>
                         </tr>
                     </tbody>
                 </table>
