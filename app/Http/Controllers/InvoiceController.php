@@ -18,6 +18,7 @@ class InvoiceController extends Controller
     private $totalTurnOver;
     private $paidTurnOver;
     private $unPaidTurnOver;
+    private $totalRows = 10;
 
     public function __construct(){
         $this->totalTurnOver = round(Invoice::sum('total'), 2);
@@ -27,8 +28,12 @@ class InvoiceController extends Controller
 
     public function index()
     {
+        if(request('total_rows')){
+            $this->totalRows = request('total_rows');
+        }
+
         $results = Invoice::latest()->with(['customer'])
-        ->paginate(15);
+        ->paginate($this->totalRows);
 
         return response()
         ->json([
@@ -39,16 +44,16 @@ class InvoiceController extends Controller
         ]);
     }
 
-    public function totalRows(){
-        $results = Invoice::latest()->with(['customer'])->paginate(request('total_rows'));
-        return response()
-            ->json([
-                'results' => $results,
-                'totalTurnOver' => $this->totalTurnOver, 
-                'paidTurnOver' => $this->paidTurnOver,
-                'unPaidTurnOver' => $this->unPaidTurnOver
-            ]);
-    }
+    // public function totalRows(){
+    //     $results = Invoice::latest()->with(['customer'])->paginate(request('total_rows'));
+    //     return response()
+    //         ->json([
+    //             'results' => $results,
+    //             'totalTurnOver' => $this->totalTurnOver, 
+    //             'paidTurnOver' => $this->paidTurnOver,
+    //             'unPaidTurnOver' => $this->unPaidTurnOver
+    //         ]);
+    // }
 
     public function liveSearch(){
 

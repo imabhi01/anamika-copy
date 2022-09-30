@@ -37,4 +37,18 @@ class Invoice extends Model
         $discount = $this->attributes['discount'];
         $this->attributes['total'] = $value - (($value * $discount) / 100);
     }
+
+    public function scopeSearch($query)
+    {
+        $term = "%". request('q') ."%";
+
+        $query->join('customers', 'invoices.customer_id', 'customers.id')
+            ->where(function ($query) use ($term) {
+                $query->where('firstname', 'like', $term)
+                    ->orWhere('lastname', 'like', $term)
+                    ->orWhere('number', 'like', $term)
+                    ->paginate(request('total_rows')
+            );
+        });
+    }
 }

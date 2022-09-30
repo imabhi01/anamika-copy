@@ -6812,11 +6812,23 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    // getRows(event) {
+    //     this.total_rows = event.target.value
+    //     console.log(this.total_rows);
+    //     axios.get('/api/invoices/get/total_rows', {params: { total_rows : this.total_rows}})
+    //         .then(res => {
+    //             this.setData(res)
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //         });
+    // },
     getRows: function getRows(event) {
       var _this2 = this;
 
       this.total_rows = event.target.value;
-      axios.get('/api/invoices/get/total_rows', {
+      console.log(this.total_rows);
+      axios.get('/api/invoices', {
         params: {
           total_rows: this.total_rows
         }
@@ -91862,12 +91874,28 @@ var render = function() {
             _c("label", { attrs: { for: "search" } }, [_vm._v("Search")]),
             _vm._v(" "),
             _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model.lazy",
+                  value: _vm.search,
+                  expression: "search",
+                  modifiers: { lazy: true }
+                }
+              ],
               staticClass: "form-control",
-              attrs: { type: "text", name: "Search", placeholder: "Search" },
+              attrs: {
+                type: "search",
+                name: "Search",
+                placeholder: "Search by name, phone..."
+              },
               domProps: { value: _vm.search },
               on: {
                 keyup: function($event) {
                   return _vm.$emit("liveSearch", $event)
+                },
+                change: function($event) {
+                  _vm.search = $event.target.value
                 }
               }
             })
@@ -92544,11 +92572,15 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
           _c("div", { staticClass: "col-sm-12" }, [
-            _c("label", { attrs: { for: "search" } }, [_vm._v("Search")]),
+            _c("label", { attrs: { for: "search" } }, [_vm._v("Search New")]),
             _vm._v(" "),
             _c("input", {
               staticClass: "form-control",
-              attrs: { type: "text", name: "Search", placeholder: "Search" },
+              attrs: {
+                type: "text",
+                name: "Search",
+                placeholder: "Search by name, phone..."
+              },
               domProps: { value: _vm.search },
               on: {
                 keyup: function($event) {

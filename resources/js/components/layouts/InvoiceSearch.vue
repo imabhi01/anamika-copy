@@ -45,7 +45,7 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <label for="search">Search</label>
-                    <input type="text" name="Search" :value="search" @keyup="$emit('liveSearch', $event)" class="form-control" placeholder="Search">
+                    <input type="search" name="Search" v-model.lazy="search" @keyup="$emit('liveSearch', $event)" class="form-control" placeholder="Search by name, phone...">
                 </div>
             </div>
         </div>

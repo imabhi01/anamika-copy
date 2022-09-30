@@ -117,9 +117,21 @@
                 })
         },
         methods: {
+            // getRows(event) {
+            //     this.total_rows = event.target.value
+            //     console.log(this.total_rows);
+            //     axios.get('/api/invoices/get/total_rows', {params: { total_rows : this.total_rows}})
+            //         .then(res => {
+            //             this.setData(res)
+            //         })
+            //         .catch(error => {
+            //             console.log(error)
+            //         });
+            // },
             getRows(event) {
                 this.total_rows = event.target.value
-                axios.get('/api/invoices/get/total_rows', {params: { total_rows : this.total_rows}})
+                console.log(this.total_rows);
+                axios.get('/api/invoices', {params: { total_rows : this.total_rows}})
                     .then(res => {
                         this.setData(res)
                     })
