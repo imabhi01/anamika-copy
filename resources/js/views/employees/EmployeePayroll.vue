@@ -20,7 +20,7 @@
                     <div class="col-8">
                         <div class="form-group">
                             <label>Date</label>
-                            <v-nepalidatepicker classValue="form-control" @change="$emit('getFirstDate', $event)" v-model="form.date" placeholder="Date"/>
+                            <v-nepalidatepicker classValue="form-control" @change="$emit('getFirstDate', $event)" v-model="form.date" placeholder="Date" calenderType="Nepali" :monthSelect="false" :yearSelect="false"/>
                             <small class="error-control" v-if="errors.date">
                                 {{errors.date[0]}}
                             </small>

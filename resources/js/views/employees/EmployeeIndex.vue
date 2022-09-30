@@ -28,8 +28,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in model.data" :key="item.data" @click="detailsPage(item)">
-                            <td class="w-1 text-center">{{item.id}}</td>
+                        <tr v-for="(item, index) in model.data" :key="item.data" @click="detailsPage(item)">
+                            <td class="w-1 text-center">{{index+1}}</td>
                             <td class="w-3 text-center">{{item.first_name ? item.first_name : 'N/A'}}</td>
                             <td class="w-3 text-center">{{item.last_name ? item.last_name : 'N/A'}}</td>
                             <td class="w-5 text-center">{{item.phone ? item.phone : 'N/A'}}</td>
@@ -41,6 +41,9 @@
                             <td class="w-3 text-center">
                                 <router-link :to="`/employees/${item.id}`" class="btn">Show</router-link>
                             </td>
+                        </tr>
+                        <tr v-if="!model.data.length" class="text-center">
+                            <td colspan = "100%" class="text-center">No Records Found</td>
                         </tr>
                     </tbody>
                 </table>

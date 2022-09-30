@@ -60,6 +60,7 @@
                             <label>
                                 Joining Date
                             </label>
+                            
                             <input type="date" class="form-control" disabled v-model="form.joining_date" placeholder="Joining Date">
                             <small class="error-control" v-if="errors.joining_date">
                                 {{errors.joining_date[0]}}

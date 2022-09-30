@@ -24,12 +24,12 @@
 
             <div class="form-group">
                 <label>First Date :</label>
-                <v-nepalidatepicker classValue="form-control" :value="firstDate" @change="$emit('getFirstDate', $event)" v-model="first_date" placeholder="First Date"/>
+                <v-nepalidatepicker classValue="form-control" :value="firstDate" @change="$emit('getFirstDate', $event)" v-model="first_date" placeholder="First Date" calenderType="Nepali" :monthSelect="false" :yearSelect="false"/>
             </div>
 
             <div class="form-group">
                 <label>Second Date :</label>
-                <v-nepalidatepicker classValue="form-control" :value="secondDate" @change="$emit('getSecondDate', $event)" v-model="second_date" placeholder="Second Date"/>
+                <v-nepalidatepicker classValue="form-control" :value="secondDate" @change="$emit('getSecondDate', $event)" v-model="second_date" placeholder="Second Date" calenderType="Nepali" :monthSelect="false" :yearSelect="false"/>
             </div>
 
             <div class="form-group">

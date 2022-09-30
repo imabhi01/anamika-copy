@@ -38,6 +38,9 @@
                                 <router-link :to="`/users/${item.id}`" class="btn">Show</router-link>
                             </td>
                         </tr>
+                        <tr v-if="!model.data.length" class="text-center">
+                            <td colspan = "100%" class="text-center">No Records Found</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

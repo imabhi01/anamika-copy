@@ -36,7 +36,7 @@
                 <div class="col-8">
                     <div class="form-group">
                         <label>Date :</label>
-                        <v-nepalidatepicker classValue="form-control" v-model="form.date" />
+                        <v-nepalidatepicker classValue="form-control" v-model="form.date" calenderType="Nepali" :monthSelect="false" :yearSelect="false"/>
                          <small class="error-control" v-if="errors.date">
                             {{errors.date[0]}}
                         </small>
@@ -46,7 +46,7 @@
                 <div class="col-8">
                     <div class="form-group">
                         <label>Due Date :</label>
-                        <v-nepalidatepicker classValue="form-control" v-model="form.due_date" />
+                        <v-nepalidatepicker classValue="form-control" v-model="form.due_date" calenderType="Nepali" :monthSelect="false" :yearSelect="false"/>
                         <small class="error-control" v-if="errors.due_date">
                             {{errors.due_date[0]}}
                         </small>

@@ -49,7 +49,7 @@ class CreateInvoicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
         Schema::dropIfExists('invoice_items');
+        Schema::dropIfExists('invoices');
     }
 }

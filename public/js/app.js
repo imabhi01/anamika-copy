@@ -4006,6 +4006,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -4019,6 +4022,7 @@ __webpack_require__.r(__webpack_exports__);
       model: {
         data: []
       },
+      index: 0,
       search: '',
       total_rows: 10
     };
@@ -4587,6 +4591,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/api */ "./resources/js/lib/api.js");
 /* harmony import */ var _components_layouts_search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/layouts/search */ "./resources/js/components/layouts/search.vue");
+//
+//
+//
 //
 //
 //
@@ -5557,6 +5564,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'EmployeeShow',
@@ -5940,6 +5948,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/api */ "./resources/js/lib/api.js");
 /* harmony import */ var _components_layouts_InvoiceSearch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/layouts/InvoiceSearch */ "./resources/js/components/layouts/InvoiceSearch.vue");
 /* harmony import */ var v_nepalidatepicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! v-nepalidatepicker */ "./node_modules/v-nepalidatepicker/dist/v-nepalidatepicker.esm.js");
+//
+//
+//
 //
 //
 //
@@ -6756,6 +6767,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -7386,6 +7400,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -7957,6 +7974,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -8411,6 +8431,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/api */ "./resources/js/lib/api.js");
 /* harmony import */ var _components_layouts_search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/layouts/search */ "./resources/js/components/layouts/search.vue");
+//
+//
+//
 //
 //
 //
@@ -8921,6 +8944,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/api */ "./resources/js/lib/api.js");
 /* harmony import */ var _components_layouts_search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/layouts/search */ "./resources/js/components/layouts/search.vue");
+//
+//
+//
 //
 //
 //
@@ -9515,6 +9541,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/api */ "./resources/js/lib/api.js");
 /* harmony import */ var _components_layouts_search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/layouts/search */ "./resources/js/components/layouts/search.vue");
+//
+//
+//
 //
 //
 //
@@ -91735,7 +91764,10 @@ var render = function() {
               attrs: {
                 classValue: "form-control",
                 value: _vm.firstDate,
-                placeholder: "First Date"
+                placeholder: "First Date",
+                calenderType: "Nepali",
+                monthSelect: false,
+                yearSelect: false
               },
               on: {
                 change: function($event) {
@@ -91764,7 +91796,10 @@ var render = function() {
               attrs: {
                 classValue: "form-control",
                 value: _vm.secondDate,
-                placeholder: "Second Date"
+                placeholder: "Second Date",
+                calenderType: "Nepali",
+                monthSelect: false,
+                yearSelect: false
               },
               on: {
                 change: function($event) {
@@ -93407,61 +93442,76 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.model.data, function(item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.data,
-                    on: {
-                      click: function($event) {
-                        return _vm.detailsPage(item)
+              [
+                _vm._l(_vm.model.data, function(item, index) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.data,
+                      on: {
+                        click: function($event) {
+                          return _vm.detailsPage(item)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("td", { staticClass: "w-1 text-center" }, [
-                      _vm._v(_vm._s(item.id))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.firstname))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.lastname))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.email ? item.email : "N/A"))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.address ? item.address : "N/A"))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.phone ? item.phone : "N/A"))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "w-3 text-center" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn",
-                            attrs: { to: "/customers/" + item.id }
-                          },
-                          [_vm._v("Show")]
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              }),
-              0
+                    },
+                    [
+                      _c("td", { staticClass: "w-1 text-center" }, [
+                        _vm._v(_vm._s(index + 1) + " ")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.firstname))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.lastname))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.email ? item.email : "N/A"))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5 text-center" }, [
+                        _vm._v(_vm._s(item.address ? item.address : "N/A"))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.phone ? item.phone : "N/A"))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "w-3 text-center" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn",
+                              attrs: { to: "/customers/" + item.id }
+                            },
+                            [_vm._v("Show")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                !_vm.model.data.length
+                  ? _c("tr", { staticClass: "text-center" }, [
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          attrs: { colspan: "100%" }
+                        },
+                        [_vm._v("No Records Found")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
             )
           ])
         ],
@@ -93951,7 +94001,12 @@ var render = function() {
                 _c("label", [_vm._v("Joining Date")]),
                 _vm._v(" "),
                 _c("v-nepalidatepicker", {
-                  attrs: { classValue: "form-control" },
+                  attrs: {
+                    classValue: "form-control",
+                    calenderType: "Nepali",
+                    monthSelect: false,
+                    yearSelect: false
+                  },
                   model: {
                     value: _vm.form.joining_date,
                     callback: function($$v) {
@@ -94276,7 +94331,12 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("v-nepalidatepicker", {
-                    attrs: { classValue: "form-control" },
+                    attrs: {
+                      classValue: "form-control",
+                      calenderType: "Nepali",
+                      monthSelect: false,
+                      yearSelect: false
+                    },
                     model: {
                       value: _vm.form.joining_date,
                       callback: function($$v) {
@@ -94469,68 +94529,86 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.model.data, function(item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.data,
-                    on: {
-                      click: function($event) {
-                        return _vm.detailsPage(item)
+              [
+                _vm._l(_vm.model.data, function(item, index) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.data,
+                      on: {
+                        click: function($event) {
+                          return _vm.detailsPage(item)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("td", { staticClass: "w-1 text-center" }, [
-                      _vm._v(_vm._s(item.id))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.first_name ? item.first_name : "N/A"))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.last_name ? item.last_name : "N/A"))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.phone ? item.phone : "N/A"))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5 text-center" }, [
-                      _c("img", {
-                        staticClass: "figure-img img-fluid img-rounded preview",
-                        attrs: { src: item.image, alt: "" }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.address ? item.address : "N/A"))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.salary ? item.salary : "N/A"))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "w-3 text-center" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn",
-                            attrs: { to: "/employees/" + item.id }
-                          },
-                          [_vm._v("Show")]
+                    },
+                    [
+                      _c("td", { staticClass: "w-1 text-center" }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(
+                          _vm._s(item.first_name ? item.first_name : "N/A")
                         )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              }),
-              0
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.last_name ? item.last_name : "N/A"))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5 text-center" }, [
+                        _vm._v(_vm._s(item.phone ? item.phone : "N/A"))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5 text-center" }, [
+                        _c("img", {
+                          staticClass:
+                            "figure-img img-fluid img-rounded preview",
+                          attrs: { src: item.image, alt: "" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5 text-center" }, [
+                        _vm._v(_vm._s(item.address ? item.address : "N/A"))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5 text-center" }, [
+                        _vm._v(_vm._s(item.salary ? item.salary : "N/A"))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "w-3 text-center" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn",
+                              attrs: { to: "/employees/" + item.id }
+                            },
+                            [_vm._v("Show")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                !_vm.model.data.length
+                  ? _c("tr", { staticClass: "text-center" }, [
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          attrs: { colspan: "100%" }
+                        },
+                        [_vm._v("No Records Found")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
             )
           ])
         ],
@@ -94683,7 +94761,13 @@ var render = function() {
                 _c("label", [_vm._v("Date")]),
                 _vm._v(" "),
                 _c("v-nepalidatepicker", {
-                  attrs: { classValue: "form-control", placeholder: "Date" },
+                  attrs: {
+                    classValue: "form-control",
+                    placeholder: "Date",
+                    calenderType: "Nepali",
+                    monthSelect: false,
+                    yearSelect: false
+                  },
                   on: {
                     change: function($event) {
                       return _vm.$emit("getFirstDate", $event)
@@ -95010,7 +95094,10 @@ var render = function() {
                   attrs: {
                     classValue: "form-control",
                     value: _vm.form.date,
-                    placeholder: "Date"
+                    placeholder: "Date",
+                    calenderType: "Nepali",
+                    monthSelect: false,
+                    yearSelect: false
                   },
                   on: {
                     change: function($event) {
@@ -96211,7 +96298,12 @@ var render = function() {
                   _c("label", [_vm._v("Date :")]),
                   _vm._v(" "),
                   _c("v-nepalidatepicker", {
-                    attrs: { classValue: "form-control" },
+                    attrs: {
+                      classValue: "form-control",
+                      calenderType: "Nepali",
+                      monthSelect: false,
+                      yearSelect: false
+                    },
                     model: {
                       value: _vm.form.date,
                       callback: function($$v) {
@@ -96243,7 +96335,12 @@ var render = function() {
                   _c("label", [_vm._v("Due Date :")]),
                   _vm._v(" "),
                   _c("v-nepalidatepicker", {
-                    attrs: { classValue: "form-control" },
+                    attrs: {
+                      classValue: "form-control",
+                      calenderType: "Nepali",
+                      monthSelect: false,
+                      yearSelect: false
+                    },
                     model: {
                       value: _vm.form.due_date,
                       callback: function($$v) {
@@ -96792,77 +96889,94 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.model.data, function(item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.data,
-                    on: {
-                      click: function($event) {
-                        return _vm.detailsPage(item)
+              [
+                _vm._l(_vm.model.data, function(item, index) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.data,
+                      on: {
+                        click: function($event) {
+                          return _vm.detailsPage(item)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("td", { staticClass: "w-1 text-center" }, [
-                      _vm._v(_vm._s(item.id))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.date))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.number))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.vendor.text))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.due_date))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      item.status == "Paid"
-                        ? _c(
-                            "span",
-                            { staticClass: "badge bg-success text-center" },
-                            [_vm._v(_vm._s(item.status))]
-                          )
-                        : item.status == "Un paid"
-                        ? _c(
-                            "span",
-                            { staticClass: "badge bg-danger text-center" },
-                            [_vm._v(_vm._s(item.status))]
-                          )
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v("Rs. " + _vm._s(_vm._f("formatMoney")(item.total)))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "w-3 text-center" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn",
-                            attrs: { to: "/expenses/" + item.id }
-                          },
-                          [_vm._v("Show")]
+                    },
+                    [
+                      _c("td", { staticClass: "w-1 text-center" }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.date))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.number))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5 text-center" }, [
+                        _vm._v(_vm._s(item.vendor.text))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.due_date))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        item.status == "Paid"
+                          ? _c(
+                              "span",
+                              { staticClass: "badge bg-success text-center" },
+                              [_vm._v(_vm._s(item.status))]
+                            )
+                          : item.status == "Un paid"
+                          ? _c(
+                              "span",
+                              { staticClass: "badge bg-danger text-center" },
+                              [_vm._v(_vm._s(item.status))]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(
+                          "Rs. " + _vm._s(_vm._f("formatMoney")(item.total))
                         )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              }),
-              0
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "w-3 text-center" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn",
+                              attrs: { to: "/expenses/" + item.id }
+                            },
+                            [_vm._v("Show")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                !_vm.model.data.length
+                  ? _c("tr", { staticClass: "text-center" }, [
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          attrs: { colspan: "100%" }
+                        },
+                        [_vm._v("No Records Found")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
             )
           ])
         ],
@@ -97309,7 +97423,12 @@ var render = function() {
                   _c("label", [_vm._v("Date :")]),
                   _vm._v(" "),
                   _c("v-nepalidatepicker", {
-                    attrs: { classValue: "form-control" },
+                    attrs: {
+                      classValue: "form-control",
+                      calenderType: "Nepali",
+                      monthSelect: false,
+                      yearSelect: false
+                    },
                     model: {
                       value: _vm.form.date,
                       callback: function($$v) {
@@ -97341,7 +97460,12 @@ var render = function() {
                   _c("label", [_vm._v("Due Date :")]),
                   _vm._v(" "),
                   _c("v-nepalidatepicker", {
-                    attrs: { classValue: "form-control" },
+                    attrs: {
+                      classValue: "form-control",
+                      calenderType: "Nepali",
+                      monthSelect: false,
+                      yearSelect: false
+                    },
                     model: {
                       value: _vm.form.due_date,
                       callback: function($$v) {
@@ -97939,77 +98063,92 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.model.data, function(item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.data,
-                    on: {
-                      click: function($event) {
-                        return _vm.detailsPage(item)
+              [
+                _vm._l(_vm.model.data, function(item, index) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.data,
+                      on: {
+                        click: function($event) {
+                          return _vm.detailsPage(item)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("td", { staticClass: "w-1 text-center" }, [
-                      _vm._v(_vm._s(item.id))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.date))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.number))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.customer.text))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.due_date))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      item.status == "Paid"
-                        ? _c(
-                            "span",
-                            { staticClass: "badge bg-success text-center" },
-                            [_vm._v(_vm._s(item.status))]
+                    },
+                    [
+                      _c("td", { staticClass: "w-1 text-center" }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.date))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.number))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5 text-center" }, [
+                        _vm._v(_vm._s(item.customer.text))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.due_date))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        item.status == "Paid"
+                          ? _c(
+                              "span",
+                              { staticClass: "badge bg-success text-center" },
+                              [_vm._v(_vm._s(item.status))]
+                            )
+                          : item.status == "Un paid"
+                          ? _c(
+                              "span",
+                              { staticClass: "badge bg-danger text-center" },
+                              [_vm._v(_vm._s(item.status))]
+                            )
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(_vm._f("formatMoney")(item.total)))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "w-3 text-center" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn",
+                              attrs: { to: "/invoices/" + item.id }
+                            },
+                            [_vm._v("Show")]
                           )
-                        : item.status == "Un paid"
-                        ? _c(
-                            "span",
-                            { staticClass: "badge bg-danger text-center" },
-                            [_vm._v(_vm._s(item.status))]
-                          )
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(_vm._f("formatMoney")(item.total)))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "w-3 text-center" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn",
-                            attrs: { to: "/invoices/" + item.id }
-                          },
-                          [_vm._v("Show")]
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              }),
-              0
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                !_vm.model.data.length
+                  ? _c("tr", { staticClass: "text-center" }, [
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          attrs: { colspan: "100%" }
+                        },
+                        [_vm._v("No Records Found")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
             )
           ])
         ],
@@ -98928,55 +99067,72 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.model.data, function(item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.data,
-                    on: {
-                      click: function($event) {
-                        return _vm.detailsPage(item)
+              [
+                _vm._l(_vm.model.data, function(item, index) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.data,
+                      on: {
+                        click: function($event) {
+                          return _vm.detailsPage(item)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("td", { staticClass: "w-1" }, [_vm._v(_vm._s(item.id))]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
-                      _vm._v(_vm._s(item.item_name))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
-                      _vm._v(_vm._s(item.description))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
-                      _vm._v("Rs. " + _vm._s(item.unit_price))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
-                      _vm._v(_vm._s(item.unit))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "w-3" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn",
-                            attrs: { to: "/items/" + item.id }
-                          },
-                          [_vm._v("Show")]
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              }),
-              0
+                    },
+                    [
+                      _c("td", { staticClass: "w-1" }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3" }, [
+                        _vm._v(_vm._s(item.item_name))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3" }, [
+                        _vm._v(_vm._s(item.description))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3" }, [
+                        _vm._v("Rs. " + _vm._s(item.unit_price))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3" }, [
+                        _vm._v(_vm._s(item.unit))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "w-3" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn",
+                              attrs: { to: "/items/" + item.id }
+                            },
+                            [_vm._v("Show")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                !_vm.model.data.length
+                  ? _c("tr", { staticClass: "text-center" }, [
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          attrs: { colspan: "100%" }
+                        },
+                        [_vm._v("No Records Found")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
             )
           ])
         ],
@@ -99927,61 +100083,76 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.model.data, function(item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.data,
-                    on: {
-                      click: function($event) {
-                        return _vm.detailsPage(item)
+              [
+                _vm._l(_vm.model.data, function(item, index) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.data,
+                      on: {
+                        click: function($event) {
+                          return _vm.detailsPage(item)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("td", { staticClass: "w-1 text-center" }, [
-                      _vm._v(_vm._s(item.id))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.item_code))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-4 text-center" }, [
-                      _vm._v(_vm._s(item.description))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v("Rs. " + _vm._s(item.unit_price))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.quantity))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.unit))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "w-3 text-center" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn",
-                            attrs: { to: "/products/" + item.id }
-                          },
-                          [_vm._v("Show")]
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              }),
-              0
+                    },
+                    [
+                      _c("td", { staticClass: "w-1 text-center" }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.item_code))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-4 text-center" }, [
+                        _vm._v(_vm._s(item.description))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v("Rs. " + _vm._s(item.unit_price))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.quantity))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.unit))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "w-3 text-center" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn",
+                              attrs: { to: "/products/" + item.id }
+                            },
+                            [_vm._v("Show")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                !_vm.model.data.length
+                  ? _c("tr", { staticClass: "text-center" }, [
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          attrs: { colspan: "100%" }
+                        },
+                        [_vm._v("No Records Found")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
             )
           ])
         ],
@@ -100708,49 +100879,64 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.model.data, function(item) {
-              return _c(
-                "tr",
-                {
-                  key: item.data,
-                  on: {
-                    click: function($event) {
-                      return _vm.detailsPage(item)
+            [
+              _vm._l(_vm.model.data, function(item, index) {
+                return _c(
+                  "tr",
+                  {
+                    key: item.data,
+                    on: {
+                      click: function($event) {
+                        return _vm.detailsPage(item)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("td", { staticClass: "w-1 text-center" }, [
-                    _vm._v(_vm._s(item.id))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "w-3 text-center" }, [
-                    _vm._v(_vm._s(item.title))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "w-3 text-center" }, [
-                    _vm._v(_vm._s(item.description))
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "w-3 text-center" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn",
-                          attrs: { to: "/settings/" + item.id }
-                        },
-                        [_vm._v("Show")]
-                      )
-                    ],
-                    1
-                  )
-                ]
-              )
-            }),
-            0
+                  },
+                  [
+                    _c("td", { staticClass: "w-1 text-center" }, [
+                      _vm._v(_vm._s(index + 1))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "w-3 text-center" }, [
+                      _vm._v(_vm._s(item.title))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "w-3 text-center" }, [
+                      _vm._v(_vm._s(item.description))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      { staticClass: "w-3 text-center" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn",
+                            attrs: { to: "/settings/" + item.id }
+                          },
+                          [_vm._v("Show")]
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              !_vm.model.data.length
+                ? _c("tr", { staticClass: "text-center" }, [
+                    _c(
+                      "td",
+                      {
+                        staticClass: "text-center",
+                        attrs: { colspan: "100%" }
+                      },
+                      [_vm._v("No Records Found")]
+                    )
+                  ])
+                : _vm._e()
+            ],
+            2
           )
         ])
       ])
@@ -101497,58 +101683,76 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.model.data, function(item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.data,
-                    on: {
-                      click: function($event) {
-                        return _vm.detailsPage(item)
+              [
+                _vm._l(_vm.model.data, function(item) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.data,
+                      on: {
+                        click: function($event) {
+                          return _vm.detailsPage(item)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("td", { staticClass: "w-1" }, [_vm._v(_vm._s(item.id))]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
-                      _vm._v(_vm._s(item.first_name))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3" }, [
-                      _vm._v(_vm._s(item.last_name))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5" }, [
-                      _vm._v(_vm._s(item.email))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5" }, [
-                      _c("img", {
-                        staticClass: "figure-img img-fluid img-rounded preview",
-                        attrs: { src: item.image, alt: "" }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "w-3" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn",
-                            attrs: { to: "/users/" + item.id }
-                          },
-                          [_vm._v("Show")]
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              }),
-              0
+                    },
+                    [
+                      _c("td", { staticClass: "w-1" }, [
+                        _vm._v(_vm._s(item.id))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3" }, [
+                        _vm._v(_vm._s(item.first_name))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3" }, [
+                        _vm._v(_vm._s(item.last_name))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5" }, [
+                        _vm._v(_vm._s(item.email))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5" }, [
+                        _c("img", {
+                          staticClass:
+                            "figure-img img-fluid img-rounded preview",
+                          attrs: { src: item.image, alt: "" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "w-3" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn",
+                              attrs: { to: "/users/" + item.id }
+                            },
+                            [_vm._v("Show")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                !_vm.model.data.length
+                  ? _c("tr", { staticClass: "text-center" }, [
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          attrs: { colspan: "100%" }
+                        },
+                        [_vm._v("No Records Found")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
             )
           ])
         ],
@@ -102544,63 +102748,78 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.model.data, function(item) {
-                return _c(
-                  "tr",
-                  {
-                    key: item.data,
-                    on: {
-                      click: function($event) {
-                        return _vm.detailsPage(item)
+              [
+                _vm._l(_vm.model.data, function(item, index) {
+                  return _c(
+                    "tr",
+                    {
+                      key: item.data,
+                      on: {
+                        click: function($event) {
+                          return _vm.detailsPage(item)
+                        }
                       }
-                    }
-                  },
-                  [
-                    _c("td", { staticClass: "w-1 text-center" }, [
-                      _vm._v(_vm._s(item.id))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.firstname))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.lastname))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(
-                        _vm._s(item.vendor_name ? item.vendor_name : "N/A")
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-5 text-center" }, [
-                      _vm._v(_vm._s(item.address ? item.address : "N/A"))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "w-3 text-center" }, [
-                      _vm._v(_vm._s(item.phone ? item.phone : "N/A"))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "w-3 text-center" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "btn",
-                            attrs: { to: "/vendors/" + item.id }
-                          },
-                          [_vm._v("Show")]
+                    },
+                    [
+                      _c("td", { staticClass: "w-1 text-center" }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.firstname))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.lastname))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(
+                          _vm._s(item.vendor_name ? item.vendor_name : "N/A")
                         )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              }),
-              0
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-5 text-center" }, [
+                        _vm._v(_vm._s(item.address ? item.address : "N/A"))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "w-3 text-center" }, [
+                        _vm._v(_vm._s(item.phone ? item.phone : "N/A"))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "w-3 text-center" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn",
+                              attrs: { to: "/vendors/" + item.id }
+                            },
+                            [_vm._v("Show")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                !_vm.model.data.length
+                  ? _c("tr", { staticClass: "text-center" }, [
+                      _c(
+                        "td",
+                        {
+                          staticClass: "text-center",
+                          attrs: { colspan: "100%" }
+                        },
+                        [_vm._v("No Records Found")]
+                      )
+                    ])
+                  : _vm._e()
+              ],
+              2
             )
           ])
         ],
