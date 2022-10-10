@@ -31,10 +31,8 @@ class InvoiceController extends Controller
         if(request('total_rows')){
             $this->totalRows = request('total_rows');
         }
-
         $results = Invoice::latest()->with(['customer'])
         ->paginate($this->totalRows);
-
         return response()
         ->json([
             'results' => $results, 
