@@ -18,10 +18,7 @@
                     :first_date="first_date" 
                     :second_date="second_date" 
                     :status="status"
-                    @searchDate="searchDate($event)"
-                    @getRows="getRows($event)" 
-                    @liveSearch="liveSearch($event)" 
-                    @getStatus="getStatus($event)" 
+                    @filterMethod="filterMethod($event)"
                 />
                 <table class="table table-link">
                     <thead>
@@ -82,7 +79,7 @@
 <script type="text/javascript">
     import Vue from 'vue'
     import { get } from '../../lib/api'
-    import search from '../../components/layouts/InvoiceSearch'
+    import search from '../../components/layouts/BillingSearch'
 
     export default {
         components:{
@@ -117,56 +114,48 @@
                 })
         },
         methods: {
-            // getRows(event) {
-            //     this.total_rows = event.target.value
-            //     console.log(this.total_rows);
-            //     axios.get('/api/invoices/get/total_rows', {params: { total_rows : this.total_rows}})
-            //         .then(res => {
-            //             this.setData(res)
-            //         })
-            //         .catch(error => {
-            //             console.log(error)
-            //         });
-            // },
-            getRows(event) {
-                this.total_rows = event.target.value
-                console.log(this.total_rows);
-                axios.get('/api/invoices', {params: { total_rows : this.total_rows}})
-                    .then(res => {
-                        this.setData(res)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    });
-            },
-            liveSearch(event){
-                this.search = event.target.value
-                axios.get('/api/invoices/live/search', { params: { q: this.search } })
-                    .then(res => {
-                        this.setData(res)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    });
-            },
-            searchDate(event){
-                axios.get('/api/invoices/date/search', { params: {first_date: event[0], second_date: event[1]} })
-                    .then(res => {
-                        this.setData(res)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    });
-            },
-            getStatus(event){
-                this.status = event.target.value
-                axios.get('/api/invoices/status/search', { params: {status: event.target.value} })
-                    .then(res => {
-                        this.setData(res)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    });
+            filterMethod(eventData){
+                
+                if(eventData.name == 'search'){
+                    this.search = eventData.event.target.value
+                }
+
+                if(eventData.name == 'total_rows'){
+                    this.total_rows = eventData.event.target.value
+                }
+
+                if(eventData.name == 'status'){
+                    this.status = eventData.event.target.value
+                }
+
+                if(eventData.name == 'search-date'){
+                    this.first_date = eventData.event[0];
+                    this.second_date = eventData.event[1];
+                }
+
+                if(eventData.name == 'reset-data'){
+                    this.search = ''
+                    this.total_rows = 15
+                    this.status = ''
+                    this.first_date = ''
+                    this.second_date = ''
+                }
+
+                axios.get('/api/invoices', {
+                    params: { 
+                        q : this.search,
+                        total_rows : this.total_rows,
+                        status : this.status,
+                        first_date: this.first_date,
+                        second_date: this.second_date,
+                    }
+                })
+                .then(res => {
+                    this.setData(res)
+                })
+                .catch(error => {
+                    console.log(error)
+                });
             },
             detailsPage(item) {
                 this.$router.push(`/invoices/${item.id}`)
@@ -179,11 +168,20 @@
                 this.unPaidTurnOver = res.data.unPaidTurnOver
                 this.$bar.finish()
             },
+            setQueryData(query){
+                query.total_rows = this.total_rows
+                query.status = this.status
+                query.first_date = this.first_date
+                query.second_date = this.second_date
+            },
+            resetData(){
+                console.log('reset');
+            },
             nextPage() {
                 if(this.model.next_page_url) {
                     const query = Object.assign({}, this.$route.query)
                     query.page = query.page ? (Number(query.page) + 1) : 2
-
+                    this.setQueryData(query)
                     this.$router.push({
                         path: '/invoices',
                         query: query
@@ -194,7 +192,7 @@
                 if(this.model.prev_page_url) {
                     const query = Object.assign({}, this.$route.query)
                     query.page = query.page ? (Number(query.page) - 1) : 1
-
+                    this.setQueryData(query)
                     this.$router.push({
                         path: '/invoices',
                         query: query

@@ -18,7 +18,7 @@ class InvoiceController extends Controller
     private $totalTurnOver;
     private $paidTurnOver;
     private $unPaidTurnOver;
-    private $totalRows = 10;
+    private $totalRows = 15;
 
     public function __construct(){
         $this->totalTurnOver = round(Invoice::sum('total'), 2);
@@ -32,84 +32,85 @@ class InvoiceController extends Controller
             $this->totalRows = request('total_rows');
         }
 
-        $results = Invoice::latest()->with(['customer'])
-        ->paginate($this->totalRows);
+        $results = Invoice::search()->latest()->with(['customer'])
+            ->where(function($query){
+                if(request('status') == 'Paid' || request('status') == 'Un paid'){
+                    $query->where('status', request('status'));
+                }
 
+                if(request('first_date') && request('second_date')){
+                    $query->whereBetween('date', [request('first_date'), request('second_date')]);
+                }
+            })
+            
+            ->latest()
+            ->paginate($this->totalRows);
+        
         return response()
-        ->json([
-            'results' => $results, 
-            'totalTurnOver' => $this->totalTurnOver, 
-            'paidTurnOver' => $this->paidTurnOver,
-            'unPaidTurnOver' => $this->unPaidTurnOver
-        ]);
+            ->json([
+                'results' => $results, 
+                'totalTurnOver' => $this->totalTurnOver, 
+                'paidTurnOver' => $this->paidTurnOver,
+                'unPaidTurnOver' => $this->unPaidTurnOver
+            ]);
     }
 
-    // public function totalRows(){
-    //     $results = Invoice::latest()->with(['customer'])->paginate(request('total_rows'));
+    // public function liveSearch(){
+
+    //     $results = Invoice::join('customers', 'invoices.customer_id', 'customers.id')
+    //             ->with('customer')
+    //             ->where('firstname', 'like', '%' . request('q') . '%')
+    //             ->orWhere('lastname', 'like', '%' . request('q') . '%')
+    //             ->orWhere('number', 'like', '%' . request('q') . '%')
+    //             ->where('status', request('status') ? request('status') : '')
+    //             ->paginate(15);
+
     //     return response()
-    //         ->json([
-    //             'results' => $results,
-    //             'totalTurnOver' => $this->totalTurnOver, 
-    //             'paidTurnOver' => $this->paidTurnOver,
-    //             'unPaidTurnOver' => $this->unPaidTurnOver
-    //         ]);
+    //     ->json([
+    //         'results' => $results,
+    //         'totalTurnOver' => $this->totalTurnOver, 
+    //         'paidTurnOver' => $this->paidTurnOver,
+    //         'unPaidTurnOver' => $this->unPaidTurnOver
+    //     ]);
     // }
 
-    public function liveSearch(){
+    // public function statusSearch(){
+    //     $results = Invoice::join('customers', 'invoices.customer_id', 'customers.id')
+    //             ->with('customer')
+    //             ->where('status', request('status'))
+    //             ->paginate(15);
 
-        $results = Invoice::join('customers', 'invoices.customer_id', 'customers.id')
-                ->with('customer')
-                ->where('firstname', 'like', '%' . request('q') . '%')
-                ->orWhere('lastname', 'like', '%' . request('q') . '%')
-                ->orWhere('number', 'like', '%' . request('q') . '%')
-                ->paginate(15);
-
-        return response()
-        ->json([
-            'results' => $results,
-            'totalTurnOver' => $this->totalTurnOver, 
-            'paidTurnOver' => $this->paidTurnOver,
-            'unPaidTurnOver' => $this->unPaidTurnOver
-        ]);
-    }
-
-    public function statusSearch(){
-        $results = Invoice::join('customers', 'invoices.customer_id', 'customers.id')
-                ->with('customer')
-                ->where('status', request('status'))
-                ->paginate(15);
-
-        return response()
-        ->json([
-            'results' => $results,
-            'totalTurnOver' => $this->totalTurnOver, 
-            'paidTurnOver' => $this->paidTurnOver,
-            'unPaidTurnOver' => $this->unPaidTurnOver
-        ]);
-    }
+    //     return response()
+    //     ->json([
+    //         'results' => $results,
+    //         'totalTurnOver' => $this->totalTurnOver, 
+    //         'paidTurnOver' => $this->paidTurnOver,
+    //         'unPaidTurnOver' => $this->unPaidTurnOver
+    //     ]);
+    // }
 
     
-    public function dateSearch(){
-        $firstDate = request('first_date');
-        $secondDate = request('second_date');
+    // public function dateSearch(){
+    //     $firstDate = request('first_date');
+    //     $secondDate = request('second_date');
 
-        $results = Invoice::with(['customer'])
-            ->latest()
-            ->paginate(15);
+    //     $results = Invoice::with(['customer'])
+    //         ->latest()
+    //         ->paginate(15);
 
-        if($firstDate != '' && $secondDate != ''){
-            $results = Invoice::latest()->with('customer')->whereBetween('date', [$firstDate, $secondDate])
-            ->paginate(15);
-        }
+    //     if($firstDate != '' && $secondDate != ''){
+    //         $results = Invoice::latest()->with('customer')->whereBetween('date', [$firstDate, $secondDate])
+    //         ->paginate(15);
+    //     }
 
-        return response()
-        ->json([
-            'results' => $results,
-            'totalTurnOver' => $this->totalTurnOver, 
-            'paidTurnOver' => $this->paidTurnOver,
-            'unPaidTurnOver' => $this->unPaidTurnOver
-        ]);
-    }
+    //     return response()
+    //     ->json([
+    //         'results' => $results,
+    //         'totalTurnOver' => $this->totalTurnOver, 
+    //         'paidTurnOver' => $this->paidTurnOver,
+    //         'unPaidTurnOver' => $this->unPaidTurnOver
+    //     ]);
+    // }
 
     /**
      * Show the form for creating a new resource.

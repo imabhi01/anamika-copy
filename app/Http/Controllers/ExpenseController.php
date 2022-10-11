@@ -16,6 +16,7 @@ class ExpenseController extends Controller
     private $totalTurnOver;
     private $paidTurnOver;
     private $unPaidTurnOver;
+    private $totalRows = 15;
 
     public function __construct(){
         $this->totalTurnOver = round(Expense::sum('total'), 2);
@@ -25,17 +26,42 @@ class ExpenseController extends Controller
 
     public function index()
     {
-        $results = Expense::with(['vendor'])
-        ->orderBy('created_at', 'desc')
-        ->paginate(15);
+        if(request('total_rows')){
+            $this->totalRows = request('total_rows');
+        }
 
+        $results = Expense::search()->latest()->with(['vendor'])
+            ->where(function($query){
+                if(request('status') == 'Paid' || request('status') == 'Un paid'){
+                    $query->where('status', request('status'));
+                }
+
+                if(request('first_date') && request('second_date')){
+                    $query->whereBetween('date', [request('first_date'), request('second_date')]);
+                }
+            })
+            ->latest()
+            ->paginate($this->totalRows);
+        
         return response()
-        ->json([
-            'results' => $results, 
-            'totalTurnOver' => $this->totalTurnOver, 
-            'paidTurnOver' => $this->paidTurnOver,
-            'unPaidTurnOver' => $this->unPaidTurnOver,
-        ]);
+            ->json([
+                'results' => $results, 
+                'totalTurnOver' => $this->totalTurnOver, 
+                'paidTurnOver' => $this->paidTurnOver,
+                'unPaidTurnOver' => $this->unPaidTurnOver
+            ]);
+
+        // $results = Expense::with(['vendor'])
+        // ->orderBy('created_at', 'desc')
+        // ->paginate(15);
+
+        // return response()
+        // ->json([
+        //     'results' => $results, 
+        //     'totalTurnOver' => $this->totalTurnOver, 
+        //     'paidTurnOver' => $this->paidTurnOver,
+        //     'unPaidTurnOver' => $this->unPaidTurnOver,
+        // ]);
     }
 
     public function totalRows(){

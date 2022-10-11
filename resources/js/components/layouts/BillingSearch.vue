@@ -3,7 +3,8 @@
         <div class="row" style="margin-left: 0px; justify-content: space-between;">
             <div class="form-group">
                 <label for="show">Show rows</label>
-                <select name="number_of_rows" id="select-rows" @change="$emit('getRows', $event)" class="form-control" :value="total_rows">
+                <!-- <select name="number_of_rows" id="select-rows" @change="$emit('getRows', $event)" class="form-control" :value="total_rows"> -->
+                <select name="number_of_rows" id="select-rows" @change="$emit('filterMethod', {event: $event, name: 'total_rows'})" class="form-control" :value="total_rows">
                     <option value="10">10</option>
                     <option value="15">15</option>
                     <option value="25">25</option>
@@ -15,7 +16,7 @@
 
             <div class="form-group">
                 <label for="show">Status</label>
-                <select name="status" id="status" @change="$emit('getStatus', $event)" class="form-control" :value="status">
+                <select name="status" id="status" @change="$emit('filterMethod', {event: $event, name: 'status'})" class="form-control" :value="status">
                     <option value="" disabled selected>Select Status</option>
                     <option value="Paid">Paid</option>
                     <option value="Un paid">Un Paid</option>
@@ -45,7 +46,7 @@
             <div class="form-group">
                 <div class="col-sm-12">
                     <label for="search">Search</label>
-                    <input type="search" name="Search" v-model.lazy="search" @keyup="$emit('liveSearch', $event)" class="form-control" placeholder="Search by name, phone...">
+                    <input type="search" name="search" v-model.lazy="search" @keyup="$emit('filterMethod', {event: $event, name: 'search'})" class="form-control" placeholder="Search by name, phone...">
                 </div>
             </div>
         </div>
@@ -54,7 +55,7 @@
 
 <script>
     export default {
-        name: 'InvoiceSearch',
+        name: 'BillingSearch',
         props: ['total_rows', 'search', 'first_date', 'second_date', 'status'],
         data(){
             return {
@@ -64,10 +65,10 @@
         },
         methods:{
             searchDate(){
-                this.$emit('searchDate', [this.first_date, this.second_date]);
+                this.$emit('filterMethod', {event: [this.first_date, this.second_date], name: 'search-date'});
             },
             resetFilter(){
-                location.reload();
+                this.$emit('filterMethod', {name: 'reset-data'});
             }
         }
     }

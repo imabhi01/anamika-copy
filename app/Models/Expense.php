@@ -35,4 +35,15 @@ class Expense extends Model
         $discount = $this->attributes['discount'];
         $this->attributes['total'] = $value - (($value * $discount) / 100);
     }
+
+    public function scopeSearch($query)
+    {
+        $term = "%". request('q') ."%";
+
+        $query->whereHas('vendor', function($query) use ($term){
+            $query->where('firstname', 'like', $term)
+                ->orWhere('lastname', 'like', $term)
+                ->orWhere('number', 'like', $term);
+        });
+    }
 }

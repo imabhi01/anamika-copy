@@ -42,13 +42,10 @@ class Invoice extends Model
     {
         $term = "%". request('q') ."%";
 
-        $query->join('customers', 'invoices.customer_id', 'customers.id')
-            ->where(function ($query) use ($term) {
-                $query->where('firstname', 'like', $term)
-                    ->orWhere('lastname', 'like', $term)
-                    ->orWhere('number', 'like', $term)
-                    ->paginate(request('total_rows')
-            );
+        $query->whereHas('customer', function($query) use ($term){
+            $query->where('firstname', 'like', $term)
+                ->orWhere('lastname', 'like', $term)
+                ->orWhere('number', 'like', $term);
         });
     }
 }
