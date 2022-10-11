@@ -42,75 +42,16 @@ class InvoiceController extends Controller
                     $query->whereBetween('date', [request('first_date'), request('second_date')]);
                 }
             })
-            
-            ->latest()
-            ->paginate($this->totalRows);
+        ->latest()
+        ->paginate($this->totalRows);
         
-        return response()
-            ->json([
-                'results' => $results, 
-                'totalTurnOver' => $this->totalTurnOver, 
-                'paidTurnOver' => $this->paidTurnOver,
-                'unPaidTurnOver' => $this->unPaidTurnOver
-            ]);
+        return response()->json([
+            'results' => $results, 
+            'totalTurnOver' => $this->totalTurnOver, 
+            'paidTurnOver' => $this->paidTurnOver,
+            'unPaidTurnOver' => $this->unPaidTurnOver
+        ]);
     }
-
-    // public function liveSearch(){
-
-    //     $results = Invoice::join('customers', 'invoices.customer_id', 'customers.id')
-    //             ->with('customer')
-    //             ->where('firstname', 'like', '%' . request('q') . '%')
-    //             ->orWhere('lastname', 'like', '%' . request('q') . '%')
-    //             ->orWhere('number', 'like', '%' . request('q') . '%')
-    //             ->where('status', request('status') ? request('status') : '')
-    //             ->paginate(15);
-
-    //     return response()
-    //     ->json([
-    //         'results' => $results,
-    //         'totalTurnOver' => $this->totalTurnOver, 
-    //         'paidTurnOver' => $this->paidTurnOver,
-    //         'unPaidTurnOver' => $this->unPaidTurnOver
-    //     ]);
-    // }
-
-    // public function statusSearch(){
-    //     $results = Invoice::join('customers', 'invoices.customer_id', 'customers.id')
-    //             ->with('customer')
-    //             ->where('status', request('status'))
-    //             ->paginate(15);
-
-    //     return response()
-    //     ->json([
-    //         'results' => $results,
-    //         'totalTurnOver' => $this->totalTurnOver, 
-    //         'paidTurnOver' => $this->paidTurnOver,
-    //         'unPaidTurnOver' => $this->unPaidTurnOver
-    //     ]);
-    // }
-
-    
-    // public function dateSearch(){
-    //     $firstDate = request('first_date');
-    //     $secondDate = request('second_date');
-
-    //     $results = Invoice::with(['customer'])
-    //         ->latest()
-    //         ->paginate(15);
-
-    //     if($firstDate != '' && $secondDate != ''){
-    //         $results = Invoice::latest()->with('customer')->whereBetween('date', [$firstDate, $secondDate])
-    //         ->paginate(15);
-    //     }
-
-    //     return response()
-    //     ->json([
-    //         'results' => $results,
-    //         'totalTurnOver' => $this->totalTurnOver, 
-    //         'paidTurnOver' => $this->paidTurnOver,
-    //         'unPaidTurnOver' => $this->unPaidTurnOver
-    //     ]);
-    // }
 
     /**
      * Show the form for creating a new resource.

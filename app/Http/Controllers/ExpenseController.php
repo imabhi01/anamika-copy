@@ -40,28 +40,16 @@ class ExpenseController extends Controller
                     $query->whereBetween('date', [request('first_date'), request('second_date')]);
                 }
             })
-            ->latest()
-            ->paginate($this->totalRows);
+        ->latest()
+        ->paginate($this->totalRows);
         
-        return response()
-            ->json([
-                'results' => $results, 
-                'totalTurnOver' => $this->totalTurnOver, 
-                'paidTurnOver' => $this->paidTurnOver,
-                'unPaidTurnOver' => $this->unPaidTurnOver
-            ]);
-
-        // $results = Expense::with(['vendor'])
-        // ->orderBy('created_at', 'desc')
-        // ->paginate(15);
-
-        // return response()
-        // ->json([
-        //     'results' => $results, 
-        //     'totalTurnOver' => $this->totalTurnOver, 
-        //     'paidTurnOver' => $this->paidTurnOver,
-        //     'unPaidTurnOver' => $this->unPaidTurnOver,
-        // ]);
+        return response()->json([
+            'results' => $results, 
+            'totalTurnOver' => $this->totalTurnOver, 
+            'paidTurnOver' => $this->paidTurnOver,
+            'unPaidTurnOver' => $this->unPaidTurnOver
+        ]);
+            
     }
 
     public function totalRows(){
