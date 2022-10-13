@@ -3441,6 +3441,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -92025,7 +92029,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "sticky" }, [
     _c(
       "ul",
       {
@@ -92044,15 +92048,13 @@ var render = function() {
           [
             !_vm.setting
               ? _c("div", { staticClass: " mx-3" }, [
-                  _vm._v("\n         PROJECT TITLE FROM SETTINGS\n       ")
+                  _vm._v("\n        PROJECT TITLE FROM SETTINGS\n      ")
                 ])
               : _vm._e(),
             _vm._v(" "),
             _vm.setting
               ? _c("div", { staticClass: " mx-3" }, [
-                  _vm._v(
-                    "\n         " + _vm._s(_vm.setting.title) + "\n       "
-                  )
+                  _vm._v("\n        " + _vm._s(_vm.setting.title) + "\n      ")
                 ])
               : _vm._e()
           ]
@@ -92227,7 +92229,7 @@ var render = function() {
                   staticClass: "fa fa-file",
                   attrs: { "aria-hidden": "true" }
                 }),
-                _vm._v("\nBilling List")
+                _vm._v("\n      Sales ")
               ]
             )
           ],
@@ -92829,6 +92831,20 @@ var render = function() {
           "div",
           { staticClass: "col-md-5 chart" },
           [
+            _c("LineChart", {
+              attrs: {
+                "chart-data": _vm.totalExpenseCollection,
+                options: _vm.options
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-5 chart" },
+          [
             _c("BarChart", {
               attrs: {
                 "chart-data": _vm.totalIncomesData,
@@ -92860,20 +92876,6 @@ var render = function() {
             _c("BarChart", {
               attrs: {
                 "chart-data": _vm.totalExpensesData,
-                options: _vm.options
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-md-5 chart" },
-          [
-            _c("LineChart", {
-              attrs: {
-                "chart-data": _vm.totalExpenseCollection,
                 options: _vm.options
               }
             })

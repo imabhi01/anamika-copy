@@ -2,12 +2,18 @@
     <div>
         <router-view></router-view>
         <div class="row">
+
+            <div class="col-md-5 chart">
+                <LineChart :chart-data="totalExpenseCollection" :options="options"></LineChart> 
+            </div>
+
             <div class="col-md-5 chart">
                 <BarChart :chart-data="totalIncomesData" :options="options"></BarChart> 
                 <!-- <div class="data">
                     <h3>Total Expenses </h3>
                 </div> -->
             </div>
+            
             <div class="col-md-5 chart">
                 <BarChart :chart-data="totalIncomeCollection" :options="options"></BarChart>
             </div>
@@ -16,9 +22,7 @@
                 <BarChart :chart-data="totalExpensesData" :options="options"></BarChart> 
             </div>
 
-            <div class="col-md-5 chart">
-                <LineChart :chart-data="totalExpenseCollection" :options="options"></LineChart> 
-            </div>
+           
             
         </div>
     </div>

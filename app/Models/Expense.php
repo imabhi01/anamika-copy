@@ -40,10 +40,13 @@ class Expense extends Model
     {
         $term = "%". request('q') ."%";
 
-        $query->whereHas('vendor', function($query) use ($term){
-            $query->where('firstname', 'like', $term)
-                ->orWhere('lastname', 'like', $term)
-                ->orWhere('number', 'like', $term);
+        $query->where('number', 'like', $term)
+        ->orWhere(function($query) use ($term){
+            $query->whereHas('vendor', function($query) use ($term){
+                $query->where('firstname', 'like', $term)
+                    ->orWhere('lastname', 'like', $term)
+                    ->orWhere('phone', 'like', $term);
+            });
         });
     }
 }

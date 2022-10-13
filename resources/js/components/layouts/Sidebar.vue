@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sticky">
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
       <!-- Sidebar - Brand -->
@@ -160,7 +160,7 @@
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <router-link :to="{ name: 'invoices'}" :class="['invoices', 'invoices-create', 'invoices-show', 'invoices-edit'].includes(this.$route.name) ? 'nav-link active' : 'nav-link'"><i class="fa fa-file" aria-hidden="true"></i>
- Billing List</router-link>
+        Sales </router-link>
         <!-- <a
           class="nav-link collapsed"
           href="#"
