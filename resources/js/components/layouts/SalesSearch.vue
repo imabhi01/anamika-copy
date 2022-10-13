@@ -55,7 +55,7 @@
 
 <script>
     export default {
-        name: 'BillingSearch',
+        name: 'SalesSearch',
         props: ['total_rows', 'search', 'first_date', 'second_date', 'status'],
         data(){
             return {
@@ -75,5 +75,4 @@
 </script>
 
 <style lang="scss" scoped>
-
 </style>
