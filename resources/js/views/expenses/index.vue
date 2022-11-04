@@ -82,7 +82,6 @@
     import { get } from '../../lib/api'
     import search from '../../components/layouts/SalesSearch'
     import VNepaliDatePicker from 'v-nepalidatepicker';
-
     export default {
         components:{
             search
