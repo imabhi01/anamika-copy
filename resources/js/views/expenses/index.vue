@@ -20,7 +20,6 @@
                     :status="status"
                     @filterMethod="filterMethod($event)"
                 />
-
                 <table class="table table-link">
                     <thead>
                         <tr>
