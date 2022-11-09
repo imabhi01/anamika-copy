@@ -80,7 +80,6 @@
     import Vue from 'vue'
     import { get } from '../../lib/api'
     import search from '../../components/layouts/SalesSearch'
-
     export default {
         components:{
             search
