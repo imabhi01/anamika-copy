@@ -140,7 +140,6 @@
                     this.first_date = ''
                     this.second_date = ''
                 }
-
                 axios.get('/api/expenses', {
                     params: { 
                         q: this.search,
