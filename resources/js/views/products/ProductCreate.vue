@@ -75,7 +75,6 @@
         </div>
     </div>
 </template>
-
 <script>
     import {get, byMethod } from '../../lib/api'
 
