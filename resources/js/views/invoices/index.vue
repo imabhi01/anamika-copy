@@ -114,7 +114,6 @@
         },
         methods: {
             filterMethod(eventData){
-                
                 if(eventData.name == 'search'){
                     this.search = eventData.event.target.value
                 }
