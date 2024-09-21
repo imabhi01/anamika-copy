@@ -22,8 +22,9 @@
                 <BarChart :chart-data="totalExpensesData" :options="options"></BarChart> 
             </div>
 
-           
-            
+            <!-- <div>
+                Pie / Chart (Profit / Loss)
+            </div> -->
         </div>
     </div>
 </template>
